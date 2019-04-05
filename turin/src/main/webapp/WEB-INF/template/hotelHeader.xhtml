@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      >
+   
+	    <ui:composition>
+	
+		<header role="banner" class="probootstrap-header">
+    <!-- <div class="container"> -->
+      
+    <div class="row">
+        
+        
+        <div class="mobile-menu-overlay"></div>
+
+        <nav role="navigation" class="probootstrap-nav hidden-xs">
+          <ul class="probootstrap-main-nav">
+            <li class="active"><a href="index.html">Inicio</a></li>
+            <li><a href="reservas.xhtml">Reservas</a></li>
+            <li><a href="resources/contact.html">Contactenos</a></li>
+            <li><h:outputLink value="javascript:void(0)" onclick="PF('dlg').show();" title="login">
+         <h:outputLabel  value="Ingresar" />
+    </h:outputLink>
+      <h:form> 
+      <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+     
+    <p:dialog header="Login" widgetVar="dlg" resizable="false">
+        <h:panelGrid columns="2" cellpadding="5">
+            <h:outputLabel for="username" value="Username:" />
+            <p:inputText id="username" value="#{userLoginView.username}" required="true" label="username" />
+             
+            <h:outputLabel for="password" value="Password:" />
+            <p:password id="password" value="#{userLoginView.password}" required="true" label="password" />
+             
+            <f:facet name="footer">
+                <p:commandButton value="Login" update="growl" action="#{userLoginView.login}"
+                                 oncomplete="handleLoginRequest(xhr, status, args)" />
+            </f:facet>  
+        </h:panelGrid>
+    </p:dialog>    
+</h:form>
+    </li>
+          </ul>
+         
+        </nav>
+        </div>
+    <!-- </div> -->
+  </header>
+	    
+  
+     
+  
+				
+	    </ui:composition>
+
+</div>

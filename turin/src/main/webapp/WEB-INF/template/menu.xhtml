@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<h:head>
+</h:head>
+<h:body>
+	<h:form>  
+    <p:growl id="messages"/>
+ 
+    <p:menubar>
+        <p:submenu label="Checking" icon="pi pi-file">
+           
+            <p:menuitem value="Ingresar" url="checking.xhtml" />
+            <p:separator />
+            <p:menuitem value="Imprimir" url="checking.xhtml" />
+        </p:submenu>
+ 
+        <p:submenu label="Facturar" icon="pi pi-pencil">
+            <p:menuitem value="generar" url="#" icon="pi pi-angle-double-left" />
+            
+        </p:submenu>
+        
+           <p:submenu label="Limpieza" icon="pi pi-pencil">
+            <p:menuitem value="Reportar" url="#" icon="pi pi-angle-double-left" />
+            
+        </p:submenu>
+     
+ 
+  <p:submenu label="Administracion" icon="pi pi-pencil">
+            <p:menuitem value="generar" url="#" icon="pi pi-angle-double-left" />
+            
+       </p:submenu>
+      <p:submenu label="Reportes" icon="pi pi-pencil" >
+            <p:menuitem value="generar" url="#" icon="pi pi-angle-double-left" />
+            
+       </p:submenu>      
+ 
+        <f:facet name="options">
+            <p:commandButton type="button" value="Salir del sitio" icon="pi pi-home" />
+        </f:facet>
+    </p:menubar>
+</h:form>
+
+	
+</h:body>
+</html> 

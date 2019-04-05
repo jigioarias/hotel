@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<h:head>
+</h:head>
+<h:body>
+<ui:composition template="../template/hotelLayout.xhtml">
+<ui:define name="content">
+	<h1></h1>
+
+	<h:form id="forma">
+
+		<p:growl id="messages" showDetail="true" sticky="true" />
+
+		<p:wizard flowListener="#{checkingView.onFlowProcess}" showNavBar="true" nextLabel="${msg['checking.siguiente']}"
+		backLabel="${msg['checking.anterior']}"
+			id="myWizard">
+
+			<p:commandButton value="Atras" icon="ui-icon-arrow-1-w"
+				iconPos="right" type="button" onclick="myWizard.back();" />
+
+			<p:commandButton value="Siguiente	" icon="ui-icon-arrow-1-e"
+				iconPos="left" type="button" onclick="myWizard.next();"
+				styleClass="btn btn-default u-btn-verde" />
+
+			<p:tab id="reeserva" title="${msg['checking.datosReserva']}" >
+				
+					<p:panel header="${msg['checking.buscarCliente']}" toggleable="true" toggleOrientation="horizontal" collapsed="true">
+					
+					
+					<h:panelGrid columns="3" columnClasses="value, value,value">
+				
+						<h:outputText value="${msg['checking.cliente']}" />
+						
+						<p:autoComplete id="buscarDocumento" value="#{checkingView.clienteBusqueda}" completeMethod="#{checkingView.completeCliente}"
+                        var="vcliente" itemLabel="#{vcliente.nombre}" itemValue="#{vcliente}" converter="clienteConverter" forceSelection="true" 
+                        size="30" maxlength="30"	 >
+                           <p:ajax event="itemSelect" listener="#{checkingView.buscarReserva}" update="pClientes" />
+                        
+                        </p:autoComplete>
+   	
+					</h:panelGrid>
+					</p:panel>
+				
+				
+				
+				<p:panel header="${msg['checking.cliente']}">
+					<p:messages />
+					
+					
+					
+					<h:panelGrid columns="2" columnClasses="value, value" id="pClientes">
+					
+					 <p:outputLabel for="tipoDocunento" value="Tipo Documnento: " />
+					 <p:selectOneMenu id="tipoDocunento" value="#{checkingView.cliente.tipoDocumento}" >
+                        <f:selectItems value="#{checkingView.tiposDocumento}" />
+                     </p:selectOneMenu>
+					
+						<h:outputText value="${msg['checking.documentoCliente']}" />
+						<p:inputText value="#{checkingView.cliente.documento}" required="true" requiredMessage="El documento es requerido"
+							label="Documento" id="documento" size="30" maxlength="30"/>
+
+						<h:outputText value="${msg['checking.nombreCliente']}" />
+						<p:inputText value="#{checkingView.cliente.nombre}" required="true" requiredMessage="El nombre es requerido"
+							label="Nombre del Cliente" id="nombreCliente" size="50"  maxlength="50"/>
+							
+							 <p:outputLabel for="extranjero" value="${msg['checking.extranjero']}" />
+                     <p:selectOneRadio id="extranjero" value="#{checkingView.cliente.extranjero}" unselectable="true"
+                     required="true" requiredMessage="Debe seleccionar si el ciente es extranjero o no">
+                     <f:selectItem itemLabel="Si" itemValue="S" />
+                     <f:selectItem itemLabel="No" itemValue="N"  />
+                   </p:selectOneRadio>
+							
+					
+					 <h:outputLabel for="correo" value="${msg['checking.correo']}"  />      
+                     <p:inputText id="correo" value="#{checkingView.cliente.correo}" 
+                     required="true"   
+                     requiredMessage="El correo es requerido" 
+                     validatorMessage="El correo es invalido"
+                     maxlength="50" size="50">
+                     <f:validateRegex
+		                   pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                     </p:inputText>
+ 
+                    <h:outputLabel for="celular" value="${msg['checking.celular']}" />
+                   <p:inputText id="celular" value="#{checkingView.cliente.celular}" required="true"
+                  
+                    requiredMessage="El celular es requerido"/>
+					
+					 <h:outputLabel for="fechaNacimiento" value="${msg['checking.fechaNacimiento']}" />
+                  <p:calendar id="fechaNacimiento" value="#{checkingView.cliente.fechaNacimiento}"
+                   required="false"  showOn="button"
+                   pattern="dd-MM-yyyy"
+                  maxdate="#{checkingView.todayDate}"
+                   />
+                   
+                   
+                   <h:outputLabel for="numeroPersonas" value="${msg['checking.numeroPersonas']}" required="true"  requiredMessage="El numero de personas es requerido"/>
+                   
+					  <p:spinner id="basic" value="#{checkingView.numeroPersonas}" min="1" max="20" />
+                  
+					 <h:outputLabel for="fechaEntrada" value="${msg['checking.fechaEntrada']}" />
+                  <p:calendar id="fechaEntrada" value="#{checkingView.fechaEntrada}" required="true" 
+                  pattern="dd-MM-yyyy"
+                  requiredMessage="La fecha de entrada requerida" 
+                  binding="#{dateIniComponent}"
+                  mindate="#{checkingView.todayDate}"
+                  
+                  showOn="button">
+                  <f:validator validatorId="dateRangeValidator" />
+                  <f:attribute name="dateFinComponent" value="#{bindingDateFinComponent}" />
+		        <f:attribute name="range" value="year" />
+		        <f:attribute name="reference" value="ini" />
+                  </p:calendar>	
+                
+         <h:outputLabel for="fechaSalida" value="${msg['checking.fechaSalida']}"  />
+        <p:calendar id="fechaSalida" value="#{checkingView.fechaSalida}"
+        pattern="dd-MM-yyyy"
+         showOn="button"  requiredMessage="fecha de salidad es requerida"
+          required="true" 
+           binding="#{bindingDateFinComponent}"
+           mindate="#{checkingView.todayDate}"
+           
+          >
+          
+            <f:validator validatorId="dateRangeValidator" />
+        <f:attribute name="dateIniComponent" value="#{bindingDateIniComponent}" />
+        <f:attribute name="range" value="year" />
+        <f:attribute name="reference" value="ini" />
+          </p:calendar>
+				
+		  <p:outputLabel value="${msg['checking.habitaciones']}" for="habitaciones" />
+        <p:autoComplete id="habitaciones" multiple="true" value="#{checkingView.habitacionSeleccionada}" completeMethod="#{checkingView.completeHabitacion}"
+                        var="habitacion" itemLabel="#{habitacion.nombre}" itemValue="#{habitacion}" converter="habitacionConverter" required="true"
+                        requiredMessage="Las habitaciones son requeridas" >
+            <f:facet name="itemtip">
+                <h:panelGrid columns="2" cellpadding="5">
+                   
+                     
+                    <h:outputText value="Capacidad:" />
+                    <h:outputText value="#{habitacion.capacidad}" />
+                     
+                    <h:outputText value="precio" />
+                    <h:outputText value="#{habitacion.precio}" />
+                     <h:outputText value="Descripcion" />
+                    <h:outputText value="#{habitacion.descripcion}" />
+                    
+                </h:panelGrid>
+            </f:facet>
+        </p:autoComplete>			
+					
+					
+					</h:panelGrid>
+	
+				</p:panel>
+				
+			</p:tab>
+
+			
+
+			<p:tab id="acompanantes" title="${msg['checking.acompanantes']}">
+			
+			
+					<p:panel  header="${msg['checking.buscarAcompanante']}" toggleable="true" 
+					toggleOrientation="horizontal" collapsed="true">
+					
+					
+					<h:panelGrid columns="3" columnClasses="value, value,value">
+				
+						<h:outputText value="${msg['checking.documento']}" />
+						
+						<p:autoComplete id="buscarDocumentoAcompanante" value="#{checkingView.acompananteBusqueda}" completeMethod="#{checkingView.completeAcompanante}"
+                        var="vcliente" itemLabel="#{vcliente.nombre}" itemValue="#{vcliente}" converter="acompananteConverter" forceSelection="true" 
+                        size="30" maxlength="30"	 >
+                           <p:ajax event="itemSelect" listener="#{checkingView.addAcompananteBuscar}" update="listaAcompanantes" />
+                        
+                        </p:autoComplete>
+   	
+					</h:panelGrid>
+					</p:panel>
+				
+					
+			
+				
+				
+					<p:panel  id="pAcompanantes">
+					<p:messages />
+					<h:panelGrid>
+					
+				
+    				<p:commandButton id="bAdicionarAcompanante" value="${msg['checking.adicionarAcompanantes']}"  icon="ui-icon-newwin" 
+    				 oncomplete="PF('dlgAcompanantes').show();" />
+					
+					</h:panelGrid>
+					
+				
+					<p:dialog header="${msg['checking.adicionarAcompanantes']}" widgetVar="dlgAcompanantes" resizable="false"
+					  modal="true"
+						width="90%" height="90%">
+
+						<h:panelGrid columns="2" cellpadding="5"  columnClasses="value,value">
+							
+								
+					 <p:outputLabel for="tipoDocunentoAcompanante" value="Tipo Documnento: " />
+					 <p:selectOneMenu id="tipoDocunentoAcompanante" value="#{checkingView.tipoDocumento}" >
+                        <f:selectItems value="#{checkingView.tiposDocumento}" />
+                     </p:selectOneMenu>
+							
+							<h:outputLabel for="documentoAcompanante" value="Documento:" />
+							<p:inputText id="documentoAcompanante" value="#{checkingView.documento}" size="30" maxlength="30"
+								required="true" label="documentoAcompanante" />
+			              
+			        
+			          <h:outputText value="${msg['checking.nombreCliente']}" />
+						<p:inputText value="#{checkingView.nombre}" required="true" requiredMessage="El nombre es requerido"
+							label="Nombre del Cliente" id="nombreAcompante" size="50"  maxlength="50"/>
+					
+					 <p:outputLabel for="extranjeroAcompanante" value="${msg['checking.extranjero']}" />
+                     <p:selectOneRadio id="extranjeroAcompanante" value="#{checkingView.extranjero}" unselectable="true">
+                     <f:selectItem itemLabel="Si" itemValue="S" />
+                     <f:selectItem itemLabel="No" itemValue="N"  />
+                    </p:selectOneRadio>
+					
+					 <!-- h:outputLabel for="correoAcompante" value="${msg['checking.correo']}"  >
+					 
+					
+		                   
+					 </h:outputLabel>      
+                     <p:inputText id="correoAcompanante" value="#{checkingView.correo}" 
+                      >
+                    
+                     </p:inputText>
+                     
+                     <h:outputLabel for="celularAcompanante" value="${msg['checking.celular']}"/>
+                     <p:inputText id="celularAcompanante" value="#{checkingView.celular}" />
+						
+	
+					 <h:outputLabel for="fechaNacimientoAcompanante" value="${msg['checking.fechaNacimiento']}" />
+                  <p:calendar id="fechaNacimientoAcompanante" value="#{checkingView.fechaNacimiento}" required="false"  showOn="button"/
+                   -->
+                  
+					<f:facet name="footer">
+								<p:commandButton value="${msg['checking.guardar']}"   update="listaAcompanantes"
+									actionListener="#{checkingView.adicionarAcompanante}"
+									styleClass="btn btn-default u-btn-naranja"
+									oncomplete="handleHalbRequest(xhr,status,args)"  />
+							</f:facet>
+								<f:facet name="footer">
+								<p:commandButton value="${msg['checking.cerrar']}"  oncomplete="PF('dlgAcompanantes').hide();" />
+							</f:facet>
+						</h:panelGrid>
+					</p:dialog>
+
+
+	             <p:dataTable var="acompanante"
+								value="#{checkingView.acompanantes}"
+								id="listaAcompanantes" emptyMessage="No hay acompañantes">
+								<f:facet name="header">
+        						${msg['checking.listaAcompanantes']}
+    						</f:facet>
+							
+                                 <p:column headerText="Tipo Documento">
+									<h:outputText value="#{acompanante.tipoDocumento}" />
+								</p:column>
+							
+							
+								<p:column headerText="Documento">
+									<h:outputText value="#{acompanante.documento}" />
+								</p:column>
+
+
+								<p:column headerText="Nombre">
+									<h:outputText value="#{acompanante.nombre}" />
+								</p:column>
+								
+								<p:column headerText="Extranjero">
+									<h:outputText value="#{acompanante.extranjero}" />
+								</p:column>
+								<!--p:column headerText="Correo">
+									<h:outputText value="#{acompanante.correo}" />
+								</p:column>
+								
+								
+								
+								<p:column headerText="Nombre">
+									<h:outputText value="#{acompanante.celular}" />
+								</p:column-->
+								<p:column headerText="Eliminar">
+							      <p:commandButton id="bBorrarAcompanante" value="${msg['checking.borrarAcompanante']}"  icon="ui-icon-trash"  update="listaAcompanantes" 
+                                  actionListener="#{checkingView.borrarAcompanante(acompanante.documento)}"/>
+                                </p:column>
+
+							</p:dataTable>
+
+
+				</p:panel>
+			</p:tab>
+
+
+
+
+			<p:tab id="serviciosAdicionales" title="${msg['checking.serviciosAdicionales']}">
+				
+				
+			<p:panel  header="${msg['checking.buscarServicio']}" toggleable="true" 
+					toggleOrientation="horizontal" collapsed="true">
+					
+					
+					<h:panelGrid columns="3" columnClasses="value, value,value">
+				
+						<h:outputText value="${msg['checking.servicio']}" />
+						
+						<p:autoComplete id="buscarServicio" value="#{checkingView.servicioBusqueda}" completeMethod="#{checkingView.completeServicio}"
+                        var="vservicio" itemLabel="#{vservicio.nombre}" itemValue="#{vservicio}" converter="servicioConverter" forceSelection="true" 
+                        size="30" maxlength="30"	 >
+                           <p:ajax event="itemSelect" listener="#{checkingView.addServicioBuscar}" update="listaServicios" />
+                        
+                        </p:autoComplete>
+   	
+					</h:panelGrid>
+				</p:panel>
+						
+				
+				<p:panel header="Servicios" id="pServicios">
+					<p:messages />
+					
+				         <h:panelGrid>
+					
+				
+    				<p:commandButton id="bAdicionarServicio" value="${msg['checking.adicionarServicio']}"  icon="ui-icon-newwin" 
+    				 oncomplete="PF('dlgServicio').show();" />
+					
+					</h:panelGrid>
+
+				 <p:dialog header="${msg['checking.adicionarServicio']}" widgetVar="dlgServicio" resizable="false"
+					  modal="true"
+						width="90%" height="90%">
+
+						<h:panelGrid columns="2" cellpadding="5"  columnClasses="value,value">
+							<h:outputLabel for="nombreServicio" value="Servicio:" />
+							<p:inputText id="nombreServicio" value="#{checkingView.servicioSeleccionado.nombre}" size="30" maxlength="30"
+								required="true" label="nombreServicio" />
+								
+							<h:outputLabel for="precioServicio" value="Precio:" />
+							<p:inputText id="precioServicio" value="#{checkingView.servicioSeleccionado.valor}" size="30" maxlength="30"
+								required="true" label="precioServicio" />	
+			     
+					<f:facet name="footer">
+								<p:commandButton value="${msg['checking.guardar']}"   update="listaServicios"
+									actionListener="#{checkingView.adicionarServicio}"
+									styleClass="btn btn-default u-btn-naranja"
+									oncomplete="handleServicioRequest(xhr,status,args)"  />
+							</f:facet>
+								<f:facet name="footer">
+								<p:commandButton value="${msg['checking.cerrar']}"  oncomplete="PF('dlgServicio').hide();" />
+							</f:facet>
+						</h:panelGrid>
+					</p:dialog>
+					
+					    <p:dataTable var="servicio"
+					    editable="true" editMode="cell"
+								value="#{checkingView.servicios}"
+								id="listaServicios" emptyMessage="No hay servicios adicionales">
+								<f:facet name="header">
+        						Lista de Servicios
+    						</f:facet>
+							
+								<p:column headerText="Nombre">
+									<h:outputText value="#{servicio.nombre}" />
+								</p:column>
+		                        <p:column headerText="Precio">
+									<h:outputText value="#{servicio.valor}" />
+								</p:column>
+								
+						<p:column headerText="Cantidad">
+                        <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{servicio.cantidad}" /></f:facet>
+                        <f:facet name="input">
+                       <p:spinner value="#{servicio.cantidad}" min="1" max="20" />
+                      </f:facet>
+            </p:cellEditor>
+        </p:column>
+
+								<p:column headerText="Eliminar">
+							      <p:commandButton id="bBorrarServicio" value="${msg['checking.borrarAcompanante']}"  icon="ui-icon-trash"  update="listaServicios" 
+                                  actionListener="#{checkingView.borrarServicio(servicio.id)}"/>
+                                </p:column>
+								
+							</p:dataTable>
+				
+
+				</p:panel>
+			</p:tab>
+
+
+
+
+
+
+			<p:tab id="confirmarChecking" title="${msg['checking.resumenCkecking']}">
+				<p:panel header="${msg['checking.resumen']}">
+
+					<h:panelGrid columns="2" columnClasses="value, value">
+						<h:outputText value="${msg['checking.documentoResumen']}" />
+						<h:outputText value="#{checkingView.cliente.documento} " />
+				
+						<h:outputText value="${msg['checking.nombres']}" />
+						<h:outputText value="#{checkingView.cliente.nombre} " />
+						
+						<h:outputText value="${msg['checking.correoResumen']}" />
+						<h:outputText value="#{checkingView.cliente.correo} " />
+						
+						<h:outputText value="${msg['checking.celularResumen']}" />
+					    <h:outputText value="#{checkingView.cliente.celular} " />
+			
+						<h:outputText value="${msg['checking.fechaEntradaResumen']}" />
+					    <h:outputText value="#{checkingView.formatFechaEntrada} " />
+	
+			            <h:outputText value="${msg['checking.fechaSalidaResumen']}" />
+					    <h:outputText value="#{checkingView.formatFechaSalida} " />
+	
+	
+	
+	             <p:dataTable var="acompanante"
+								value="#{checkingView.acompanantes}"
+								id="listaAcompanantesResumen" emptyMessage="No hay acompañantes">
+								<f:facet name="header">
+        						${msg['checking.listaAcompanantes']}
+    						</f:facet>
+							
+							 <p:column headerText="Tipo Documento">
+									<h:outputText value="#{acompanante.tipoDocumento}" />
+								</p:column>
+								<p:column headerText="Documento">
+									<h:outputText value="#{acompanante.documento}" />
+								</p:column>
+
+
+								<p:column headerText="Nombre">
+									<h:outputText value="#{acompanante.nombre}" />
+								</p:column>
+							
+								<p:column headerText="Extranjero">
+									<h:outputText value="#{acompanante.extranjero}" />
+								</p:column>
+
+							</p:dataTable>
+	
+	                      <p:dataTable var="servicio"
+								value="#{checkingView.servicios}"
+								id="listaServiciosResumen" emptyMessage="No hay servicios adicionales">
+								<f:facet name="header">
+        						Lista de Servicios
+    						</f:facet>
+							
+								<p:column headerText="Nombre">
+									<h:outputText value="#{servicio.nombre}" />
+								</p:column>
+		                        <p:column headerText="Precio">
+									<h:outputText value="#{servicio.valor}" />
+								</p:column>
+                                <p:column headerText="Cantidad">
+									<h:outputText value="#{servicio.cantidad}" />
+								</p:column>
+								
+								
+							</p:dataTable>
+							
+							
+							  <p:dataTable var="habitacion"
+								value="#{checkingView.habitacionSeleccionada}"
+								id="listaHabitaciones" emptyMessage="No hay habitaciones">
+								<f:facet name="header">
+        						Lista de Habitaciones
+    						</f:facet>
+							
+								<p:column headerText="Nombre">
+									<h:outputText value="#{habitacion.nombre}" />
+								</p:column>
+		                        <p:column headerText="Descripción">
+									<h:outputText value="#{habitacion.descripcion}" />
+								</p:column>
+		                        <p:column headerText="Precio">
+									<h:outputText value="#{habitacion.precio}" />
+								</p:column>
+
+								
+								
+							</p:dataTable>
+
+					</h:panelGrid>
+                   <h:panelGrid>
+					<h:panelGrid columns="2" columnClasses="value, value">			
+					
+    				 				
+    				<p:commandButton id="Imprimir" value="${msg['checking.imprimir']}"  icon="ui-icon-print" 
+    				 actionListener="#{checkingView.generarChecking()}" ajax="false" />
+    			    <p:commandButton id="Facturar" value="${msg['checking.facturar']}"  icon="ui-icon-print" 
+    				 actionListener="#{checkingView.generarFactura()}" ajax="false" />
+    				 
+    				 </h:panelGrid>
+					
+					</h:panelGrid>
+							
+				
+				</p:panel>
+			</p:tab>
+		</p:wizard>
+
+
+	</h:form>
+	<script type="text/javascript">
+		function handleHalbRequest(xhr, status, args) {
+			if (args.validationFailed || !args.adicionado) {
+				PF('dlgAcompanantes').jq.effect("shake", {
+					times : 5
+				}, 100);
+			} else {
+				PF('dlgAcompanantes').hide();
+				$('#loginLink').fadeOut();
+				
+			}
+		}function handleServicioRequest(xhr, status, args) {
+			if (args.validationFailed || !args.adicionado) {
+				PF('dlgServicio').jq.effect("shake", {
+					times : 5
+				}, 100);
+			} else {
+				PF('dlgServicio').hide();
+				$('#loginLink').fadeOut();
+				
+			}
+		}
+		
+	</script>
+	
+	</ui:define></ui:composition>
+</h:body>
+</html> 

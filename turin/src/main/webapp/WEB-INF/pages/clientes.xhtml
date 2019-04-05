@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      >
+    <h:body>
+    	
+    	
+    	
+    	<ui:composition template="../template/hotelLayout.xhtml">
+         		<ui:define name="content">
+    			<style type="text/css">
+    /** Demo **/
+    .ui-grid-row .ui-grid-col-2,
+    .ui-grid-row .ui-grid-col-10 {
+        padding: 0.5em 0;
+    }
+     
+    .ui-outputlabel {
+        font-weight: bold;
+    }
+     
+    .ui-orderlist .ui-orderlist-list {
+        height: auto;
+    }
+     
+    .ui-orderlist .ui-grid-row .ui-grid-col-2, 
+    .ui-orderlist .ui-grid-row .ui-grid-col-10 {
+        padding: 0;
+    }
+</style>
+    
+   <h:form>
+    <div class="ui-fluid">
+        <p:panelGrid columns="4" columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4" layout="grid" styleClass="ui-panelgrid-blank ui-fluid">
+            <h:outputLabel value="Clientes" style="font-weight:bold" />
+
+            <h:outputLabel for="nombre" value="Nombre:" style="font-weight:bold" />
+            <p:inputText id="nombre" value="#{clienteView.nombre}" />
+ 
+            <h:outputLabel for="correo" value="Correo:" style="font-weight:bold" />      
+            <p:inputText id="correo" value="#{clienteView.correo}" />
+ 
+             <h:outputLabel for="celular" value="Celular:" style="font-weight:bold" />
+            <p:inputText id="celular" value="#{clienteView.celular}" />
+        
+            <h:outputLabel for="documento" value="Documento:" style="font-weight:bold" />
+             <p:spinner id="documento" value="#{clienteView.documento}" min="0" max="20" />
+        
+           <h:outputLabel for="tipoDocumento" value="Tipo Documento:" style="font-weight:bold" />
+           <p:spinner id="tipoDocumento" value="#{clienteView.tipoDocumento}" min="1" max="10" />
+        
+         <h:outputLabel for="fechaNacimiento" value="Fecha Nacimiento:" style="font-weight:bold" />
+        <p:calendar id="fechaNacimiento" value="#{clienteView.fechaNacimiento}" showOn="button"/>
+        
+         <h:outputLabel for="fechaRegistro" value="Fecha Registro:" style="font-weight:bold" />
+        <p:calendar id="fechaSalida" value="#{clienteView.fechaRegistro}" showOn="button" />
+          <p:commandButton value="Guardar" update="mensaje" action="#{clienteView.enviar}" icon="pi pi-check" />
+              <h:outputText id="mensaje" value="#{clienteView.mensaje}" />
+      
+      
+ 
+     
+ 
+       
+            <p:spacer />
+            <p:spacer />
+        </p:panelGrid>
+ 
+     
+       
+ 
+ 
+    </div>
+</h:form>
+    			
+    	
+    	</ui:define>
+    		
+	
+    	</ui:composition>
+    	
+    </h:body>
+
+</html>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<h:head>
+</h:head>
+<h:body>
+<ui:composition template="../template/hotelLayout.xhtml">
+<ui:define name="content">
+	<h1></h1>
+
+	<h:form id="forma">
+
+    <p:growl id="msg" />
+
+				<p:panel header="${msg['limpieza.habitacion']}">
+					<p:messages />
+							  <h:panelGrid columns="1" style="margin-bottom:10px" cellpadding="5">
+	       					 <p:selectOneMenu id="habitacion" value="#{limpiezaView.codigoHabitacion}" >
+	            				<f:selectItem itemLabel="Seleccione la habitacion" itemValue="" />
+	            				<f:selectItems value="#{limpiezaView.habitacionesOcupadas}" />
+	            				 <p:ajax event="change" listener="#{limpiezaView.buscarInsumos}" update="insumos" />
+	            			
+	        				</p:selectOneMenu>	  
+					         
+				   		 </h:panelGrid>
+				 
+				
+				    
+				
+    </p:panel>
+	
+	
+	
+				<p:panel header="${msg['limpieza.insumos']}" id="insumos">
+				
+    <p:selectManyCheckbox id="grid" value="#{limpiezaView.selectedHabitaciones}" layout="grid" columns="1">
+        
+        <f:selectItems value="#{limpiezaView.listaInsumos}" var="insumo" itemLabel="#{insumo}" itemValue="#{insumo}" />
+        
+        
+    </p:selectManyCheckbox>
+				
+    </p:panel>
+        <p:commandButton value="Submit" update="display" actionListener="#{limpiezaView.guardar}" oncomplete="PF('dlg').show()" icon="pi pi-check" />
+    
+<p:dialog header="Values" modal="true" showEffect="clip" widgetVar="dlg" resizable="false">
+        <p:outputPanel id="display">
+         
+            <p:dataList value="#{limpiezaView.selectedHabitaciones}" var="insumo">
+                <f:facet name="header">
+                   Insumos de la habitación
+                </f:facet>
+                #{insumo}
+            </p:dataList>
+          
+        </p:outputPanel>
+    </p:dialog>
+
+
+	</h:form>
+	<script type="text/javascript">
+		
+		
+		
+	</script>
+	
+	</ui:define></ui:composition>
+</h:body>
+</html> 

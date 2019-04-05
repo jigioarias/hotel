@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      >
+    <h:body>
+    	
+    	
+    	
+    	<ui:composition template="../template/hotelLayout.xhtml">
+       
+    		<ui:define name="content">
+    			<style type="text/css">
+    /** Demo **/
+    .ui-grid-row .ui-grid-col-2,
+    .ui-grid-row .ui-grid-col-10 {
+        padding: 0.5em 0;
+    }
+     
+    .ui-outputlabel {
+        font-weight: bold;
+    }
+     
+    .ui-orderlist .ui-orderlist-list {
+        height: auto;
+    }
+     
+    .ui-orderlist .ui-grid-row .ui-grid-col-2, 
+    .ui-orderlist .ui-grid-row .ui-grid-col-10 {
+        padding: 0;
+    }
+</style>
+    
+   <h:form>
+    <div class="ui-fluid">
+        <p:panelGrid columns="4" columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4" layout="grid" styleClass="ui-panelgrid-blank ui-fluid">
+            <h:outputLabel for="nombre" value="Nombre:" style="font-weight:bold" />
+            <p:inputText id="nombre" value="#{reservasView.nombre}" required="true" />
+ 
+            <h:outputLabel for="correo" value="Correo:" style="font-weight:bold" />      
+            <p:inputText id="correo" value="#{reservasView.correo}" required="true"  />
+ 
+             <h:outputLabel for="celular" value="Celular:" style="font-weight:bold" />
+            <p:inputText id="celular" value="#{reservasView.celular}" required="true"  />
+          <h:outputLabel for="numeroAdultos" value="Número Adultos:" style="font-weight:bold" />
+             <p:spinner id="numeroAdultos" value="#{reservasView.numeroAdultos}" min="1" max="20" />
+        
+        
+            <h:outputLabel for="numeroNinos" value="Número Niños:" style="font-weight:bold" />
+             <p:spinner id="numeroNinos" value="#{reservasView.numeroNinos}" min="0" max="20" />
+        
+           <h:outputLabel for="numerHabitaciones" value="Número Habitaciones:" style="font-weight:bold" />
+           <p:spinner id="numerHabitaciones" value="#{reservasView.numeroHabitaciones}" min="1" max="10" />
+        
+         <h:outputLabel for="fechaEntrada" value="Fecha Entrada:"  style="font-weight:bold" />
+        <p:calendar id="fechaEntrada" value="#{reservasView.fechaEntrada}" required="true"  showOn="button"/>
+        
+         <h:outputLabel for="fechaSalida" value="Fecha Salida:" style="font-weight:bold" />
+        <p:calendar id="fechaSalida" value="#{reservasView.fechaSalida}" showOn="button" required="true"  />
+          <p:commandButton value="Reservar" update="mensaje" action="#{reservasView.enviar}" icon="pi pi-check" />
+              <h:outputText id="mensaje" value="#{reservasView.mensaje}" />
+      
+      
+ 
+     
+ 
+       
+            <p:spacer />
+            <p:spacer />
+        </p:panelGrid>
+ 
+     
+       
+ 
+       
+ 
+ 
+      
+ 
+ 
+
+ 
+ 
+    </div>
+</h:form>
+    			
+    	
+    			</ui:define>
+    		
+		
+		
+
+    	</ui:composition>
+    	
+    </h:body>
+
+</html>
