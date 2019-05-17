@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import co.com.hoteles.turin.entities.Cliente;
+import co.com.hoteles.turin.entities.Habitacion;
 import co.com.hoteles.turin.entities.Insumo;
 import co.com.hoteles.turin.reportes.JPAUtility;
 
@@ -56,5 +57,15 @@ public Insumo find(int id) throws Exception{
 	    return em.find(Insumo.class, id);
 
 	}
+
+public List<Insumo> findXNombre(String nombre) throws Exception{
+	
+	EntityManager em = JPAUtility.getEntityManager();
+	Query query = em.createNamedQuery("Insumo.findNombre");
+	query.setParameter("nombre", nombre);
+	List<Insumo> results = query.getResultList();
+    return results;
+    
+}
 
 }

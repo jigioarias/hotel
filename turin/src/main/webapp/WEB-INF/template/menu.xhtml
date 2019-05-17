@@ -13,37 +13,52 @@
 <h:body>
 	<h:form>  
     <p:growl id="messages"/>
+    
+    
+    
  
     <p:menubar>
         <p:submenu label="Checking" icon="pi pi-file">
            
             <p:menuitem value="Ingresar" url="checking.xhtml" />
             <p:separator />
-            <p:menuitem value="Imprimir" url="checking.xhtml" />
+            <p:menuitem value="Imprimir" url="imprimirChecking.xhtml" />
         </p:submenu>
  
         <p:submenu label="Facturar" icon="pi pi-pencil">
-            <p:menuitem value="generar" url="#" icon="pi pi-angle-double-left" />
+            <p:menuitem value="generar" url="facturar.xhtml" icon="pi pi-angle-double-left" />
             
         </p:submenu>
         
            <p:submenu label="Limpieza" icon="pi pi-pencil">
-            <p:menuitem value="Reportar" url="#" icon="pi pi-angle-double-left" />
+            <p:menuitem value="Reportar" url="reportar.xhtml" icon="pi pi-angle-double-left" />
+            <p:menuitem value="Limpiar" url="limpieza.xhtml" icon="pi pi-angle-double-left" />
             
         </p:submenu>
      
  
-  <p:submenu label="Administracion" icon="pi pi-pencil">
-            <p:menuitem value="generar" url="#" icon="pi pi-angle-double-left" />
+  <p:submenu label="Administracion" icon="pi pi-pencil" >
+            <p:menuitem value="Habitaciones" url="habitacion.xhtml" icon="pi pi-angle-double-left" />
+            <p:menuitem value="Insumos" url="insumos.xhtml" icon="pi pi-angle-double-left" />
+            <p:menuitem value="Servicios" url="servicio.xhtml" icon="pi pi-angle-double-left" />
+            <p:menuitem value="Roles" url="roles.xhtml" icon="pi pi-angle-double-left" />
+            <p:menuitem value="Usuarios" url="usuario.xhtml" icon="pi pi-angle-double-left" />
+            
             
        </p:submenu>
       <p:submenu label="Reportes" icon="pi pi-pencil" >
-            <p:menuitem value="generar" url="#" icon="pi pi-angle-double-left" />
+            <p:menuitem value="Extranjeros" url="reporteExtranjeros.xhtml" icon="pi pi-angle-double-left" />
             
        </p:submenu>      
- 
+        
+        <p:menuitem value="Reservas (#{reservasView.numeroReservas})" url="reservas.xhtml" icon="pi pi-user-plus" />
+      
+      
+   
+
         <f:facet name="options">
-            <p:commandButton type="button" value="Salir del sitio" icon="pi pi-home" />
+			<h:commandLink  id="exit"   value="${msg['menu.salir']}" action="#{loginBean.salir}" ></h:commandLink>
+
         </f:facet>
     </p:menubar>
 </h:form>

@@ -1,6 +1,4 @@
 package co.com.hoteles.turin.views;
-import java.io.File;
-import java.io.IOException;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,10 +17,10 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import org.primefaces.PrimeFaces;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.FlowEvent;
+import org.primefaces.model.DualListModel;
 
 import co.com.hoteles.turin.dtos.CheckingDTO;
 import co.com.hoteles.turin.entities.AcompanantesChecking;
@@ -32,7 +30,6 @@ import co.com.hoteles.turin.entities.Habitacion;
 import co.com.hoteles.turin.entities.HabitacionesChecking;
 import co.com.hoteles.turin.entities.Servicio;
 import co.com.hoteles.turin.entities.ServiciosCkeking;
-import co.com.hoteles.turin.entities.Usuario;
 import co.com.hoteles.turin.services.AcompanantesCkeckingService;
 import co.com.hoteles.turin.services.CkeckingService;
 import co.com.hoteles.turin.services.ClienteService;
@@ -61,6 +58,8 @@ public class CheckingView extends GenericBB implements Serializable {
 	private String formatFechaSalida;
 	private String formatFechaEntrada;
 	private int numeroPersonas;
+    private DualListModel<String> habitacionesPickList;
+
 	
 	private Date todayDate = new Date();
 	
@@ -88,25 +87,21 @@ public class CheckingView extends GenericBB implements Serializable {
 	private String tipoDocumento= " ";
 
 
-
-	 
-	 public Date getFechaNacimiento() {
-		return fechaNacimiento;
-	}
-
-
-	public void setFechaNacimiento(Date fechaNacimiento) {
-		this.fechaNacimiento = fechaNacimiento;
-	}
-
-
-	public String getExtranjero() {
-		return extranjero;
-	}
-
-
-	public void setExtranjero(String extranjero) {
-		this.extranjero = extranjero;
+	public CheckingView(){
+		
+		List<String> habitacionesDisponibles = new ArrayList<String>();
+		try {
+			for(Habitacion i:HabitacionService.getInstance().listarDisponibles()) {
+				habitacionesDisponibles.add(i.getNombre() +"-Capacidad:"+ i.getCapacidad()+"-Precio:"+i.getPrecio());
+			}
+		
+		    List<String> habitacionesSeleccionados = new ArrayList<String>();
+            habitacionesPickList = new DualListModel<String>(habitacionesDisponibles, habitacionesSeleccionados);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
 	}
 
 
@@ -129,7 +124,7 @@ public class CheckingView extends GenericBB implements Serializable {
 	     	 session.setAttribute("listaHabitaciones",filteredHabitacion);
 			
 	        return filteredHabitacion;
-	    }
+	 }
 	
 
 	public Cliente getCliente() {
@@ -200,13 +195,7 @@ public class CheckingView extends GenericBB implements Serializable {
 		this.extranjeros = extranjeros;
 	}
 
-	public CheckingView(){
 
-		
-
-
-
-	}
 
 	public Map<String, String> getTiposDocumento() {
 		return tiposDocumento;
@@ -292,8 +281,9 @@ public class CheckingView extends GenericBB implements Serializable {
 	public void guardar() {
 
 		try {
-			
+			   String usuarioIngreso = this.getUsuarioSession().getId();
 			   cliente.setFechaRegistro(new Date());
+			   cliente.setUsuarioUIngreso(usuarioIngreso);
 			   ClienteService.getInstance().ingresar(cliente);
 			   Cliente ClienteIngresado = null;
 			   if(clienteBusqueda != null) {
@@ -309,23 +299,31 @@ public class CheckingView extends GenericBB implements Serializable {
 			   ck.setFechaSalida(fechaSalida);
 			   ck.setIdCliente(ClienteIngresado.getId());
 			   ck.setNumeroPersonas(numeroPersonas);
-			   ck.setUsuario(getUsuarioSession().getLogin());
+			   ck.setUsuario(getUsuarioSession().getId());
+
 			   		   
 			   CkeckingService.getInstance().ingresar(ck);
-			   System.out.println("clienteBusqueda.getId()>>>>>>:::"+clienteBusqueda.getId()); 
-			   System.out.println("ClienteIngresado.getId()>>>>>>:::"+ClienteIngresado.getId()); 
 
 			  Ckecking CkeckingConsultado =  CkeckingService.getInstance().getFindXCliente(ClienteIngresado.getId());
-			   System.out.println("CkeckingConsultado.getId()::::::"+CkeckingConsultado.getId());
 			  if(CkeckingConsultado!= null) {
-			   for (Habitacion habitacion : habitacionSeleccionada) {
-				   System.out.println("habitacion.getId()::::::"+habitacion.getId());
+			  /* for (Habitacion habitacion : habitacionSeleccionada) {
 
 				  HabitacionesChecking h = new HabitacionesChecking(CkeckingConsultado.getId(),habitacion.getId());  
 				  HabitacionesCkeckingService.getInstance().ingresar(h);
 				  habitacion.setEstado("OCU");
 				  HabitacionService.getInstance().actualizar(habitacion);
-			   }
+			   }*/
+			   
+			   for (String habitacion : habitacionesPickList.getTarget()) {
+				   	  String[] datos = habitacion.split("-");
+					  System.err.println("codigo:"+datos[0]);
+					List<Habitacion> h2= HabitacionService.getInstance().findXNombre(datos[0]);
+					  Habitacion hc = h2.get(0);
+					  HabitacionesChecking h = new HabitacionesChecking(CkeckingConsultado.getId(),hc.getId());  
+					  HabitacionesCkeckingService.getInstance().ingresar(h);
+					   hc.setEstado("OCU");
+					  HabitacionService.getInstance().actualizar(hc);	 
+				   }
 			   
 			   for (Servicio servicio : servicios) {
 				   	 
@@ -342,7 +340,7 @@ public class CheckingView extends GenericBB implements Serializable {
 
 				   	 ServiciosCkeking s = new ServiciosCkeking(servicio.getCantidad(),CkeckingConsultado.getId(),servicioConsultado.getId());  
 					 ServiciosCkeckingService.getInstance().ingresar(s);
-				 }
+			   }
 			   boolean hayExtrajeros = false;
 			   for (Cliente acompanante : acompanantes) {
 					 
@@ -353,7 +351,9 @@ public class CheckingView extends GenericBB implements Serializable {
 					 Cliente acompananteConsultado =ClienteService.getInstance().getFindXDocumento(acompanante.getDocumento());
 					 AcompanantesCkeckingService.getInstance().ingresar(new AcompanantesChecking(CkeckingConsultado.getId(),acompananteConsultado.getId()));
 					 
-				 }
+			}
+			   
+			     
 		        String mensaje ="";
 			    if(hayExtrajeros) {
 			    	mensaje ="EL cheking se guardo con exito,Recuerde que debe reportar al final de mes los extranjeros";
@@ -421,24 +421,12 @@ public class CheckingView extends GenericBB implements Serializable {
 
 	}
 
-
-
-
-
 	public void buscar() {
 
 		FacesContext.getCurrentInstance().addMessage("messages",
 				new FacesMessage(FacesMessage.SEVERITY_ERROR, " Buscar Checking", ""));
 
-
-
-
 	}
-
-	
-	
-	
-	
 
 	public String getDocumento() {
 		return documento;
@@ -546,12 +534,42 @@ public void buscarReserva() {
 	Ckecking checking = null;
 	try {
 		checking = CkeckingService.getInstance().getFindXCliente(cliente.getId());
-		System.out.println("ID en buscar:>>>>>>>>>>>>>:::"+cliente.getId());
 		if(checking !=null) {
 			fechaSalida =checking.getFechaSalida();  
 			fechaEntrada = checking.getFechaEntrada();
 			numeroPersonas = checking.getNumeroPersonas();
-			habitacionSeleccionada = HabitacionesCkeckingService.getInstance().getFindXChecking(checking.getId());
+			
+			List<String> habitacionesDisponibles = new ArrayList<String>();
+			 habitacionSeleccionada = HabitacionesCkeckingService.getInstance().getFindXChecking(checking.getId());
+
+			try {
+				for(Habitacion i:HabitacionService.getInstance().listarDisponibles()) {
+					
+					habitacionesDisponibles.add(i.getNombre() +"-Capacidad:"+ i.getCapacidad()+"-Precio:"+i.getPrecio());
+					
+				}
+				
+				   for (Habitacion h : habitacionSeleccionada) {
+					   
+					   habitacionesDisponibles.remove(h.getNombre() +"-Capacidad:"+ h.getCapacidad()+"-Precio:"+h.getPrecio());
+					   
+				     
+				   }
+			    List<String> habitacionesSeleccionados = new ArrayList<String>();
+
+			   for (Habitacion h : habitacionSeleccionada) {
+				   
+				   habitacionesSeleccionados.add(h.getNombre() +"-Capacidad:"+ h.getCapacidad()+"-Precio:"+h.getPrecio());
+				   
+			     
+			   }
+			    
+	            habitacionesPickList = new DualListModel<String>(habitacionesDisponibles, habitacionesSeleccionados);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 			 HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 	     	 session.setAttribute("listaHabitaciones",habitacionSeleccionada);
 
@@ -586,7 +604,6 @@ public void buscarReserva() {
 	tiposDocumento.put("Pasaporte", "PP");
 	tiposDocumento.put("Cedula Extranjeria", "CE");
 	
-	guardarUsuario(FacesContext.getCurrentInstance(), new Usuario("jinni"));
    
 }
 
@@ -600,6 +617,24 @@ public void setClienteBusqueda(Cliente clienteBusqueda) {
 
 
 public List<Habitacion> getHabitacionSeleccionada() {
+	
+	habitacionSeleccionada = new ArrayList<Habitacion>();
+
+	for (String idHabitacion : habitacionesPickList.getTarget()) {
+    	String [] datos = idHabitacion.split("-");
+ 	
+    	try {
+			habitacionSeleccionada.add((HabitacionService.getInstance().findXNombre(datos[0])).get(0));
+			
+		} catch (NumberFormatException e) {
+		
+			e.printStackTrace();
+		} catch (Exception e) {
+		
+			e.printStackTrace();
+		}
+		
+	}
 	return habitacionSeleccionada;
 }
 
@@ -718,7 +753,10 @@ public  void generarChecking() {
     	
     	CheckingDTO checkingDTO = new CheckingDTO();
     	checkingDTO.setAcompanantes(acompanantes);
-    	checkingDTO.setHabitaciones(habitacionSeleccionada);
+    	
+    	
+    	
+    	checkingDTO.setHabitaciones(getHabitacionSeleccionada());
     	checkingDTO.setServicios(servicios);
     	List<CheckingDTO> lista = new ArrayList<CheckingDTO>();
     	lista.add(checkingDTO);
@@ -815,4 +853,34 @@ public  void generarFactura() {
 }
 
 
+
+public DualListModel<String> getHabitacionesPickList() {
+	return habitacionesPickList;
+}
+
+
+public void setHabitacionesPickList(DualListModel<String> habitacionesPickList) {
+	this.habitacionesPickList = habitacionesPickList;
+}
+
+
+
+public Date getFechaNacimiento() {
+	return fechaNacimiento;
+}
+
+
+public void setFechaNacimiento(Date fechaNacimiento) {
+	this.fechaNacimiento = fechaNacimiento;
+}
+
+
+public String getExtranjero() {
+	return extranjero;
+}
+
+
+public void setExtranjero(String extranjero) {
+	this.extranjero = extranjero;
+}
 }

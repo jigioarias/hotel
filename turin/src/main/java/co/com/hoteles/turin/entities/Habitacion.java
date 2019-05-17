@@ -11,6 +11,7 @@ import javax.persistence.*;
 @Entity
 @NamedQuery(name="Habitacion.findAll", query="SELECT h FROM Habitacion h")
 @NamedQuery(name="Habitacion.findEstado", query="SELECT h FROM Habitacion h where estado=:estado")
+@NamedQuery(name="Habitacion.findNombre", query="SELECT h FROM Habitacion h where nombre=:nombre")
 
 public class Habitacion implements Serializable {
 	public Habitacion(int capacidad, String descripcion, String estado, String nombre, int precio) {
@@ -25,6 +26,7 @@ public class Habitacion implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
 	private int capacidad;

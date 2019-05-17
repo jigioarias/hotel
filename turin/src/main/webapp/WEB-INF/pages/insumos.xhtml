@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      >
+    <h:body>
+    	
+    	
+    	
+    	<ui:composition template="../template/hotelLayout.xhtml">
+         		<ui:define name="content">
+    			
+    
+   <h:form>
+    		<p:growl id="messages" showDetail="true" sticky="true" />
+    
+    	
+    
+    <div class="ui-fluid">
+        <p:panelGrid columns="2" id="pInsumos" columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4" layout="grid" styleClass="ui-fluid">
+            <h:outputLabel value="Insumo" style="font-weight:bold" />
+          <h:outputLabel value=" " style="font-weight:bold" />
+            <h:outputLabel for="nombre" value="${msg['insumo.nombre']}:" style="font-weight:bold" />
+            <p:inputText id="nombre" value="#{insumoView.insumo.nombre}" required="true" />
+ 
+               
+           <h:outputLabel for="valor" value="${msg['insumo.valor']}:" style="font-weight:bold" />
+           <p:inputText id="valor" value="#{insumoView.insumo.valor}" required="true"  maxlength="6"  />
+   
+          <p:commandButton value="Guardar" update="mensaje,listaInsumos"   action="#{insumoView.enviar}" icon="pi pi-check"  />
+              <h:outputText id="mensaje" value="#{insumoView.mensaje}" />
+      
+       
+      
+      
+ 
+     
+ 
+       
+            <p:spacer />
+            <p:spacer />
+        </p:panelGrid>
+ 
+     
+       <p:dataTable var="insumo"
+								value="#{insumoView.listaInsumos}"
+								id="listaInsumos" emptyMessage="No hay Insumos">
+								<f:facet name="header">
+        						${msg['insumo.listaInsumos']}
+    						</f:facet>
+							
+                               <p:column headerText="${msg['insumo.nombre']}">
+									<h:outputText value="#{insumo.nombre}" />
+								</p:column>
+							  <p:column headerText="${msg['insumo.valor']}">
+									<h:outputText value="#{insumo.valor}" />
+								</p:column>
+							
+							</p:dataTable>  
+ 
+ 
+    </div>
+</h:form>
+    			
+    	
+    	</ui:define>
+    		
+	
+    	</ui:composition>
+    	
+    </h:body>
+
+</html>

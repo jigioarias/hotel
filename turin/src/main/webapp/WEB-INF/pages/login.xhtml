@@ -1,0 +1,41 @@
+<html xmlns="http://www.w3c.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+       xmlns:p="http://primefaces.org/ui">
+       
+       
+<h:head>
+   
+ </h:head> 
+
+<h:body>
+ <style>
+ 
+ .centered {
+text-align: center;
+margin-left: 30%;
+}
+ </style>
+<div  class="centered" >
+	<p:growl id="messages" for="messages" showDetail="true" sticky="true" />
+<h:form id="principal">
+      <p:panel  header="Hotel Turin" style="width:400px"  >
+      
+        <h:panelGrid columns="2" cellpadding="5">
+          <h:outputLabel for="username" value="Usuario:" />
+          <p:inputText value="#{loginBean.usuario.id}" id="username"
+             required="true" label="username" />
+          <h:outputLabel for="password" value="Clave:" />
+        <p:password value="#{loginBean.usuario.clave}" id="password" required="false"
+           label="password" />
+          <p:commandButton action="#{loginBean.ingresar}" value="Ingresar"
+									styleClass="button"></p:commandButton>
+      </h:panelGrid>
+    </p:panel>
+  </h:form>
+  
+  </div>
+</h:body>
+
+
+</html>

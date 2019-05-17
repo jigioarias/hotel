@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<h:head>
+<style>
+.ui-picklist .ui-picklist-list{
+height:1500px;
+width: 1500px
+}
+
+</style>
+</h:head>
+<h:body>
+<ui:composition template="../template/hotelLayout.xhtml">
+<ui:define name="content">
+	<h1></h1>
+
+	<h:form id="forma">
+
+		<p:growl id="messages" showDetail="true" sticky="true" />
+
+	
+					<p:panel header="${msg['checking.buscarCliente']}" toggleable="true" toggleOrientation="horizontal" collapsed="true">
+					
+					
+					<h:panelGrid columns="3" columnClasses="value, value,value">
+				
+						<h:outputText value="${msg['checking.cliente']}" />
+						
+						<p:autoComplete id="buscarDocumento" value="#{checkingView.clienteBusqueda}" completeMethod="#{checkingView.completeCliente}"
+                        var="vcliente" itemLabel="#{vcliente.nombre}" itemValue="#{vcliente}" converter="clienteConverter" forceSelection="true" 
+                        size="30" maxlength="30"	 >
+                           <p:ajax event="itemSelect" listener="#{checkingView.buscarReserva}" update="pResumen" />
+                        
+                        </p:autoComplete>
+   	
+					</h:panelGrid>
+					</p:panel>
+				
+			
+
+
+				<p:panel header="${msg['checking.resumen']}" id="pResumen">
+
+					<h:panelGrid columns="2" columnClasses="value, value">
+						<h:outputText value="${msg['checking.documentoResumen']}" />
+						<h:outputText value="#{checkingView.cliente.documento} " />
+				
+						<h:outputText value="${msg['checking.nombres']}" />
+						<h:outputText value="#{checkingView.cliente.nombre} " />
+						
+						<h:outputText value="${msg['checking.correoResumen']}" />
+						<h:outputText value="#{checkingView.cliente.correo} " />
+						
+						<h:outputText value="${msg['checking.celularResumen']}" />
+					    <h:outputText value="#{checkingView.cliente.celular} " />
+			
+						<h:outputText value="${msg['checking.fechaEntradaResumen']}" />
+					    <h:outputText value="#{checkingView.fechaEntrada} " />
+	
+			            <h:outputText value="${msg['checking.fechaSalidaResumen']}" />
+					    <h:outputText value="#{checkingView.fechaSalida} " />
+	
+	
+	
+	             <p:dataTable var="acompanante"
+								value="#{checkingView.acompanantes}"
+								id="listaAcompanantesResumen" emptyMessage="No hay acompañantes">
+								<f:facet name="header">
+        						${msg['checking.listaAcompanantes']}
+    						</f:facet>
+							
+							 <p:column headerText="Tipo Documento">
+									<h:outputText value="#{acompanante.tipoDocumento}" />
+								</p:column>
+								<p:column headerText="Documento">
+									<h:outputText value="#{acompanante.documento}" />
+								</p:column>
+
+
+								<p:column headerText="Nombre">
+									<h:outputText value="#{acompanante.nombre}" />
+								</p:column>
+							
+								<p:column headerText="Extranjero">
+									<h:outputText value="#{acompanante.extranjero}" />
+								</p:column>
+
+							</p:dataTable>
+	
+	                      <p:dataTable var="servicio"
+								value="#{checkingView.servicios}"
+								id="listaServiciosResumen" emptyMessage="No hay servicios adicionales">
+								<f:facet name="header">
+        						Lista de Servicios
+    						</f:facet>
+							
+								<p:column headerText="Nombre">
+									<h:outputText value="#{servicio.nombre}" />
+								</p:column>
+		                        <p:column headerText="Precio">
+									<h:outputText value="#{servicio.valor}" />
+								</p:column>
+                                <p:column headerText="Cantidad">
+									<h:outputText value="#{servicio.cantidad}" />
+								</p:column>
+								
+								
+							</p:dataTable>
+							
+							
+							  <p:dataTable var="habitacion"
+								value="#{checkingView.habitacionSeleccionada}"
+								id="listaHabitaciones" emptyMessage="No hay habitaciones">
+								<f:facet name="header">
+        						Lista de Habitaciones
+    						</f:facet>
+							
+								<p:column headerText="Nombre">
+									<h:outputText value="#{habitacion.nombre}" />
+								</p:column>
+		                        <p:column headerText="Descripción">
+									<h:outputText value="#{habitacion.descripcion}" />
+								</p:column>
+		                        <p:column headerText="Precio">
+									<h:outputText value="#{habitacion.precio}" />
+								</p:column>
+
+								
+								
+							</p:dataTable>
+
+					</h:panelGrid>
+                   <h:panelGrid>
+					<h:panelGrid columns="2" columnClasses="value, value">			
+					
+    				 				
+    				<p:commandButton id="Imprimir" value="${msg['checking.imprimir']}"  icon="ui-icon-print" 
+    				 actionListener="#{checkingView.generarChecking()}" ajax="false" />
+    			    <p:commandButton id="Facturar" value="${msg['checking.facturar']}"  icon="ui-icon-print" 
+    				 actionListener="#{checkingView.generarFactura()}" ajax="false" />
+    				 
+    				 </h:panelGrid>
+					
+					</h:panelGrid>
+							
+				
+				</p:panel>
+		
+
+	</h:form>
+	<script type="text/javascript">
+		function handleHalbRequest(xhr, status, args) {
+			if (args.validationFailed || !args.adicionado) {
+				PF('dlgAcompanantes').jq.effect("shake", {
+					times : 5
+				}, 100);
+			} else {
+				PF('dlgAcompanantes').hide();
+				$('#loginLink').fadeOut();
+				
+			}
+		}function handleServicioRequest(xhr, status, args) {
+			if (args.validationFailed || !args.adicionado) {
+				PF('dlgServicio').jq.effect("shake", {
+					times : 5
+				}, 100);
+			} else {
+				PF('dlgServicio').hide();
+				$('#loginLink').fadeOut();
+				
+			}
+		}
+		
+	</script>
+	
+	</ui:define></ui:composition>
+</h:body>
+</html> 

@@ -11,13 +11,19 @@ import javax.persistence.*;
 @Entity
 @Table(name="insumos")
 @NamedQuery(name="Insumo.findAll", query="SELECT i FROM Insumo i")
+@NamedQuery(name="Insumo.findNombre", query="SELECT i FROM Insumo i where i.nombre=:nombre")
+
 public class Insumo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+
 	private int codigo;
 
 	private String nombre;
+	
+	private int valor;
 	
 	 public int getCantidad() {
 		return cantidad;
@@ -53,6 +59,14 @@ public class Insumo implements Serializable {
 		this.codigo = codigo;
 		this.nombre = nombre;
 		this.cantidad = cantidad;
+	}
+
+	public int getValor() {
+		return valor;
+	}
+
+	public void setValor(int valor) {
+		this.valor = valor;
 	}
 
 }

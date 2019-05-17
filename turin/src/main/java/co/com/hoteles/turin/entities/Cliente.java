@@ -18,6 +18,7 @@ import javax.persistence.Table;
 @NamedQuery(name="Cliente.findAll", query="SELECT c FROM Cliente c")
 @NamedQuery(name="Cliente.findDocumento", query="SELECT c FROM Cliente c where documento=:documento")
 @NamedQuery(name="Cliente.findId", query="SELECT c FROM Cliente c where id=:id")
+@NamedQuery(name="Cliente.findExtranjeros", query="SELECT c FROM Cliente c where c.extranjero=:extranjero and c.fechaRegistro>=:fechaInicio and c.fechaRegistro<=:fechaFin ")
 
 public class Cliente implements Serializable {
 
@@ -74,6 +75,7 @@ public class Cliente implements Serializable {
 	@Column(name = "correo")
 	private String correo;
 	
+	private String usuarioIngreso;
 
 
 	public Cliente(String tipoDocumento, String documento, String nombre, String celular, Date fechaRegistro,
@@ -143,6 +145,14 @@ public String getExtranjero() {
 
 public void setExtranjero(String extranjero) {
 	this.extranjero = extranjero;
+}
+
+public String getUsuarioIngreso() {
+	return usuarioIngreso;
+}
+
+public void setUsuarioUIngreso(String usuarioIngreso) {
+	this.usuarioIngreso = usuarioIngreso;
 }	
 	
 }

@@ -12,6 +12,7 @@ import javax.persistence.*;
 @Entity
 @NamedQuery(name="Insumoshabitacion.findAll", query="SELECT i FROM Insumoshabitacion i")
 @NamedQuery(name="Insumoshabitacion.findHabitacion", query="SELECT i FROM Insumoshabitacion i where id.habitacion=:habitacion")
+@NamedQuery(name="Insumoshabitacion.findId", query="SELECT i FROM Insumoshabitacion i where id.habitacion=:habitacion and id.insumo=:insumo")
 
 public class Insumoshabitacion implements Serializable {
 	private static final long serialVersionUID = 1L;

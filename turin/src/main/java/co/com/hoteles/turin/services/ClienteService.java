@@ -1,5 +1,6 @@
 package co.com.hoteles.turin.services;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -102,4 +103,16 @@ public class ClienteService {
 		
 
 	}
+   
+   public List<Cliente> listarExtranjeros(String extranjero,Date fechaInicio, Date fechaFin) throws Exception {
+		
+	 EntityManager em = JPAUtility.getEntityManager();
+	Query query = em.createNamedQuery("Cliente.findExtranjeros");
+	query.setParameter("extranjero", extranjero);
+	query.setParameter("fechaInicio", fechaInicio);
+	query.setParameter("fechaFin", fechaFin);
+	List<Cliente> results = query.getResultList();
+ 
+	  return results;
+	  }
 }

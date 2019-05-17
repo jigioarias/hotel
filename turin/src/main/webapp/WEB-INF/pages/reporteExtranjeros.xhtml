@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+ <h:body>
+
+<ui:composition template="../template/hotelLayout.xhtml">
+         		<ui:define name="content">
+
+
+
+
+<h:form id="principal">
+
+ <div class="ui-fluid">
+        <p:panelGrid columns="2" id="pFiltros" columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4" layout="grid" styleClass="ui-fluid">
+    
+		 <h:outputLabel for="FechaInicio" value="${msg['reportes.fechaInicio']}" />
+                  <p:calendar id="fechaInicio" value="#{reporteClientesView.fechaInicio}"
+                   required="false"  showOn="button"
+                   pattern="dd-MM-yyyy"
+                  maxdate="#{reporteCLientesView.todayDate}"
+                   />
+		
+			 <h:outputLabel for="FechaFin" value="${msg['reportes.fechaFin']}" />
+                  <p:calendar id="fechaFin" value="#{reporteClientesView.fechaFin}"
+                   required="false"  showOn="button"
+                   pattern="dd-MM-yyyy"
+                  maxdate="#{reporteCLientesView.todayDate}"
+                   />
+	
+		<p:commandButton action="#{reporteClientesView.buscar}" value="Buscar"
+			update="lista"></p:commandButton>
+	
+</p:panelGrid>
+	
+	
+		
+	<p:dataTable var="cliente" value="#{reporteClientesView.listaClientes}" id="lista">
+	
+		
+		<p:column>
+		   <f:facet name="header">
+                <h:outputText value="TipoDocumento" />
+            </f:facet>
+			<h:outputText value="#{cliente.tipoDocumento}" />
+		</p:column>
+
+		<p:column>
+		  <f:facet name="header">
+                <h:outputText value="Documento" />
+            </f:facet>
+		<h:outputText value="#{cliente.documento}" />
+	    
+		</p:column>
+		<p:column>
+		  <f:facet name="header">
+                <h:outputText value="Nombre" />
+            </f:facet>
+			
+			<h:outputText value="#{cliente.nombre}" />
+		</p:column>
+		
+		<p:column>
+		 <f:facet name="header">
+                <h:outputText value="Correo" />
+            </f:facet>
+		<h:outputText value="#{cliente.correo}" />
+	    
+		</p:column>
+		<p:column>
+		 <f:facet name="header">
+                <h:outputText value="FechaRegistroee" />
+            </f:facet>
+		<h:outputText value="#{cliente.fechaRegistro}" />
+	    
+		</p:column>
+
+	</p:dataTable>
+	
+
+			  <div>
+              
+         <h:commandLink>
+                    <p:graphicImage name="img/pdf.png" width="24"/>
+                    <p:dataExporter type="pdf" target="lista" fileName="extranjeros"/>
+         </h:commandLink>
+ 
+       </div>
+</div>	
+</h:form>
+
+	
+    	</ui:define>
+    		
+	
+    	</ui:composition>
+</h:body>
+</html>
+

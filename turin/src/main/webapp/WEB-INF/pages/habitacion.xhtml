@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      >
+    <h:body>
+    	
+    	
+    	
+    	<ui:composition template="../template/hotelLayout.xhtml">
+         		<ui:define name="content">
+    			
+    
+   <h:form>
+    		<p:growl id="messages" showDetail="true" sticky="true" />
+    
+    	<p:panel header="${msg['habitacion.buscar']}" toggleable="true" toggleOrientation="horizontal" collapsed="true">
+					
+					
+					<h:panelGrid columns="3" columnClasses="value, value,value">
+				
+						<h:outputText value="${msg['habitacion.nombre']}" />
+						
+						<p:autoComplete id="buscarHabitacion" value="#{habitacionView.habitacionBusqueda}" completeMethod="#{habitacionView.completeHabitacion}"
+                        var="vhabitacion" itemLabel="#{vhabitacion.nombre}" itemValue="#{vhabitacion}" converter="habitacionConverter" forceSelection="true" 
+                        size="30" maxlength="30"	 >
+                           <p:ajax event="itemSelect" listener="#{habitacionView.buscarHabitacion}" update="pHabitacion" />
+                        
+                        </p:autoComplete>
+   	
+					</h:panelGrid>
+					</p:panel>
+	
+    
+    <div class="ui-fluid">
+        <p:panelGrid columns="2" id="pHabitacion" columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4" layout="grid" styleClass="ui-fluid">
+            <h:outputLabel value="Habitacion" style="font-weight:bold" />
+          <h:outputLabel value=" " style="font-weight:bold" />
+            <h:outputLabel for="nombre" value="${msg['habitacion.nombre']}:" style="font-weight:bold" />
+            <p:inputText id="nombre" value="#{habitacionView.habitacion.nombre}" required="true" />
+ 
+            <h:outputLabel for="descripcion" value="${msg['habitacion.descripcion']}:" style="font-weight:bold" />      
+            <p:inputText id="descripcion" value="#{habitacionView.habitacion.descripcion}" required="true" />
+              <h:outputLabel for="estado" value="${msg['habitacion.estado']}:" style="font-weight:bold" />
+           
+            <p:selectOneRadio id="estado" value="#{habitacionView.habitacion.estado}" unselectable="false">
+                     <f:selectItem itemLabel="Disponible" itemValue="DIS"  />
+                     <f:selectItem itemLabel="Ocupada" itemValue="OCU" ></f:selectItem> 
+                     <f:selectItem itemLabel="Reportar para Factura" itemValue="RPF" ></f:selectItem>
+                     <f:selectItem itemLabel="Facturacion" itemValue="FAC" ></f:selectItem>
+                     <f:selectItem itemLabel="Limpieza" itemValue="LIM" ></f:selectItem>
+                   <f:selectItem itemLabel="Reparación" itemValue="REP" ></f:selectItem>
+                     <f:selectItem itemLabel="Inactiva" itemValue="INA" ></f:selectItem>
+
+                    </p:selectOneRadio>
+        
+            <h:outputLabel for="capacidad" value="${msg['habitacion.capacidad']}:" style="font-weight:bold" />
+             <p:spinner id="capacidad" value="#{habitacionView.habitacion.capacidad}" min="1" max="20" />        
+           <h:outputLabel for="precio" value="${msg['habitacion.precio']}:" style="font-weight:bold" />
+           <p:inputText id="precio" value="#{habitacionView.habitacion.precio}" required="true"  maxlength="6"  />
+           <h:outputLabel for="pickListInsumos" value="${msg['habitacion.insumos']}:" style="font-weight:bold" />
+             <p:pickList id="pickListInsumos" value="#{habitacionView.insumos}" var="insumos" itemLabel="#{insumos}" itemValue="#{insumos}" />
+   
+          <p:commandButton value="Guardar" update="mensaje,listaHabitaciones"   action="#{habitacionView.enviar}" icon="pi pi-check"  />
+              <h:outputText id="mensaje" value="#{habitacionView.mensaje}" />
+      
+      
+      
+      
+      
+ 
+     
+ 
+       
+            <p:spacer />
+            <p:spacer />
+        </p:panelGrid>
+ 
+     
+       <p:dataTable var="habitacion"
+								value="#{habitacionView.listaHabitaciones}"
+								id="listaHabitaciones" emptyMessage="No hay Habitaciones">
+								<f:facet name="header">
+        						${msg['habitacion.listaHabitaciones']}
+    						</f:facet>
+							
+                                 <p:column headerText="${msg['habitacion.nombre']}">
+									<h:outputText value="#{habitacion.nombre}" />
+								</p:column>
+							  <p:column headerText="${msg['habitacion.descripcion']}">
+									<h:outputText value="#{habitacion.descripcion}" />
+								</p:column>
+								  <p:column headerText="${msg['habitacion.estado']}">
+									<h:outputText value="#{habitacion.estado}" />
+								</p:column>
+								  <p:column headerText="${msg['habitacion.capacidad']}">
+									<h:outputText value="#{habitacion.capacidad}" />
+								</p:column>
+								  <p:column headerText="${msg['habitacion.precio']}">
+									<h:outputText value="#{habitacion.precio}" />
+								</p:column>
+							
+							</p:dataTable>  
+ 
+ 
+    </div>
+</h:form>
+    			
+    	
+    	</ui:define>
+    		
+	
+    	</ui:composition>
+    	
+    </h:body>
+
+</html>

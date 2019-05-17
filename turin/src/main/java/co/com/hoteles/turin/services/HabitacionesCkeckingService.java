@@ -84,5 +84,17 @@ public class HabitacionesCkeckingService {
  	     return results;
 
  	}
+   
+   
+   public int getFindXHabitacion(int idHabitacion) throws Exception{
+		
+		EntityManager em = JPAUtility.getEntityManager();
+		Query query = em.createNamedQuery("HabitacionesChecking.findxHabitacion");
+		query.setParameter("idHabitacion", idHabitacion);
+		int  results =  (Integer) query.getSingleResult();
+	 
+	     return results;
+
+	}
     
 }

@@ -9,6 +9,13 @@
 	xmlns:pe="http://primefaces.org/ui/extensions">
 
 <h:head>
+<style>
+.ui-picklist .ui-picklist-list{
+height:1500px;
+width: 1500px
+}
+
+</style>
 </h:head>
 <h:body>
 <ui:composition template="../template/hotelLayout.xhtml">
@@ -123,7 +130,7 @@
          <h:outputLabel for="fechaSalida" value="${msg['checking.fechaSalida']}"  />
         <p:calendar id="fechaSalida" value="#{checkingView.fechaSalida}"
         pattern="dd-MM-yyyy"
-         showOn="button"  requiredMessage="fecha de salidad es requerida"
+         showOn="button"  requiredMessage=" la fecha de salida es requerida"
           required="true" 
            binding="#{bindingDateFinComponent}"
            mindate="#{checkingView.todayDate}"
@@ -136,25 +143,12 @@
         <f:attribute name="reference" value="ini" />
           </p:calendar>
 				
-		  <p:outputLabel value="${msg['checking.habitaciones']}" for="habitaciones" />
-        <p:autoComplete id="habitaciones" multiple="true" value="#{checkingView.habitacionSeleccionada}" completeMethod="#{checkingView.completeHabitacion}"
-                        var="habitacion" itemLabel="#{habitacion.nombre}" itemValue="#{habitacion}" converter="habitacionConverter" required="true"
-                        requiredMessage="Las habitaciones son requeridas" >
-            <f:facet name="itemtip">
-                <h:panelGrid columns="2" cellpadding="5">
-                   
-                     
-                    <h:outputText value="Capacidad:" />
-                    <h:outputText value="#{habitacion.capacidad}" />
-                     
-                    <h:outputText value="precio" />
-                    <h:outputText value="#{habitacion.precio}" />
-                     <h:outputText value="Descripcion" />
-                    <h:outputText value="#{habitacion.descripcion}" />
-                    
-                </h:panelGrid>
-            </f:facet>
-        </p:autoComplete>			
+		  <p:outputLabel value="${msg['checking.habitaciones']}" for="pickListHabitaciones" />
+		  <p:pickList style="width:460;" required="true"  requiredMessage="Las habitaciones son requeridas"
+		  id="pickListHabitaciones" value="#{checkingView.habitacionesPickList}" var="habitaciones" itemLabel="#{habitaciones}" itemValue="#{habitaciones}" />
+		  
+		  
+       	
 					
 					
 					</h:panelGrid>

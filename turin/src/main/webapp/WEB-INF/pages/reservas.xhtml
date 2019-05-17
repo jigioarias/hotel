@@ -11,33 +11,13 @@
     	
     	
     	
-    	<ui:composition template="../template/hotelLayout.xhtml">
-       
-    		<ui:define name="content">
-    			<style type="text/css">
-    /** Demo **/
-    .ui-grid-row .ui-grid-col-2,
-    .ui-grid-row .ui-grid-col-10 {
-        padding: 0.5em 0;
-    }
-     
-    .ui-outputlabel {
-        font-weight: bold;
-    }
-     
-    .ui-orderlist .ui-orderlist-list {
-        height: auto;
-    }
-     
-    .ui-orderlist .ui-grid-row .ui-grid-col-2, 
-    .ui-orderlist .ui-grid-row .ui-grid-col-10 {
-        padding: 0;
-    }
-</style>
+        	<ui:composition template="../template/hotelLayout.xhtml">
+         		<ui:define name="content">
+    			
     
    <h:form>
     <div class="ui-fluid">
-        <p:panelGrid columns="4" columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4" layout="grid" styleClass="ui-panelgrid-blank ui-fluid">
+        <p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4" layout="grid" styleClass="ui-panelgrid-blank ui-fluid">
             <h:outputLabel for="nombre" value="Nombre:" style="font-weight:bold" />
             <p:inputText id="nombre" value="#{reservasView.nombre}" required="true" />
  
@@ -86,7 +66,50 @@
  
  
     </div>
+    
+     <p:dataTable var="reserva"
+								value="#{reservasView.listaReservas}"
+								id="listaResevas" emptyMessage="No hay Resevas">
+								<f:facet name="header">
+        						${msg['reservas.listaReservas']}
+    						</f:facet>
+							  <p:column headerText="${msg['reserva.fechaEntrada']}">
+									<h:outputText value="#{reserva.fechaEntrada}" />
+								</p:column>
+								
+								  <p:column headerText="${msg['reserva.fechaSalida']}">
+									<h:outputText value="#{reserva.fechaSalida}" />
+								</p:column>
+							
+                               <p:column headerText="${msg['reserva.nombre']}">
+									<h:outputText value="#{reserva.nombre}" />
+								</p:column>
+							 
+							 
+							   <p:column headerText="${msg['reserva.correo']}">
+									<h:outputText value="#{reserva.correo}" />
+								</p:column>
+								
+								 <p:column headerText="${msg['reserva.celular']}">
+									<h:outputText value="#{reserva.celular}" />
+								</p:column>
+								 <p:column headerText="${msg['reserva.numeroHabitaciones']}">
+									<h:outputText value="#{reserva.numeroHabitaciones}" />
+								</p:column>
+								<p:column headerText="${msg['reserva.numeroAdultos']}">
+									<h:outputText value="#{reserva.numeroAdultos}" />
+								</p:column>
+								<p:column headerText="${msg['reserva.numeroNinos']}">
+									<h:outputText value="#{reserva.numeroNinos}" />
+								</p:column>
+							
+    </p:dataTable>  
+    
+    
 </h:form>
+    		
+    		
+    		
     			
     	
     			</ui:define>

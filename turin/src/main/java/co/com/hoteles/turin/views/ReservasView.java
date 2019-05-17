@@ -1,6 +1,7 @@
 package co.com.hoteles.turin.views;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -27,6 +28,27 @@ public class ReservasView {
     private Date fechaSalida;
     private int numeroHabitaciones;
     private String mensaje;
+    private int numeroReservas;
+    private List<Reserva> listaReservas;
+    
+    public  ReservasView() {
+    	
+
+        ReservaService reservaService = ReservaService.getInstance();
+        
+        try {
+			listaReservas =reservaService.listar();
+			numeroReservas =listaReservas.size();
+	      
+		} catch (Exception e) {
+	       e.printStackTrace();
+
+		}
+        
+    }
+
+    
+    
 	public String getNombre() {
 		return nombre;
 	}
@@ -112,6 +134,20 @@ public class ReservasView {
 		this.mensaje = mensaje;
 	}
 
+	
+	 public int getNumeroReservas() {
+        
+		 
+		      
+	     return numeroReservas;
+		 
+	 }
+	public List<Reserva> getListaReservas() {
+		return listaReservas;
+	}
+	public void setListaReservas(List<Reserva> listaReservas) {
+		this.listaReservas = listaReservas;
+	}    
 
 		 
 

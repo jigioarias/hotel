@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      >
+    <h:body>
+    	
+    	
+    	
+    	<ui:composition template="../template/hotelLayout.xhtml">
+         		<ui:define name="content">
+    			
+    
+   <h:form>
+    		<p:growl id="messages" showDetail="true" sticky="true" />
+    
+    	
+    
+    <div class="ui-fluid">
+        <p:panelGrid columns="2" id="pRoles" columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4" layout="grid" styleClass="ui-fluid">
+            <h:outputLabel value="Rol" style="font-weight:bold" />
+          <h:outputLabel value=" " style="font-weight:bold" />
+            <h:outputLabel for="rol" value="${msg['rol.nombre']}:" style="font-weight:bold" />
+            <p:inputText id="nombre" value="#{rolView.rol.nombre}" required="true" />
+ 
+               
+        
+          <p:commandButton value="Guardar" update="mensaje,listaRoles"   action="#{rolView.enviar}" icon="pi pi-check"  />
+              <h:outputText id="mensaje" value="#{rolView.mensaje}" />
+      
+       
+      
+      
+ 
+     
+ 
+       
+            <p:spacer />
+            <p:spacer />
+        </p:panelGrid>
+ 
+     
+       <p:dataTable var="rol"
+								value="#{rolView.listaRoles}"
+								id="listaRoles" emptyMessage="No hay Roles">
+								<f:facet name="header">
+        						${msg['rol.listaRoles']}
+    						</f:facet>
+							
+                               <p:column headerText="${msg['rol.nombre']}">
+									<h:outputText value="#{rol.nombre}" />
+								</p:column>
+							 
+							
+							</p:dataTable>  
+ 
+ 
+    </div>
+</h:form>
+    			
+    	
+    	</ui:define>
+    		
+	
+    	</ui:composition>
+    	
+    </h:body>
+
+</html>

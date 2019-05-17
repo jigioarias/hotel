@@ -7,19 +7,27 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.component.UISelectMany;
+import javax.faces.component.UISelectOne;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.model.SelectItem;
 import javax.faces.model.SelectItemGroup;
 
 import co.com.hoteles.turin.entities.Habitacion;
 import co.com.hoteles.turin.entities.Insumo;
+import co.com.hoteles.turin.entities.InsumosChecking;
 import co.com.hoteles.turin.services.HabitacionService;
+import co.com.hoteles.turin.services.HabitacionesCkeckingService;
 import co.com.hoteles.turin.services.InsumoHabitacionService;
+import co.com.hoteles.turin.services.InsumosCheckingService;
 
+import javax.faces.bean.ViewScoped;
 
 
 
 @ManagedBean(name="limpiezaView")
+@ViewScoped
 public class LimpiezaView extends GenericBB implements Serializable {
 
 
@@ -46,14 +54,9 @@ public class LimpiezaView extends GenericBB implements Serializable {
 
 	
 	
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+	
 
-
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 
 	public String[] getHabitaciones() {
@@ -68,7 +71,12 @@ public class LimpiezaView extends GenericBB implements Serializable {
 
 
 
-	
+	public LimpiezaView() {
+		
+	     listaInsumos = null; 
+	     listaInsumos = new ArrayList<String>(); 
+
+	}
 	
 
 
@@ -76,8 +84,7 @@ public class LimpiezaView extends GenericBB implements Serializable {
 
 		try {
 			
-		 System.out.println("selectedHabitaciones::"+selectedHabitaciones.length);
-			
+				
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -134,9 +141,9 @@ public class LimpiezaView extends GenericBB implements Serializable {
  public void init(){
 
 	  SelectItemGroup g1 = new SelectItemGroup("Habitaciones Turin");
-     
-	  SelectItem[] habitacionesOcu= null;
-	  try {
+      SelectItem[] habitacionesOcu= null;
+	 
+      try {
 		List<Habitacion> habitaciones= HabitacionService.getInstance().listarOcupadas();
 	     habitacionesOcu= new SelectItem[habitaciones.size()];
 		int contador =0;
@@ -153,9 +160,8 @@ public class LimpiezaView extends GenericBB implements Serializable {
       g2.setSelectItems(new SelectItem[] {new SelectItem("c1", "Habitacion 1 c"), new SelectItem("c2", "Habitacion 2 c"), new SelectItem("c3", "Habitacion 3 c")});
       */ 
       habitacionesOcupadas = new ArrayList<SelectItem>();
-     habitacionesOcupadas.add(g1);
+      habitacionesOcupadas.add(g1);
   //   habitacionesOcupadas.add(g2);	
-     listaInsumos = new ArrayList<String>(); 
    
 
 }
@@ -186,13 +192,17 @@ public void setListaInsumos(List<String> listaInsumos) {
 
 
 
+
 public void buscarInsumos() {
 	
+   // listaInsumos = null; 
+
 	    try {
 			List<Insumo> listaInsumosConsultados=InsumoHabitacionService.getInstance().listar(Integer.parseInt(codigoHabitacion));
-		
+
 			for (Insumo insumo : listaInsumosConsultados) {
-				listaInsumos.add(insumo.getCodigo()+"- "+insumo.getNombre()+" - Cantidad : "+insumo.getCantidad());
+				listaInsumos.add(insumo.getCodigo()+"- "+insumo.getNombre()+"- Cantidad:"+insumo.getCantidad());
+
 			}
 	
 		} catch (NumberFormatException e) {
@@ -206,20 +216,62 @@ public void buscarInsumos() {
 	     
 }
 
+
+public void adicionar(AjaxBehaviorEvent event) {
+	
+    String id = event.getComponent().toString();
+    System.out.println(id);
+	System.out.println("codigoHabitacion::"+codigoHabitacion);
+    System.out.println("lista de  seleccion::"+selectedHabitaciones.length);
+}  
+
 public void confirmar() {
 	
+   
+    
+  if (listaInsumos.size() != selectedHabitaciones.length) {
+       for (String i:selectedHabitaciones) {
+    	   
+		  listaInsumos.remove(i);
+	    }
+	
+    
+    if(listaInsumos.size()>0) {
+    	
+    	for (String insumo : listaInsumos) {
+    		
+    		String[] datos = insumo.split("-");
+    		String codigoInsumo =datos[0];
+    		InsumosChecking insumosChecking = new InsumosChecking();
+    		int cantidad = Integer.parseInt(datos[2].split(":")[1]);
+    		insumosChecking.setCantidad(cantidad);
+    		try {
+				int codigoCheking =HabitacionesCkeckingService.getInstance().getFindXHabitacion(Integer.parseInt(codigoHabitacion));
+			
+    		insumosChecking.setIdCkecking(codigoCheking);
+    		insumosChecking.setIdInsumo(Integer.parseInt(codigoInsumo));
+			
+    		InsumosCheckingService.getInstance().actualizar(insumosChecking);
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			}
+			
+		}
+    }
+    
+    }  
 	Habitacion h;
 	try {
 		h = HabitacionService.getInstance().find(Integer.parseInt(codigoHabitacion));
-		h.setEstado("DIS");
+		h.setEstado("RPF");
 		HabitacionService.getInstance().actualizar(h);
-	} catch (NumberFormatException e) {
-		e.printStackTrace();
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-
+	
+	
 }
 
 

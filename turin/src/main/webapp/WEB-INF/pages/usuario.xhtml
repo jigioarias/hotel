@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+ <h:body>
+
+<ui:composition template="../template/hotelLayout.xhtml">
+         		<ui:define name="content">
+
+
+<p:growl showDetail="true" autoUpdate="true" closable="true" />
+
+
+<h:form id="principal">
+
+ <div class="ui-fluid">
+        <p:panelGrid columns="2" id="pInsumos" columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4" layout="grid" styleClass="ui-fluid">
+    
+		<h:outputText value="Usuario   " />
+		<p:inputText id="login" value="#{usuarioView.usuario.id}"
+			required="false"></p:inputText>
+		
+		<h:outputText value="Correo   " />
+		<p:inputText id="correo" value="#{usuarioView.usuario.correo}"
+			required="false"></p:inputText>
+	
+
+		<h:outputLabel for="password" value="Clave:" />
+		<p:password id="password" value="#{usuarioView.usuario.clave}"
+			required="false" />
+		
+		<h:outputLabel for="rol" value="Rol:" />
+		<h:selectOneMenu id="rol" value="#{usuarioView.usuario.rol}"
+			required="true">
+       				<f:selectItem itemLabel="Seleccione el rol" itemValue="" />
+			       <f:selectItems value="#{usuarioView.listaRoles}" />
+		</h:selectOneMenu>
+				
+		<h:outputLabel for="activo" value="Activado:" />
+		   <p:selectOneRadio id="activo" value="#{usuarioView.usuario.activado}" required="true">
+                     <f:selectItem itemLabel="Activo" itemValue="S"  />
+                     <f:selectItem itemLabel="Inactivo" itemValue="N" ></f:selectItem> 
+           </p:selectOneRadio>
+	
+		<p:commandButton action="#{usuarioView.enviar}" value="Ingresar"
+			update="lista"></p:commandButton>
+	
+</p:panelGrid>
+	<h:outputLabel for="password" value="Lista de Usuarios" />
+	
+	<p:dataTable var="usuario" value="#{usuarioView.listaUsuarios}"
+		id="lista">
+		<p:column headerText="Login">
+			<h:outputText value="#{usuario.id}" />
+		</p:column>
+
+		<p:column headerText="Rol">
+		<h:outputText value="#{usuario.rol}" />
+	    
+		</p:column>
+		<p:column headerText="Correo">
+		<h:outputText value="#{usuario.correo}" />
+	    
+		</p:column>
+	<p:column headerText="Activo">
+		<h:outputText rendered="#{usuario.activado eq 'S'}" value="Activo" />
+		<h:outputText rendered="#{usuario.activado eq 'N'}" value="Inactivo" />
+		<h:outputText rendered="#{usuario.activado eq ''}" value="" />
+	    
+		</p:column>
+
+	</p:dataTable>
+	
+
+</div>	
+</h:form>
+
+	
+    	</ui:define>
+    		
+	
+    	</ui:composition>
+</h:body>
+</html>
+
