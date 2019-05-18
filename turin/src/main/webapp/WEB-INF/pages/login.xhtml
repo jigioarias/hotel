@@ -19,6 +19,7 @@ margin-left: 30%;
 <div  class="centered" >
 	<p:growl id="messages" for="messages" showDetail="true" sticky="true" />
 <h:form id="principal">
+
       <p:panel  header="Hotel Turin" style="width:400px"  >
       
         <h:panelGrid columns="2" cellpadding="5">
@@ -28,9 +29,18 @@ margin-left: 30%;
           <h:outputLabel for="password" value="Clave:" />
         <p:password value="#{loginBean.usuario.clave}" id="password" required="false"
            label="password" />
+          <h:outputLabel for="hotel" value="Hotel:" />
+           
+          <p:selectOneMenu id="hotel" value="#{loginBean.hotel.codigo}" style="width:125px">
+            <f:selectItem itemLabel="Turin" itemValue="1" />
+            <f:selectItem itemLabel="California" itemValue="2" />
+        
+        </p:selectOneMenu>
+ 
           <p:commandButton action="#{loginBean.ingresar}" value="Ingresar"
 									styleClass="button"></p:commandButton>
       </h:panelGrid>
+      
     </p:panel>
   </h:form>
   

@@ -7,7 +7,9 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
+import co.com.hoteles.turin.entities.Hotel;
 import co.com.hoteles.turin.entities.Usuario;
+import co.com.hoteles.turin.services.HotelService;
 import co.com.hoteles.turin.services.UsuarioService;
 
 
@@ -22,12 +24,31 @@ public class LoginBean extends GenericBB {
 	UsuarioService usuarioService;
 
 	private Usuario usuario;
+	
+	private Hotel hotel;
     
 
 	public LoginBean() {
 		usuarioService = UsuarioService.getInstance();
 		usuario = new Usuario();
+		hotel = new Hotel();
 
+	}
+
+	public UsuarioService getUsuarioService() {
+		return usuarioService;
+	}
+
+	public void setUsuarioService(UsuarioService usuarioService) {
+		this.usuarioService = usuarioService;
+	}
+
+	public Hotel getHotel() {
+		return hotel;
+	}
+
+	public void setHotel(Hotel hotel) {
+		this.hotel = hotel;
 	}
 
 	public String ingresar() {
@@ -36,12 +57,17 @@ public class LoginBean extends GenericBB {
 
 		// colocar todos los valores de la clase cajero
 		Usuario usuarioC;
+		Hotel hotelC;
+		
 		try {
 			usuarioC = usuarioService.findXClave(usuario);
+			hotelC =  HotelService.getInstance().find(hotel.getCodigo());
 		
 		if (usuarioC != null) {
 			usuario = usuarioC;
 			this.guardarUsuario(FacesContext.getCurrentInstance(), usuarioC);
+			this.guardarHotel(FacesContext.getCurrentInstance(), hotelC);
+
 			return "/menu.xhtml?faces-redirect=true";	
 			
 			

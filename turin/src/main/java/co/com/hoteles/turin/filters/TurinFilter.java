@@ -36,9 +36,10 @@ public class TurinFilter implements Filter {
         int loginRequest = request.getRequestURI().indexOf(loginURL);
         boolean resourceRequest = request.getRequestURI().startsWith(request.getContextPath() + ResourceHandler.RESOURCE_IDENTIFIER + "/");
         
-       System.out.println(request.getRequestURI());
+      /* System.out.println(request.getRequestURI());
        System.out.println(request.getContextPath() + ResourceHandler.RESOURCE_IDENTIFIER + "/");
        System.out.println(loggedIn);
+        */
         if (loggedIn || loginRequest!=-1 || resourceRequest) {
           
             chain.doFilter(request, response); // So, just continue request.

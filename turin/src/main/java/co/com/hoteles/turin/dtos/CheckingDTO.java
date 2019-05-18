@@ -4,6 +4,7 @@ import java.util.List;
 
 import co.com.hoteles.turin.entities.Cliente;
 import co.com.hoteles.turin.entities.Habitacion;
+import co.com.hoteles.turin.entities.Insumo;
 import co.com.hoteles.turin.entities.Servicio;
 
 public class CheckingDTO {
@@ -11,6 +12,8 @@ public class CheckingDTO {
 	private List<Servicio> servicios;
 	private List<Habitacion> habitaciones;
 	private List<Cliente> acompanantes;
+	private List<InsumoDTO> listaInsumos;
+
 	public List<Servicio> getServicios() {
 		return servicios;
 	}
@@ -29,6 +32,13 @@ public class CheckingDTO {
 	public void setAcompanantes(List<Cliente> acompanantes) {
 		this.acompanantes = acompanantes;
 	}
+	public List<InsumoDTO> getListaInsumos() {
+		return listaInsumos;
+	}
+	public void setListaInsumos(List<InsumoDTO> listaInsumos) {
+		this.listaInsumos = listaInsumos;
+	}
+	
 		
 	
 

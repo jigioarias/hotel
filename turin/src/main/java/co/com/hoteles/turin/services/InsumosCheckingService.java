@@ -62,8 +62,8 @@ public Insumo find(int id) throws Exception{
 public List<InsumosChecking> findXChecking(int id) throws Exception{
 	
 	EntityManager em = JPAUtility.getEntityManager();
-	Query query = em.createNamedQuery("InsumoChecking.findChecking");
-	query.setParameter("idCheking", id);
+	Query query = em.createNamedQuery("InsumosChecking.findChecking");
+	query.setParameter("idChecking", id);
 	List<InsumosChecking> results = query.getResultList();
     return results;
     

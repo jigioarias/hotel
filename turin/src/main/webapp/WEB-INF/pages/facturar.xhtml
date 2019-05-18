@@ -47,13 +47,13 @@ width: 1500px
 			
 
 
-				<p:panel header="${msg['checking.resumen']}" id="pResumen">
+				<p:panel header="${msg['checking.resumen']}" id="pResumen" >
 
 					<h:panelGrid columns="2" columnClasses="value, value">
 						<h:outputText value="${msg['checking.documentoResumen']}" />
 						<h:outputText value="#{checkingView.cliente.documento} " />
 				
-						<h:outputText value="${msg['checking.nombres']}" />
+						<h:outputText value="${msg['checking.nombres']}" /> 
 						<h:outputText value="#{checkingView.cliente.nombre} " />
 						
 						<h:outputText value="${msg['checking.correoResumen']}" />
@@ -143,7 +143,7 @@ width: 1500px
 					
     				 				
     				
-    			    <p:commandButton id="Facturar" value="${msg['checking.facturar']}"  icon="ui-icon-print" 
+    			    <p:commandButton id="Facturar" value="${msg['checking.facturar']}"   icon="ui-icon-print" 
     				 actionListener="#{checkingView.generarFactura()}" ajax="false" />
     				 
     				 </h:panelGrid>

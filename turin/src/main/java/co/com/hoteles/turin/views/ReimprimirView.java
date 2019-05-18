@@ -55,7 +55,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 @ManagedBean(name="checkingView")
 @ViewScoped
-public class CheckingView extends GenericBB implements Serializable {
+public class ReimprimirView extends GenericBB implements Serializable {
 
 
 
@@ -97,7 +97,7 @@ public class CheckingView extends GenericBB implements Serializable {
 	private String tipoDocumento= " ";
 
 
-	public CheckingView(){
+	public ReimprimirView(){
 		
 		List<String> habitacionesDisponibles = new ArrayList<String>();
 		try {
@@ -314,7 +314,7 @@ public class CheckingView extends GenericBB implements Serializable {
 			   		   
 			   CkeckingService.getInstance().ingresar(ck);
 
-			  Ckecking CkeckingConsultado =  CkeckingService.getInstance().getFindXCliente(ClienteIngresado.getId(),"A");
+			  Ckecking CkeckingConsultado =  CkeckingService.getInstance().getFindXCliente(ClienteIngresado.getId(),"I");
 			  if(CkeckingConsultado!= null) {
 			  /* for (Habitacion habitacion : habitacionSeleccionada) {
 
@@ -543,7 +543,7 @@ public void buscarReserva() {
 	cliente = clienteBusqueda;
 	Ckecking checking = null;
 	try {
-		checking = CkeckingService.getInstance().getFindXCliente(cliente.getId(),"A");
+		checking = CkeckingService.getInstance().getFindXCliente(cliente.getId(),"I");
 		if(checking !=null) {
 			fechaSalida =checking.getFechaSalida();  
 			fechaEntrada = checking.getFechaEntrada();
@@ -860,7 +860,7 @@ public  void generarFactura() {
 			        parametros.put("consecutivo", consecutivo);
 			        factura.setResolucion(resolucion);
 			        consecutivo++;
-			        Ckecking ci = CkeckingService.getInstance().getFindXCliente(cliente.getId(),"A");
+			        Ckecking ci = CkeckingService.getInstance().getFindXCliente(cliente.getId(),"I");
 			        factura.setChecking(ci.getId());
 			        factura.setDireccion(this.getHotelSession().getDireccion());
 			        factura.setTelefono(this.getHotelSession().getTelefono());

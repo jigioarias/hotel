@@ -1,6 +1,8 @@
 package co.com.hoteles.turin.entities;
 
 import java.io.Serializable;
+import java.util.Date;
+
 import javax.persistence.*;
 
 
@@ -27,12 +29,17 @@ public class Factura implements Serializable {
 
 	private String documentoCliente;
 
-	private String fecha;
+	private Date fecha;
 
 	private int hotel;
 
 	private String nit;
-
+	
+    private Date fechaEntrada;
+    
+    private Date fechaSalida;
+    
+    private int checking;
 	private String razonSocial;
 
 	private String resolucion;
@@ -88,11 +95,11 @@ public class Factura implements Serializable {
 		this.documentoCliente = documentoCliente;
 	}
 
-	public String getFecha() {
+	public Date getFecha() {
 		return this.fecha;
 	}
 
-	public void setFecha(String fecha) {
+	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
 
@@ -158,6 +165,30 @@ public class Factura implements Serializable {
 
 	public void setTotal(int total) {
 		this.total = total;
+	}
+
+	public Date getFechaEntrada() {
+		return fechaEntrada;
+	}
+
+	public void setFechaEntrada(Date fechaEntrada) {
+		this.fechaEntrada = fechaEntrada;
+	}
+
+	public Date getFechaSalida() {
+		return fechaSalida;
+	}
+
+	public void setFechaSalida(Date fechaSalida) {
+		this.fechaSalida = fechaSalida;
+	}
+
+	public int getChecking() {
+		return checking;
+	}
+
+	public void setChecking(int checking) {
+		this.checking = checking;
 	}
 
 }

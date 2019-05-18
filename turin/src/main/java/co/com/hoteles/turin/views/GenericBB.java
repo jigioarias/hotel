@@ -4,7 +4,7 @@ import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
-
+import co.com.hoteles.turin.entities.Hotel;
 import co.com.hoteles.turin.entities.Usuario;
 
 
@@ -20,6 +20,7 @@ public class GenericBB {
 
     private Usuario usuarioSession;
 
+    private Hotel hotelSession;
   
 
      public  void guardarUsuario(FacesContext facesContext,Usuario usuario){
@@ -28,6 +29,12 @@ public class GenericBB {
          usuarioSession = usuario;
      }
 
+     
+     public  void guardarHotel(FacesContext facesContext,Hotel hotel){
+
+         facesContext.getExternalContext().getSessionMap().put("hotel",hotel);
+         hotelSession = hotel;
+     }
      public  void borrarSession(FacesContext facesContext){
 
          facesContext.getExternalContext().invalidateSession();
@@ -42,6 +49,13 @@ public class GenericBB {
 
      }
 
+ public  Hotel getHotel(FacesContext facesContext){
+
+     Hotel x= (Hotel)facesContext.getExternalContext().getSessionMap().get("hotel");
+	    return (Hotel)facesContext.getExternalContext().getSessionMap().get("hotel");
+
+  }
+
  
 
  public Usuario getUsuarioSession() {
@@ -50,10 +64,18 @@ public class GenericBB {
 }
 
 
+public Hotel getHotelSession() {
+	 
+	 return (Hotel) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("hotel");
+}
+
 
 
 public void setUsuarioSession(Usuario usuarioSession) {
     this.usuarioSession = usuarioSession;
 }
 
+public void setHotelSession(Hotel hotelSession) {
+    this.hotelSession = hotelSession;
+}
 }

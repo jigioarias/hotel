@@ -33,7 +33,7 @@ public class CkeckingService {
 		EntityManager em = JPAUtility.getEntityManager();
 	    System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>:::ID cliente:::::"+ckecking.getIdCliente()); 
 
-		Ckecking ckeckingConsultado = getFindXCliente(ckecking.getIdCliente());
+		Ckecking ckeckingConsultado = getFindXCliente(ckecking.getIdCliente(),"A");
 	    em.getTransaction().begin();
 	    
 		if (ckeckingConsultado==null) {
@@ -81,14 +81,15 @@ public class CkeckingService {
    
    
    
-   public Ckecking getFindXCliente(int idCliente) throws Exception{
+  
+   
+   public Ckecking getFindXCliente(int idCliente,String estado) throws Exception{
 		
 		EntityManager em = JPAUtility.getEntityManager();
 		try {
 			Query query = em.createNamedQuery("Ckecking.findIdCliente");
 			query.setParameter("id", idCliente);
-			query.setParameter("estado", "A");
-			System.out.println("clienteeeeee:>>>>>"+idCliente);
+			query.setParameter("estado", estado);
 			Ckecking  results = (Ckecking) query.getSingleResult();
 		    return results;	
 		} catch (Exception e) {
@@ -97,6 +98,5 @@ public class CkeckingService {
 		
 
 	}
-   
   
 }

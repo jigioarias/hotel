@@ -92,6 +92,7 @@
 	<parameter name="rutaReportes" class="java.lang.String"/>
 	<parameter name="subtotal" class="java.lang.Integer"/>
 	<parameter name="dias" class="java.lang.Integer"/>
+	<parameter name="consecutivo" class="java.lang.Integer"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -220,7 +221,7 @@
 			</staticText>
 			<textField>
 				<reportElement x="482" y="28" width="64" height="15" uuid="0b5472c5-42db-4ebe-bed6-4f4b6810402a"/>
-				<textFieldExpression><![CDATA["22"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{consecutivo}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="95" y="23" width="288" height="15" uuid="b1cf3561-850e-4b0a-a4a8-97847ea9fae4"/>
