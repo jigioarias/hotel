@@ -26,7 +26,7 @@
                   maxdate="#{reporteCLientesView.todayDate}"
                    />
 		
-			 <h:outputLabel for="FechaFin" value="${msg['reportes.fechaFin']}" />
+			 <h:outputLabel for="FechaFin" value="${msg['reportes.fechaFinal']}" />
                   <p:calendar id="fechaFin" value="#{reporteClientesView.fechaFin}"
                    required="false"  showOn="button"
                    pattern="dd-MM-yyyy"
@@ -85,10 +85,9 @@
 
 			  <div>
               
-         <h:commandLink>
-                    <p:graphicImage name="img/pdf.png" width="24"/>
-                    <p:dataExporter type="pdf" target="lista" fileName="extranjeros"/>
-         </h:commandLink>
+        <p:commandButton id="generar" value="${msg['checking.facturar']}"   icon="ui-icon-print" 
+    				 actionListener="#{reporteClientesView.generarExtranjeros()}" ajax="false" />
+    				 
  
        </div>
 </div>	

@@ -148,7 +148,7 @@
 			</textField>
 			<image hAlign="Center">
 				<reportElement x="0" y="0" width="65" height="60" uuid="94883631-a913-43e2-b182-ab8d77d0181e"/>
-				<imageExpression><![CDATA[$P{rutaImagen}+"logo.png"]]></imageExpression>
+				<imageExpression><![CDATA[$P{rutaImagen}]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="95" y="0" width="210" height="25" uuid="e622555d-198b-4ccd-a4a1-c59c53304058">
@@ -163,10 +163,6 @@
 			<staticText>
 				<reportElement x="95" y="55" width="205" height="15" uuid="b8cc42fd-b569-497d-834d-7e854040ad18"/>
 				<text><![CDATA[www.hotelturinlaceja.com]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="95" y="25" width="288" height="15" uuid="c226e44d-3bb5-4145-b0b3-903bf1d79fde"/>
-				<text><![CDATA[La Ceja,  Calle 19 # 21- 55]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="95" y="40" width="205" height="15" uuid="b96f7183-44f8-43ad-ba60-43d8fbf50b6e"/>
@@ -227,6 +223,10 @@
 	<detail>
 		<band height="280" splitType="Stretch">
 			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.spreadsheet.SpreadsheetLayout"/>
+			<staticText>
+				<reportElement x="0" y="0" width="288" height="280" uuid="c226e44d-3bb5-4145-b0b3-903bf1d79fde"/>
+				<text><![CDATA[La Ceja,  Calle 19 # 21- 55]]></text>
+			</staticText>
 		</band>
 	</detail>
 	<summary>

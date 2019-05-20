@@ -1,12 +1,22 @@
 package co.com.hoteles.turin.views;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 
+import co.com.hoteles.turin.dtos.CheckingDTO;
 import co.com.hoteles.turin.entities.Cliente;
 import co.com.hoteles.turin.services.ClienteService;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 @ManagedBean
 public class ReporteClientesView extends  GenericBB {
@@ -82,4 +92,47 @@ public class ReporteClientesView extends  GenericBB {
 	}     
 
 
+	public  void generarExtranjeros() {
+
+		String realpath=FacesContext.getCurrentInstance().getExternalContext().getInitParameter("ruta_reportes")+"extranjeroTable.jasper";
+		String realpathImagenes=FacesContext.getCurrentInstance().getExternalContext().getInitParameter("ruta_imagenes")+this.getHotelSession().getCodigo()+".png";
+
+
+		try {
+
+			HashMap<String,Object> parametros =new HashMap<String,Object>();
+
+			parametros.put("rutaImagen",realpathImagenes );
+			parametros.put("rutaReportes",FacesContext.getCurrentInstance().getExternalContext().getInitParameter("ruta_reportes") );
+			parametros.put("telefono", this.getHotelSession().getTelefono());
+			parametros.put("direccion", this.getHotelSession().getDireccion());
+			parametros.put("sitio", this.getHotelSession().getRedessociales());
+			parametros.put("correo", this.getHotelSession().getRedessociales());
+			parametros.put("titulo", "Reporte de Extranjeros");
+			parametros.put("nombreHotel", "Reporte de Extranjeros");
+
+
+			CheckingDTO checkingDTO = new CheckingDTO();
+			checkingDTO.setAcompanantes(listaClientes);
+
+
+			List<CheckingDTO> lista = new ArrayList<CheckingDTO>();
+			lista.add(checkingDTO);
+
+			JRBeanCollectionDataSource beanColDataSource =  new JRBeanCollectionDataSource(lista);
+
+			JasperPrint jasperprint=JasperFillManager.fillReport(realpath,parametros,beanColDataSource);
+			HttpServletResponse httpservlet=(HttpServletResponse)FacesContext.getCurrentInstance().getExternalContext().getResponse();
+			httpservlet.addHeader("Content-disposition", "attachment;filename=extranjeros_"+new Date()+".pdf");
+			ServletOutputStream servletout=httpservlet.getOutputStream();
+			JasperExportManager.exportReportToPdfStream(jasperprint, servletout);
+			FacesContext.getCurrentInstance().responseComplete();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	
 }

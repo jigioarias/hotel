@@ -80,6 +80,12 @@
 			<fieldDescription><![CDATA[cantidad]]></fieldDescription>
 		</field>
 	</subDataset>
+	<subDataset name="DInsumos" uuid="fa298476-1ff6-41fb-a4cf-a69aa5402b46">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+	</subDataset>
 	<parameter name="nombreCliente" class="java.lang.String"/>
 	<parameter name="correo" class="java.lang.String"/>
 	<parameter name="celular" class="java.lang.String"/>
@@ -103,6 +109,9 @@
 		<fieldDescription><![CDATA[servicios]]></fieldDescription>
 	</field>
 	<field name="acompanantes" class="java.util.List">
+		<fieldDescription><![CDATA[acompanantes]]></fieldDescription>
+	</field>
+	<field name="insumos" class="java.util.List">
 		<fieldDescription><![CDATA[acompanantes]]></fieldDescription>
 	</field>
 	<title>
@@ -151,7 +160,7 @@
 			</textField>
 			<image hAlign="Center">
 				<reportElement x="0" y="0" width="65" height="60" uuid="94883631-a913-43e2-b182-ab8d77d0181e"/>
-				<imageExpression><![CDATA[$P{rutaImagen}+"logo.png"]]></imageExpression>
+				<imageExpression><![CDATA[$P{rutaImagen}]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="95" y="-1" width="210" height="25" uuid="e622555d-198b-4ccd-a4a1-c59c53304058">
@@ -358,6 +367,28 @@
 				<reportElement x="440" y="200" width="100" height="20" uuid="4687e607-b9f3-4c8c-ac32-a081cf2af748"/>
 				<textFieldExpression><![CDATA[$P{subtotal}]]></textFieldExpression>
 			</textField>
+			<componentElement>
+				<reportElement x="10" y="130" width="400" height="30" uuid="4daddf60-3d20-448c-9078-83853ae030cc"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="serviciosDataSet" uuid="44c414f5-faaf-48e9-a05f-7a903f763fc4">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="30" width="400">
+						<textField>
+							<reportElement x="0" y="0" width="100" height="30" uuid="78b10511-65af-422f-bacc-8175bbb84a1c"/>
+							<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="100" y="0" width="150" height="30" uuid="ca745bfa-4557-442b-883f-6d7d0839942a"/>
+							<textFieldExpression><![CDATA[$F{valor}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="250" y="0" width="150" height="30" uuid="3252544c-9dec-4e47-ac0b-116d9d2cc45c"/>
+							<textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
 		</band>
 	</summary>
 </jasperReport>

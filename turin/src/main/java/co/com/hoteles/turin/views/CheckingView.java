@@ -316,14 +316,9 @@ public class CheckingView extends GenericBB implements Serializable {
 
 			  Ckecking CkeckingConsultado =  CkeckingService.getInstance().getFindXCliente(ClienteIngresado.getId(),"A");
 			  if(CkeckingConsultado!= null) {
-			  /* for (Habitacion habitacion : habitacionSeleccionada) {
-
-				  HabitacionesChecking h = new HabitacionesChecking(CkeckingConsultado.getId(),habitacion.getId());  
-				  HabitacionesCkeckingService.getInstance().ingresar(h);
-				  habitacion.setEstado("OCU");
-				  HabitacionService.getInstance().actualizar(habitacion);
-			   }*/
+		
 			   
+				System.err.println(" habitacionesPickList.getTarget():"+ habitacionesPickList.getTarget().size());  
 			   for (String habitacion : habitacionesPickList.getTarget()) {
 				   	  String[] datos = habitacion.split("-");
 					  System.err.println("codigo:"+datos[0]);
@@ -751,7 +746,7 @@ public  void generarChecking() {
 	
 	JRBeanCollectionDataSource beancollection=new JRBeanCollectionDataSource(null);
     String realpath=FacesContext.getCurrentInstance().getExternalContext().getInitParameter("ruta_reportes")+"checkingTable.jasper";
-    String realpathImagenes=FacesContext.getCurrentInstance().getExternalContext().getInitParameter("ruta_imagenes")+"";
+    String realpathImagenes=FacesContext.getCurrentInstance().getExternalContext().getInitParameter("ruta_imagenes")+this.getHotelSession().getCodigo()+".png";
     try {
     	HashMap<String,Object> parametros =new HashMap<String,Object>();
     	parametros.put("tipoDocumentoCliente", cliente.getTipoDocumento());
@@ -780,7 +775,7 @@ public  void generarChecking() {
 
 		JasperPrint jasperprint=JasperFillManager.fillReport(realpath,parametros,beanColDataSource);
 		HttpServletResponse httpservlet=(HttpServletResponse)FacesContext.getCurrentInstance().getExternalContext().getResponse();
-	    httpservlet.addHeader("Content-disposition", "attachment;filename=checking_"+cliente.getDocumento()+".pdf");
+	    httpservlet.addHeader("Content-disposition", "attachment;filename=checking_"+this.getHotelSession().getCodigo()+"_"+cliente.getDocumento()+"_"+new Date()+".pdf");
 	    ServletOutputStream servletout=httpservlet.getOutputStream();
 	    JasperExportManager.exportReportToPdfStream(jasperprint, servletout);
 	    FacesContext.getCurrentInstance().responseComplete();
@@ -814,7 +809,7 @@ public  void generarFactura() {
 	
 	JRBeanCollectionDataSource beancollection=new JRBeanCollectionDataSource(null);
     String realpath=FacesContext.getCurrentInstance().getExternalContext().getInitParameter("ruta_reportes")+"FacturaTable.jasper";
-    String realpathImagenes=FacesContext.getCurrentInstance().getExternalContext().getInitParameter("ruta_imagenes")+"";
+    String realpathImagenes=FacesContext.getCurrentInstance().getExternalContext().getInitParameter("ruta_imagenes")+this.getHotelSession().getCodigo()+".png";
     boolean limpias = false;
     int contadorLimpias = 0;
     String habitacionesLimpiar =",";
@@ -912,7 +907,7 @@ public  void generarFactura() {
 			    	CkeckingService.getInstance().actualizar(ci);
 			    	for (Habitacion habitacion : habitacionSeleccionada) {
 			    		
-			    		habitacion.setEstado("DIS");
+			    		habitacion.setEstado("FAC");
 			    		HabitacionService.getInstance().actualizar(habitacion);
 			    		
 			    	}

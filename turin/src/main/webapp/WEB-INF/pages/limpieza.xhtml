@@ -25,7 +25,7 @@
 	       					 <p:selectOneMenu id="habitacion" value="#{limpiezaView.codigoHabitacion}" >
 	            				<f:selectItem itemLabel="Seleccione la habitacion" itemValue="" />
 	            				<f:selectItems value="#{limpiezaView.habitacionesOcupadas}" />
-	            				 <p:ajax event="change" listener="#{limpiezaView.buscarInsumos}" update="insumos" />
+	            				 
 	            			
 	        				</p:selectOneMenu>	  
 					         
@@ -38,18 +38,10 @@
 	
 	
 	
-				<p:panel header="${msg['limpieza.insumos']}" id="insumos">
 				
-    <p:selectManyCheckbox id="grid" value="#{limpiezaView.selectedHabitaciones}" layout="grid" columns="1">
-        
-        <f:selectItems value="#{limpiezaView.listaInsumos}" var="insumo" itemLabel="#{insumo}" itemValue="#{insumo}" >
-         </f:selectItems>
-    </p:selectManyCheckbox>
-				
-    </p:panel>
       
-    <p:commandButton value="Confirmar" action="#{limpiezaView.confirmar}" >
-        <p:confirm header="Confirmacion de Limpieza" message="Esta seguro de que los insumos registrados estan bien?" icon="pi pi-exclamation-triangle" />
+    <p:commandButton value="Confirmar" action="#{limpiezaView.liberar}" >
+        <p:confirm header="Confirmacion de Limpieza" message="Esta seguro de que la habitación quedo limpia?" icon="pi pi-exclamation-triangle" />
     </p:commandButton>
     
     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">

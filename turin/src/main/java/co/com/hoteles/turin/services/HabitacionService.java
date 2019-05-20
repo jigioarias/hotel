@@ -50,6 +50,16 @@ public List<Habitacion> listar() throws Exception{
 	    return results;
 
 	}
+
+public List<Habitacion> listar(String estado) throws Exception{
+	
+	EntityManager em = JPAUtility.getEntityManager();
+	Query query = em.createNamedQuery("Habitacion.findEstado");
+	query.setParameter("estado", estado);
+	List<Habitacion> results = query.getResultList();
+    return results;
+
+}
 public List<Habitacion> listarOcupadas() throws Exception{
 		
 		EntityManager em = JPAUtility.getEntityManager();
