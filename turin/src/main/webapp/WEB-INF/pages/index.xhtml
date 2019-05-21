@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      >
+    <h:body>
+    	
+    	
+    	
+    	<ui:composition template="../template/hotelLayout.xhtml">
+         		<ui:define name="content">
+    			
+   	<style type="text/css">
+    .ui-datalist {
+        width:300px;
+        margin-bottom: 20px;
+    }
+ 
+    .ui-datalist-item {
+        padding:3px;
+    }
+ 
+    .paginated .ui-datalist-data {
+        padding-left: 20px;
+    }
+ 
+ 
+ .centered {
+text-align: center;
+margin-left: 10%;
+}
+    body {
+    background-image: url("#{resource['img/logo.png']}");
+    background-size: cover;
+    background-repeat: no-repeat; 
+    background-attachment:fixed;
+
+}
+    
+</style>
+ 
+ <div  class="centered" >
+<h:form id="form">
+
+  <p:growl id="messages" showDetail="true" />
+  <p>
+  </p>
+ <p:panel  header="Estado Habitaciones"  >   
+   <h:panelGrid columns="3" columnClasses="value, value,value">
+    <p:dataList value="#{indexView.habitaciones}" var="habitacion" type="definition" emptyMessage="No hay habitaciones Disponibles">
+        <f:facet name="header">
+            Disponibles
+        </f:facet>
+        #{habitacion.nombre} Precio: #{habitacion.precio}
+    </p:dataList>
+ 
+    <p:dataList value="#{indexView.habitaciones2}" var="habitacion" type="definition" emptyMessage="No hay habitaciones Ocupadas">
+        <f:facet name="header">
+            Ocupadas
+        </f:facet>
+        Nombre: #{habitacion.nombre}  Precio: #{habitacion.precio}
+       	
+    </p:dataList>
+    
+    
+    <p:dataList value="#{indexView.habitaciones3}" var="habitacion" type="definition" emptyMessage="No hay habitaciones en Limpieza">
+        <f:facet name="header">
+            Limpieza
+        </f:facet>
+        Nombre: #{habitacion.nombre} Precio: #{habitacion.precio}
+       	
+    </p:dataList>
+ </h:panelGrid>
+  </p:panel>
+ 
+</h:form>
+    	</div>
+    	</ui:define>
+    		
+	
+    	</ui:composition>
+    	
+    </h:body>
+
+</html>

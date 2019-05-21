@@ -14,6 +14,7 @@ import javax.persistence.*;
 @Table(name="facturas")
 @NamedQuery(name="Factura.findAll", query="SELECT f FROM Factura f")
 @NamedQuery(name="Factura.findDocumento", query="SELECT f FROM Factura f where f.numero=:documento")
+@NamedQuery(name="Factura.findFechas", query="SELECT f FROM Factura f where f.fecha >=:fechaInicio and f.fecha<=:fechaFin")
 
 public class Factura implements Serializable {
 	private static final long serialVersionUID = 1L;

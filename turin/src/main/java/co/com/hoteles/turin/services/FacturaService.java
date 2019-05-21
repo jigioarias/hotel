@@ -1,11 +1,13 @@
 package co.com.hoteles.turin.services;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import co.com.hoteles.turin.dtos.VentaDTO;
 import co.com.hoteles.turin.entities.Factura;
 import co.com.hoteles.turin.entities.Habitacion;
 import co.com.hoteles.turin.entities.Parametro;
@@ -109,4 +111,33 @@ public class FacturaService {
 	}
    
   
+   
+   public List<VentaDTO> getFindXFechas(Date fechaInicio,Date fechaFin) throws Exception{
+		
+		  try {
+			  EntityManager em = JPAUtility.getEntityManager();
+				Query query = em.createNamedQuery("Factura.findFechas");
+	
+				query.setParameter("fechaInicio", fechaInicio);
+				query.setParameter("fechaFin", fechaFin);
+				
+				List<Factura>  results = query.getResultList();
+
+				List<VentaDTO>  ventasDTO = new ArrayList<VentaDTO>();
+				for (Factura factura : results) {
+					VentaDTO v = new VentaDTO();
+					v.setFecha(factura.getFecha());
+					v.setValor(factura.getTotal());
+					ventasDTO.add(v);
+					
+				}
+	
+			return ventasDTO;
+		
+		  } catch (Exception e) {
+		     return null;
+		  }
+		  
+
+		}
 }

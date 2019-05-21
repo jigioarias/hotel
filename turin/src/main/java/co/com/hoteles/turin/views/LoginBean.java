@@ -68,7 +68,7 @@ public class LoginBean extends GenericBB {
 			this.guardarUsuario(FacesContext.getCurrentInstance(), usuarioC);
 			this.guardarHotel(FacesContext.getCurrentInstance(), hotelC);
 
-			return "/menu.xhtml?faces-redirect=true";	
+			return "/index.xhtml?faces-redirect=true";	
 			
 			
 		} else {
@@ -77,6 +77,8 @@ public class LoginBean extends GenericBB {
 		}
 		  FacesContext.getCurrentInstance().addMessage("messages",
 					new FacesMessage(FacesMessage.SEVERITY_ERROR,  "Usuario y Clave Incorrectos", ""));
+		  
+		  
 		  return "/login.xhtml?faces-redirect=true";	
 	} catch (Exception e) {
 		// TODO Auto-generated catch block

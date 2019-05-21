@@ -25,38 +25,26 @@
 		<queryString>
 			<![CDATA[]]>
 		</queryString>
-		<field name="fecha" class="java.lang.String">
+		<field name="fecha" class="java.util.Date">
 			<fieldDescription><![CDATA[fecha]]></fieldDescription>
 		</field>
 		<field name="valor" class="java.lang.Integer">
 			<fieldDescription><![CDATA[valor]]></fieldDescription>
 		</field>
 	</subDataset>
-	<subDataset name="serviciosDataSet" uuid="5fd6c012-0591-4dc7-9d94-0785f15262c2">
-		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="arrayChecking"/>
-		<queryString>
-			<![CDATA[]]>
-		</queryString>
-		<field name="nombre" class="java.lang.String">
-			<fieldDescription><![CDATA[nombre]]></fieldDescription>
-		</field>
-		<field name="valor" class="java.lang.Integer">
-			<fieldDescription><![CDATA[valor]]></fieldDescription>
-		</field>
-		<field name="cantidad" class="java.lang.Integer">
-			<fieldDescription><![CDATA[cantidad]]></fieldDescription>
-		</field>
-	</subDataset>
-	<parameter name="nombreCliente" class="java.lang.String"/>
+	<parameter name="titulo" class="java.lang.String"/>
 	<parameter name="correo" class="java.lang.String"/>
 	<parameter name="celular" class="java.lang.String"/>
-	<parameter name="documentoCliente" class="java.lang.String"/>
+	<parameter name="telefono" class="java.lang.String"/>
 	<parameter name="tipoDocumentoCliente" class="java.lang.String"/>
 	<parameter name="numeroPersonas" class="java.lang.Integer"/>
 	<parameter name="fechaEntrada" class="java.util.Date"/>
 	<parameter name="fechaSalida" class="java.util.Date"/>
 	<parameter name="rutaImagen" class="java.lang.String"/>
 	<parameter name="rutaReportes" class="java.lang.String"/>
+	<parameter name="fechaInicio" class="java.util.Date"/>
+	<parameter name="fechaFin" class="java.util.Date"/>
+	<parameter name="total" class="java.lang.Integer"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -86,31 +74,11 @@
 				<imageExpression><![CDATA[$P{rutaImagen}]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="95" y="0" width="210" height="25" uuid="e622555d-198b-4ccd-a4a1-c59c53304058">
-					<property name="local_mesure_unitheight" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement>
-					<font size="19" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Reporte de Ventas]]></text>
+				<reportElement x="95" y="40" width="55" height="15" uuid="b96f7183-44f8-43ad-ba60-43d8fbf50b6e"/>
+				<text><![CDATA[Telefono:]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="95" y="55" width="205" height="15" uuid="b8cc42fd-b569-497d-834d-7e854040ad18"/>
-				<text><![CDATA[www.hotelturinlaceja.com]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="95" y="40" width="205" height="15" uuid="b96f7183-44f8-43ad-ba60-43d8fbf50b6e"/>
-				<text><![CDATA[Telefono: +57 (4) 5683199 ]]></text>
-			</staticText>
-			<line>
-				<reportElement x="0" y="180" width="556" height="1" uuid="89e11915-0f76-4a1d-8b43-5ac0ff0d4bb3">
-					<property name="local_mesure_unitheight" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-			</line>
 			<componentElement>
-				<reportElement stretchType="ContainerBottom" x="5" y="160" width="300" height="18" uuid="3edfaac1-a5f3-480f-b88b-0d782d524c37">
+				<reportElement stretchType="ContainerBottom" x="-1" y="160" width="300" height="18" uuid="3edfaac1-a5f3-480f-b88b-0d782d524c37">
 					<property name="net.sf.jasperreports.export.headertoolbar.table.name" value="listaVentas"/>
 				</reportElement>
 				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
@@ -143,6 +111,33 @@
 				<reportElement x="100" y="143" width="80" height="20" uuid="f28d7f86-1434-4d33-85eb-4421c041da9d"/>
 				<text><![CDATA[Valor]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="100" y="7" width="290" height="30" uuid="c27198a3-febd-4c7c-91f6-57a26207374e"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{titulo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="152" y="39" width="100" height="15" uuid="e494faef-a186-42d2-9a9e-42a6ac543ffa"/>
+				<textFieldExpression><![CDATA[$P{telefono}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="7" y="85" width="77" height="15" uuid="400edc7b-786c-44be-a39f-3a7d98f0609f"/>
+				<text><![CDATA[Fecha Inicio:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="8" y="104" width="77" height="15" uuid="673cd2a3-26f7-42a8-9e11-3f24f06560c7"/>
+				<text><![CDATA[Fecha Fin:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="95" y="85" width="100" height="15" uuid="0633be0b-506c-468a-8181-02840e1444ab"/>
+				<textFieldExpression><![CDATA[$P{fechaInicio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="90" y="104" width="100" height="15" uuid="385c4639-8fae-4ded-9847-3bc752e0c153"/>
+				<textFieldExpression><![CDATA[$P{fechaFin}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<detail>
@@ -154,6 +149,20 @@
 		<band height="273" splitType="Stretch">
 			<property name="local_mesure_unitheight" value="pixel"/>
 			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+			<textField>
+				<reportElement x="415" y="-65" width="100" height="30" uuid="8addccaa-3d4d-49c6-b23d-55202066623f"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{total}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="300" y="-65" width="100" height="30" uuid="0532568f-c96f-4b01-83c3-9019de136d70"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
 		</band>
 	</summary>
 </jasperReport>

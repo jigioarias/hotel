@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+ <h:body>
+
+<ui:composition template="../template/hotelLayout.xhtml">
+         		<ui:define name="content">
+
+
+
+
+<h:form id="principal">
+
+ <div class="ui-fluid">
+        <p:panelGrid columns="2" id="pFiltros" columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4" layout="grid" styleClass="ui-fluid">
+    
+		 <h:outputLabel for="FechaInicio" value="${msg['reportes.fechaInicio']}" />
+                  <p:calendar id="fechaInicio" value="#{reporteClientesView.fechaInicio}"
+                   required="false"  showOn="button"
+                   pattern="dd-MM-yyyy"
+                  maxdate="#{reporteCLientesView.todayDate}"
+                   />
+		
+			 <h:outputLabel for="FechaFin" value="${msg['reportes.fechaFinal']}" />
+                  <p:calendar id="fechaFin" value="#{reporteClientesView.fechaFin}"
+                   required="false"  showOn="button"
+                   pattern="dd-MM-yyyy"
+                  maxdate="#{reporteCLientesView.todayDate}"
+                   />
+	
+		<p:commandButton action="#{reporteClientesView.buscarVentas}" value="Buscar"
+			update="lista"></p:commandButton>
+	
+</p:panelGrid>
+	
+	
+		
+	<p:dataTable var="venta" value="#{reporteClientesView.listaVentas}" id="lista">
+	
+		
+		<p:column>
+		   <f:facet name="header">
+                <h:outputText value="Fecha" />
+            </f:facet>
+			<h:outputText value="#{venta.fecha}" />
+		</p:column>
+
+		<p:column>
+		  <f:facet name="header">
+                <h:outputText value="Valor" />
+            </f:facet>
+		<h:outputText value="#{venta.valor}" />
+	    
+		</p:column>
+	
+
+	</p:dataTable>
+	
+
+			  <div>
+              
+        <p:commandButton id="generar" value="${msg['reportes.generar']}"   icon="ui-icon-print" 
+    				 actionListener="#{reporteClientesView.generarVentas()}" ajax="false" />
+    				 
+ 
+       </div>
+</div>	
+</h:form>
+
+	
+    	</ui:define>
+    		
+	
+    	</ui:composition>
+</h:body>
+</html>
+

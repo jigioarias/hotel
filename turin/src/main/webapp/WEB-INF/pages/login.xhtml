@@ -15,10 +15,18 @@
 text-align: center;
 margin-left: 30%;
 }
+
+body {
+    background-image: url("#{resource['img/logo.png']}");
+    background-size: cover;
+    background-repeat: no-repeat; 
+    background-attachment:fixed;
+
+}
  </style>
 <div  class="centered" >
-	<p:growl id="messages" for="messages" showDetail="true" sticky="true" />
 <h:form id="principal">
+	<p:growl id="messages" for="messages" showDetail="true" sticky="true" />
 
       <p:panel  header="Hotel Turin" style="width:400px"  >
       

@@ -11,8 +11,10 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
 import co.com.hoteles.turin.dtos.CheckingDTO;
+import co.com.hoteles.turin.dtos.VentaDTO;
 import co.com.hoteles.turin.entities.Cliente;
 import co.com.hoteles.turin.services.ClienteService;
+import co.com.hoteles.turin.services.FacturaService;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -26,6 +28,8 @@ public class ReporteClientesView extends  GenericBB {
 
 	private String mensaje;
 	private List<Cliente> listaClientes;
+	private List<VentaDTO> listaVentas;
+
 	private Date todayDate = new Date();
 
 
@@ -47,6 +51,27 @@ public class ReporteClientesView extends  GenericBB {
 		}
 	}
 
+
+	public void buscarVentas() {
+
+	    FacturaService facturaService = FacturaService.getInstance();
+		try {
+			
+           listaVentas = facturaService.getFindXFechas(fechaInicio, fechaFin);
+           System.out.println("listaVentas:"+listaVentas.size());
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+	}
+	public List<VentaDTO> getListaVentas() {
+		return listaVentas;
+	}
+
+	public void setListaVentas(List<VentaDTO> listaVentas) {
+		this.listaVentas = listaVentas;
+	}
 
 	public String getMensaje() {
 		return mensaje;
@@ -91,10 +116,64 @@ public class ReporteClientesView extends  GenericBB {
 		this.todayDate = todayDate;
 	}     
 
+	public  void generarVentas() {
 
+		String realpath=FacesContext.getCurrentInstance().getExternalContext().getInitParameter("ruta_reportes")+"facturasTable.jasper";
+		String realpathImagenes=FacesContext.getCurrentInstance().getExternalContext().getInitParameter("ruta_imagenes")+this.getHotelSession().getCodigo()+".png";
+
+
+		try {
+
+			HashMap<String,Object> parametros =new HashMap<String,Object>();
+
+			parametros.put("rutaImagen",realpathImagenes );
+			parametros.put("rutaReportes",FacesContext.getCurrentInstance().getExternalContext().getInitParameter("ruta_reportes") );
+			parametros.put("telefono", this.getHotelSession().getTelefono());
+			parametros.put("direccion", this.getHotelSession().getDireccion());
+			parametros.put("sitio", this.getHotelSession().getRedessociales());
+			parametros.put("correo", this.getHotelSession().getRedessociales());
+			parametros.put("fechaInicio", fechaInicio);
+			parametros.put("fechaFin", fechaFin);
+
+			parametros.put("titulo", "Reporte de ventas por fecha");
+			parametros.put("nombreHotel", this.getHotelSession().getNomgre());
+
+
+			CheckingDTO checkingDTO = new CheckingDTO();
+			listaVentas= FacturaService.getInstance().getFindXFechas(fechaInicio, fechaFin);
+					
+			checkingDTO.setVentas(listaVentas);
+			
+			int totalVenta = 0;
+			
+			for (VentaDTO venta : listaVentas) {
+				
+				totalVenta = totalVenta + venta.getValor();
+				
+			}
+			parametros.put("total", totalVenta);
+
+
+			List<CheckingDTO> lista = new ArrayList<CheckingDTO>();
+			lista.add(checkingDTO);
+
+			JRBeanCollectionDataSource beanColDataSource =  new JRBeanCollectionDataSource(lista);
+
+			JasperPrint jasperprint=JasperFillManager.fillReport(realpath,parametros,beanColDataSource);
+			HttpServletResponse httpservlet=(HttpServletResponse)FacesContext.getCurrentInstance().getExternalContext().getResponse();
+			httpservlet.addHeader("Content-disposition", "attachment;filename=ventas_"+new Date()+".pdf");
+			ServletOutputStream servletout=httpservlet.getOutputStream();
+			JasperExportManager.exportReportToPdfStream(jasperprint, servletout);
+			FacesContext.getCurrentInstance().responseComplete();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
 	public  void generarExtranjeros() {
 
-		String realpath=FacesContext.getCurrentInstance().getExternalContext().getInitParameter("ruta_reportes")+"extranjeroTable.jasper";
+		String realpath=FacesContext.getCurrentInstance().getExternalContext().getInitParameter("ruta_reportes")+"extranejerosTable.jasper";
 		String realpathImagenes=FacesContext.getCurrentInstance().getExternalContext().getInitParameter("ruta_imagenes")+this.getHotelSession().getCodigo()+".png";
 
 
@@ -113,7 +192,11 @@ public class ReporteClientesView extends  GenericBB {
 
 
 			CheckingDTO checkingDTO = new CheckingDTO();
+			System.out.println(fechaInicio);
+			System.out.println(fechaFin);
+			listaClientes= ClienteService.getInstance().listarExtranjeros("S", fechaInicio, fechaFin);
 			checkingDTO.setAcompanantes(listaClientes);
+			System.out.println("listaClientes:"+listaClientes.size());
 
 
 			List<CheckingDTO> lista = new ArrayList<CheckingDTO>();
