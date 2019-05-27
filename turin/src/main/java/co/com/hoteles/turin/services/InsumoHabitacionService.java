@@ -85,14 +85,11 @@ public class InsumoHabitacionService {
 		
 		EntityManager em = JPAUtility.getEntityManager();
 		Query query = em.createNamedQuery("Insumoshabitacion.findId");
-	    System.out.println("hab:"+id.getHabitacion());
-	    System.out.println("ins:"+id.getInsumo());
 	    
 		query.setParameter("habitacion",id.getHabitacion());
 		
 		query.setParameter("insumo",id.getInsumo());
 		Insumoshabitacion results = (Insumoshabitacion) query.getSingleResult();
-		System.out.println(results.getId().getInsumo());
 		return results;
 		} catch (Exception e) {
 			return null;

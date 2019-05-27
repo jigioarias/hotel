@@ -31,6 +31,7 @@ public class AcompanantesChecking implements Serializable {
 
 	@Column(name="id_cliente")
 	private int idCliente;
+	
 
 	public AcompanantesChecking() {
 	}
@@ -58,5 +59,7 @@ public class AcompanantesChecking implements Serializable {
 	public void setIdCliente(int idCliente) {
 		this.idCliente = idCliente;
 	}
+
+
 
 }

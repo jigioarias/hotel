@@ -34,10 +34,10 @@ width: 1500px
 				
 						<h:outputText value="${msg['checking.cliente']}" />
 						
-						<p:autoComplete id="buscarDocumento" value="#{checkingView.clienteBusqueda}" completeMethod="#{checkingView.completeCliente}"
+						<p:autoComplete id="buscarDocumento" value="#{reimprimirView.clienteBusqueda}" completeMethod="#{reimprimirView.completeCliente}"
                         var="vcliente" itemLabel="#{vcliente.nombre}" itemValue="#{vcliente}" converter="clienteConverter" forceSelection="true" 
                         size="30" maxlength="30"	 >
-                           <p:ajax event="itemSelect" listener="#{checkingView.buscarReserva}" update="pResumen" />
+                           <p:ajax event="itemSelect" listener="#{reimprimirView.buscarReserva}" update="pResumen" />
                         
                         </p:autoComplete>
    	
@@ -51,27 +51,27 @@ width: 1500px
 
 					<h:panelGrid columns="2" columnClasses="value, value">
 						<h:outputText value="${msg['checking.documentoResumen']}" />
-						<h:outputText value="#{checkingView.cliente.documento} " />
+						<h:outputText value="#{reimprimirView.cliente.documento} " />
 				
 						<h:outputText value="${msg['checking.nombres']}" />
-						<h:outputText value="#{checkingView.cliente.nombre} " />
+						<h:outputText value="#{reimprimirView.cliente.nombre} " />
 						
 						<h:outputText value="${msg['checking.correoResumen']}" />
-						<h:outputText value="#{checkingView.cliente.correo} " />
+						<h:outputText value="#{reimprimirView.cliente.correo} " />
 						
 						<h:outputText value="${msg['checking.celularResumen']}" />
-					    <h:outputText value="#{checkingView.cliente.celular} " />
+					    <h:outputText value="#{reimprimirView.cliente.celular} " />
 			
 						<h:outputText value="${msg['checking.fechaEntradaResumen']}" />
-					    <h:outputText value="#{checkingView.fechaEntrada} " />
+					    <h:outputText value="#{reimprimirView.fechaEntrada} " />
 	
 			            <h:outputText value="${msg['checking.fechaSalidaResumen']}" />
-					    <h:outputText value="#{checkingView.fechaSalida} " />
+					    <h:outputText value="#{reimprimirView.fechaSalida} " />
 	
 	
 	
 	             <p:dataTable var="acompanante"
-								value="#{checkingView.acompanantes}"
+								value="#{reimprimirView.acompanantes}"
 								id="listaAcompanantesResumen" emptyMessage="No hay acompañantes">
 								<f:facet name="header">
         						${msg['checking.listaAcompanantes']}
@@ -96,7 +96,7 @@ width: 1500px
 							</p:dataTable>
 	
 	                      <p:dataTable var="servicio"
-								value="#{checkingView.servicios}"
+								value="#{reimprimirView.servicios}"
 								id="listaServiciosResumen" emptyMessage="No hay servicios adicionales">
 								<f:facet name="header">
         						Lista de Servicios
@@ -117,7 +117,7 @@ width: 1500px
 							
 							
 							  <p:dataTable var="habitacion"
-								value="#{checkingView.habitacionSeleccionada}"
+								value="#{reimprimirView.habitacionSeleccionada}"
 								id="listaHabitaciones" emptyMessage="No hay habitaciones">
 								<f:facet name="header">
         						Lista de Habitaciones
@@ -143,9 +143,9 @@ width: 1500px
 					
     				 				
     				<p:commandButton id="Imprimir" value="${msg['checking.imprimir']}"  icon="ui-icon-print" 
-    				 actionListener="#{checkingView.generarChecking()}" ajax="false" />
+    				 actionListener="#{reimprimirView.imprimirChecking()}" ajax="false" />
     			    <p:commandButton id="Facturar" value="${msg['checking.facturar']}"  icon="ui-icon-print" 
-    				 actionListener="#{checkingView.generarFactura()}" ajax="false" />
+    				 actionListener="#{reimprimirView.generarFactura()}" ajax="false" />
     				 
     				 </h:panelGrid>
 					

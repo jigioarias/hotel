@@ -246,7 +246,7 @@ public void confirmar() {
     		   int cantidad = Integer.parseInt(datos[2].split(":")[1]);
     		   insumosChecking.setCantidad(cantidad);
     		   try {
-    			   int codigoCheking =HabitacionesCkeckingService.getInstance().getFindXHabitacion(Integer.parseInt(codigoHabitacion));
+    			   int codigoCheking =HabitacionesCkeckingService.getInstance().getFindXHabitacion(Integer.parseInt(codigoHabitacion),this.getHotelSession().getCodigo());
 
     			   insumosChecking.setIdCkecking(codigoCheking);
     			   insumosChecking.setIdInsumo(Integer.parseInt(codigoInsumo));

@@ -31,7 +31,7 @@ import co.com.hoteles.turin.services.InsumoService;
 import co.com.hoteles.turin.services.ServiciosCkeckingService;
 
 @ManagedBean
-public class HabitacionView {
+public class HabitacionView extends GenericBB {
 
 	private Habitacion habitacion;
 	private String mensaje;
@@ -62,7 +62,7 @@ public class HabitacionView {
        
     	List<String> insumosDisponibles = new ArrayList<String>();
 		try {
-			for(Insumo i:InsumoService.getInstance().listar()) {
+			for(Insumo i:InsumoService.getInstance().listar(this.getHotelSession().getCodigo())) {
 				insumosDisponibles.add(i.getNombre());
 			}
 		
@@ -157,7 +157,7 @@ public class HabitacionView {
             for (Insumo insumo : lista) {
 				insumosSeleccionados.add(insumo.getNombre());
 			}
-			for(Insumo i:InsumoService.getInstance().listar()) {
+			for(Insumo i:InsumoService.getInstance().listar(this.getHotelSession().getCodigo())) {
 				
 				insumosDisponibles.add(i.getNombre());
 				

@@ -43,7 +43,7 @@ public class ReporteClientesView extends  GenericBB {
 	    ClienteService clienteService = ClienteService.getInstance();
 		try {
 			
-           setListaClientes(clienteService.listarExtranjeros("S", fechaInicio, fechaFin));
+           setListaClientes(clienteService.listarExtranjeros("S", fechaInicio, fechaFin,this.getHotelSession().getCodigo()));
 
 		} catch (Exception e) {
 
@@ -194,7 +194,7 @@ public class ReporteClientesView extends  GenericBB {
 			CheckingDTO checkingDTO = new CheckingDTO();
 			System.out.println(fechaInicio);
 			System.out.println(fechaFin);
-			listaClientes= ClienteService.getInstance().listarExtranjeros("S", fechaInicio, fechaFin);
+			listaClientes= ClienteService.getInstance().listarExtranjeros("S", fechaInicio, fechaFin,this.getHotelSession().getCodigo());
 			checkingDTO.setAcompanantes(listaClientes);
 			System.out.println("listaClientes:"+listaClientes.size());
 

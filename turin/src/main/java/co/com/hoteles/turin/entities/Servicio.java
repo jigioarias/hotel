@@ -19,6 +19,8 @@ public class Servicio  implements Serializable  {
 	private String nombre;
 	private int valor;
 	private String estado;
+	private int hotel;
+
 	
 	 transient int cantidad; // not persistent because of transient
 	
@@ -51,5 +53,11 @@ public class Servicio  implements Serializable  {
 	}
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
+	}
+	public int getHotel() {
+		return hotel;
+	}
+	public void setHotel(int hotel) {
+		this.hotel = hotel;
 	}
 }

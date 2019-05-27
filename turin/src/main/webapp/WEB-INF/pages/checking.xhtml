@@ -99,7 +99,7 @@ width: 1500px
                      </p:inputText>
  
                     <h:outputLabel for="celular" value="${msg['checking.celular']}" />
-                   <p:inputText id="celular" value="#{checkingView.cliente.celular}" required="true"
+                   <p:inputText id="celular" value="#{checkingView.cliente.celular}" required="true" size="10" maxlength="10" 
                   
                     requiredMessage="El celular es requerido"/>
 					
@@ -493,11 +493,13 @@ width: 1500px
 
 					</h:panelGrid>
                    <h:panelGrid>
-					<h:panelGrid columns="2" columnClasses="value, value">			
+					<h:panelGrid columns="3" columnClasses="value, value">			
 					
     				 				
-    				<p:commandButton id="Imprimir" value="${msg['checking.imprimir']}"  icon="ui-icon-print" 
+    				<p:commandButton id="guardar" value="${msg['checking.guardar']}"  icon="ui-icon-print" 
     				 actionListener="#{checkingView.generarChecking()}" ajax="false" />
+    				 <p:commandButton id="Imprimir" value="${msg['checking.imprimir']}"  icon="ui-icon-print" 
+    				 actionListener="#{checkingView.imprimirChecking()}" ajax="false" />
     			    <p:commandButton id="Facturar" value="${msg['checking.facturar']}"  icon="ui-icon-print" 
     				 actionListener="#{checkingView.generarFactura()}" ajax="false" />
     				 

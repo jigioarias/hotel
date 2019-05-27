@@ -21,6 +21,8 @@ public class Insumoshabitacion implements Serializable {
 	private InsumoshabitacionPK id;
 
 	private int cantidad;
+	
+
 
 	public Insumoshabitacion() {
 	}
@@ -40,5 +42,7 @@ public class Insumoshabitacion implements Serializable {
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
 	}
+
+	
 
 }

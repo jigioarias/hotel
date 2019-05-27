@@ -104,13 +104,14 @@ public class ClienteService {
 
 	}
    
-   public List<Cliente> listarExtranjeros(String extranjero,Date fechaInicio, Date fechaFin) throws Exception {
+   public List<Cliente> listarExtranjeros(String extranjero,Date fechaInicio, Date fechaFin, int hotel) throws Exception {
 		
 	 EntityManager em = JPAUtility.getEntityManager();
 	Query query = em.createNamedQuery("Cliente.findExtranjeros");
 	query.setParameter("extranjero", extranjero);
 	query.setParameter("fechaInicio", fechaInicio);
 	query.setParameter("fechaFin", fechaFin);
+	query.setParameter("hotel", hotel);
 	List<Cliente> results = query.getResultList();
  
 	  return results;

@@ -11,12 +11,15 @@ import java.util.Date;
  */
 @Entity
 @Table(name="reservas")
-@NamedQuery(name="Reserva.findAll", query="SELECT r FROM Reserva r")
+@NamedQuery(name="Reserva.findAll", query="SELECT r FROM Reserva r where hotel=:hotel")
+@NamedQuery(name="Reserva.findEstado", query="SELECT r FROM Reserva r where activa=:activo and hotel=:hotel")
+
 public class Reserva implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
 
 	public Reserva(int idreserva, String celular, String correo, Date fechaEntrada, Date fechaSalida, String nombre,
-			int numeroAdultos, int numeroHabitaciones, int numeroNinos) {
+			int numeroAdultos, int numeroHabitaciones, int numeroNinos,int hotel) {
 		super();
 		this.idreserva = idreserva;
 		this.celular = celular;
@@ -50,6 +53,12 @@ public class Reserva implements Serializable {
 	private int numeroHabitaciones;
 
 	private int numeroNinos;
+	
+	private String activa;
+	
+	private int hotel;
+
+	
 
 	public Reserva() {
 	}
@@ -124,6 +133,22 @@ public class Reserva implements Serializable {
 
 	public void setNumeroNinos(int numeroNinos) {
 		this.numeroNinos = numeroNinos;
+	}
+
+	public String getActiva() {
+		return activa;
+	}
+
+	public void setActiva(String activa) {
+		this.activa = activa;
+	}
+
+	public int getHotel() {
+		return hotel;
+	}
+
+	public void setHotel(int hotel) {
+		this.hotel = hotel;
 	}
 
 }

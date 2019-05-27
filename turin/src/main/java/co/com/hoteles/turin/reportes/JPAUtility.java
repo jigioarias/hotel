@@ -9,7 +9,12 @@ public class JPAUtility {
 		   emFactory = Persistence.createEntityManagerFactory("HotelPU");
 	}
 	public static EntityManager getEntityManager(){
-		return emFactory.createEntityManager();
+	
+	//	if (emFactory.isOpen()) {
+			return emFactory.createEntityManager();
+
+		//}
+	//	return  Persistence.createEntityManagerFactory("HotelPU").createEntityManager();
 	}
 	
 	

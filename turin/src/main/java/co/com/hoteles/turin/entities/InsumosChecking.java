@@ -22,6 +22,8 @@ public class InsumosChecking implements Serializable {
 
 	private int cantidad;
 
+	private int hotel;
+
 
 	@Column(name="id_ckecking")
 	private int idCkecking;
@@ -77,6 +79,16 @@ public class InsumosChecking implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+
+	public int getHotel() {
+		return hotel;
+	}
+
+
+	public void setHotel(int hotel) {
+		this.hotel = hotel;
 	}
 
 	

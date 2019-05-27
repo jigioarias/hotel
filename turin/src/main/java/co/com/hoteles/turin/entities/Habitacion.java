@@ -39,6 +39,7 @@ public class Habitacion implements Serializable {
 
 	private int precio;
 
+	private int hotel;
 	public Habitacion() {
 	}
 
@@ -88,6 +89,14 @@ public class Habitacion implements Serializable {
 
 	public void setPrecio(int precio) {
 		this.precio = precio;
+	}
+
+	public int getHotel() {
+		return hotel;
+	}
+
+	public void setHotel(int hotel) {
+		this.hotel = hotel;
 	}
 
 }

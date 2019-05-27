@@ -11,7 +11,7 @@ import java.util.Date;
  */
 @Entity
 @NamedQuery(name="Ckecking.findAll", query="SELECT c FROM Ckecking c")
-@NamedQuery(name="Ckecking.findIdCliente", query="SELECT c FROM Ckecking c where idCliente=:id and estado=:estado")
+@NamedQuery(name="Ckecking.findIdCliente", query="SELECT c FROM Ckecking c where idCliente=:id and estado=:estado and hotel=:hotel")
 
 public class Ckecking implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -40,6 +40,8 @@ public class Ckecking implements Serializable {
 	private int numeroPersonas;
 
 	private String usuario;
+	
+	private int hotel;
 
 	public Ckecking() {
 	}
@@ -106,6 +108,14 @@ public class Ckecking implements Serializable {
 
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
+	}
+
+	public int getHotel() {
+		return hotel;
+	}
+
+	public void setHotel(int hotel) {
+		this.hotel = hotel;
 	}
 
 }

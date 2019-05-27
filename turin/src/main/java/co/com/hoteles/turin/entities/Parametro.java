@@ -10,7 +10,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="parametros")
-@NamedQuery(name="Parametro.findAll", query="SELECT p FROM Parametro p")
+@NamedQuery(name="Parametro.findAll", query="SELECT p FROM Parametro p where p.hotel=:hotel")
 @NamedQuery(name="Parametro.findNombre", query="SELECT p FROM Parametro p where p.nombreParametro=:nombre")
 
 public class Parametro implements Serializable {
@@ -28,6 +28,9 @@ public class Parametro implements Serializable {
 	private String valorMaximo;
 
 	private String valorMinimo;
+	
+	private int hotel;
+
 
 	public Parametro() {
 	}
@@ -78,6 +81,14 @@ public class Parametro implements Serializable {
 
 	public void setValorMinimo(String valorMinimo) {
 		this.valorMinimo = valorMinimo;
+	}
+
+	public int getHotel() {
+		return hotel;
+	}
+
+	public void setHotel(int hotel) {
+		this.hotel = hotel;
 	}
 
 }

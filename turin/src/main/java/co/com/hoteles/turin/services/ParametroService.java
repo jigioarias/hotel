@@ -29,10 +29,11 @@ public class ParametroService {
         return parametroService;
     }
 	
-	public List<Parametro> listar() throws Exception{
+	public List<Parametro> listar(int hotel) throws Exception{
 		
 		EntityManager em = JPAUtility.getEntityManager();
 		Query query = em.createNamedQuery("Parametro.findAll");
+		query.setParameter("hotel", hotel);
 		List<Parametro> results = query.getResultList();
 	    return results;
 

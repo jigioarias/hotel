@@ -18,7 +18,7 @@ import javax.persistence.Table;
 @NamedQuery(name="Cliente.findAll", query="SELECT c FROM Cliente c")
 @NamedQuery(name="Cliente.findDocumento", query="SELECT c FROM Cliente c where documento=:documento")
 @NamedQuery(name="Cliente.findId", query="SELECT c FROM Cliente c where id=:id")
-@NamedQuery(name="Cliente.findExtranjeros", query="SELECT c FROM Cliente c where c.extranjero=:extranjero and c.fechaRegistro>=:fechaInicio and c.fechaRegistro<=:fechaFin ")
+@NamedQuery(name="Cliente.findExtranjeros", query="SELECT c FROM Cliente c where c.extranjero=:extranjero and c.fechaRegistro>=:fechaInicio and c.fechaRegistro<=:fechaFin and c.hotel=:hotel")
 
 public class Cliente implements Serializable {
 
@@ -58,6 +58,8 @@ public class Cliente implements Serializable {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	
+	private int hotel;
 
 	@Column(name = "nombre")
 	private String nombre;
@@ -153,6 +155,14 @@ public String getUsuarioIngreso() {
 
 public void setUsuarioUIngreso(String usuarioIngreso) {
 	this.usuarioIngreso = usuarioIngreso;
+}
+
+public int getHotel() {
+	return hotel;
+}
+
+public void setHotel(int hotel) {
+	this.hotel = hotel;
 }	
 	
 }

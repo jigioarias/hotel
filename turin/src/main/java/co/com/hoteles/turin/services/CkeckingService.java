@@ -31,17 +31,14 @@ public class CkeckingService {
 	public void ingresar(Ckecking ckecking)throws Exception {
 		
 		EntityManager em = JPAUtility.getEntityManager();
-	    System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>:::ID cliente:::::"+ckecking.getIdCliente()); 
 
-		Ckecking ckeckingConsultado = getFindXCliente(ckecking.getIdCliente(),"A");
+		Ckecking ckeckingConsultado = getFindXCliente(ckecking.getIdCliente(),"A", ckecking.getHotel());
 	    em.getTransaction().begin();
 	    
 		if (ckeckingConsultado==null) {
-			   System.out.println(">>>>>>>>>>>>>GUARDANDO>>>>>>>>>>>>>>::::::::"); 
 
 	    em.persist(ckecking);
 	    }else {
-		   System.out.println(">>>>>>>>>>>>>ACTUALIZANDO>>>>>>>>>>>>>>::::::::"+ckeckingConsultado); 
 		   ckeckingConsultado.setFechaEntrada(ckecking.getFechaEntrada());
 		   ckeckingConsultado.setFechaSalida(ckecking.getFechaSalida());
 		   ckeckingConsultado.setUsuario(ckecking.getUsuario());
@@ -83,13 +80,14 @@ public class CkeckingService {
    
   
    
-   public Ckecking getFindXCliente(int idCliente,String estado) throws Exception{
+   public Ckecking getFindXCliente(int idCliente,String estado,int hotel) throws Exception{
 		
 		EntityManager em = JPAUtility.getEntityManager();
 		try {
 			Query query = em.createNamedQuery("Ckecking.findIdCliente");
 			query.setParameter("id", idCliente);
 			query.setParameter("estado", estado);
+			query.setParameter("hotel",hotel);
 			Ckecking  results = (Ckecking) query.getSingleResult();
 		    return results;	
 		} catch (Exception e) {

@@ -15,7 +15,7 @@ import co.com.hoteles.turin.entities.Cliente;
 import co.com.hoteles.turin.entities.Reserva;
 
 @ManagedBean
-public class ClienteView {
+public class ClienteView extends GenericBB {
      
     private String nombre;
     private String correo;
@@ -85,6 +85,8 @@ public class ClienteView {
 	        cliente.setDocumento(documento);
 	        cliente.setTipoDocumento(tipoDocumento);
 	        cliente.setNombre(nombre);
+	        cliente.setHotel(this.getHotelSession().getCodigo());
+	        
 	        em.persist(cliente);
 	        em.getTransaction().commit();
 	        

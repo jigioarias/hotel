@@ -86,7 +86,7 @@ public class HabitacionesCkeckingService {
  	}
    
    
-   public int getFindXHabitacion(int idHabitacion) throws Exception{
+   public int getFindXHabitacion(int idHabitacion,int hotel) throws Exception{
 		
 		EntityManager em = JPAUtility.getEntityManager();
 		Query query = em.createNamedQuery("HabitacionesChecking.findxHabitacion");

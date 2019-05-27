@@ -17,7 +17,7 @@ import co.com.hoteles.turin.reportes.JPAUtility;
 import co.com.hoteles.turin.services.ReservaService;
 
 @ManagedBean
-public class ReservasView {
+public class ReservasView extends GenericBB {
      
     private String nombre;
     private String correo;
@@ -37,7 +37,7 @@ public class ReservasView {
         ReservaService reservaService = ReservaService.getInstance();
         
         try {
-			listaReservas =reservaService.listar();
+			listaReservas =reservaService.listar("S",this.getHotelSession().getCodigo());
 			numeroReservas =listaReservas.size();
 	      
 		} catch (Exception e) {
@@ -47,8 +47,26 @@ public class ReservasView {
         
     }
 
+    public void borrarReserva(int idReserva) {
+    	
+    	try {
+    		System.out.println(idReserva);
+			ReservaService.getInstance().borrar(idReserva);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    }
     
     
+ public void borrarReserva() {
+    	
+    	try {
+    		System.out.println("BORRANDO HP");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    }
 	public String getNombre() {
 		return nombre;
 	}

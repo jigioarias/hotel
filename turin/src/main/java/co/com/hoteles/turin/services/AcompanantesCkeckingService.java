@@ -34,7 +34,8 @@ public class AcompanantesCkeckingService {
 	public void ingresar(AcompanantesChecking acompanantesCkecking)throws Exception {
 		
 		EntityManager em = JPAUtility.getEntityManager();
-		List<Cliente> clientes=getFindXCheckingxACompanante(acompanantesCkecking.getIdChecking(),acompanantesCkecking.getIdCliente());
+		List<Cliente> clientes=getFindXCheckingxACompanante(acompanantesCkecking.getIdChecking(),
+				acompanantesCkecking.getIdCliente());
 	    if(clientes == null || clientes.size()== 0) {
 		   em.getTransaction().begin();
 	       em.persist(acompanantesCkecking);

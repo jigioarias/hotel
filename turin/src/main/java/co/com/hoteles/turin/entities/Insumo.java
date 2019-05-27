@@ -10,7 +10,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="insumos")
-@NamedQuery(name="Insumo.findAll", query="SELECT i FROM Insumo i")
+@NamedQuery(name="Insumo.findAll", query="SELECT i FROM Insumo i where i.hotel=:hotel")
 @NamedQuery(name="Insumo.findNombre", query="SELECT i FROM Insumo i where i.nombre=:nombre")
 
 public class Insumo implements Serializable {
@@ -24,6 +24,9 @@ public class Insumo implements Serializable {
 	private String nombre;
 	
 	private int valor;
+	
+	private int hotel;
+
 	
 	 public int getCantidad() {
 		return cantidad;
@@ -67,6 +70,14 @@ public class Insumo implements Serializable {
 
 	public void setValor(int valor) {
 		this.valor = valor;
+	}
+
+	public int getHotel() {
+		return hotel;
+	}
+
+	public void setHotel(int hotel) {
+		this.hotel = hotel;
 	}
 
 }

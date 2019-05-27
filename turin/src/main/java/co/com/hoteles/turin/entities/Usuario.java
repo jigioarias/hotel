@@ -27,6 +27,8 @@ public class Usuario implements Serializable {
 	private String clave;
 
 	private String correo;
+	
+	
 
 	@Temporal(TemporalType.DATE)
 	private Date fechaCreacion;
@@ -100,4 +102,6 @@ public class Usuario implements Serializable {
 	public void setUsuarioCreacion(String usuarioCreacion) {
 		this.usuarioCreacion = usuarioCreacion;
 	}
+
+	
 }

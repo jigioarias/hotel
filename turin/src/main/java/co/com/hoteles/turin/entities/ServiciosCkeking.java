@@ -29,6 +29,9 @@ public class ServiciosCkeking implements Serializable {
 	private int id;
 
 	private int cantidad;
+	
+	private int hotel;
+
 
 	@Column(name="id_checking")
 	private int idChecking;
@@ -69,6 +72,14 @@ public class ServiciosCkeking implements Serializable {
 
 	public void setIdServicio(int idServicio) {
 		this.idServicio = idServicio;
+	}
+
+	public int getHotel() {
+		return hotel;
+	}
+
+	public void setHotel(int hotel) {
+		this.hotel = hotel;
 	}
 
 }

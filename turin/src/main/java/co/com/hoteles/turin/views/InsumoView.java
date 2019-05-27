@@ -31,7 +31,7 @@ import co.com.hoteles.turin.services.InsumoService;
 import co.com.hoteles.turin.services.ServiciosCkeckingService;
 
 @ManagedBean
-public class InsumoView {
+public class InsumoView extends GenericBB {
 
 	private Insumo insumo;
 	private String mensaje;
@@ -44,7 +44,7 @@ public class InsumoView {
 	public InsumoView(){
 		insumo = new Insumo();
 		try {
-			listaInsumos= InsumoService.getInstance().listar();
+			listaInsumos= InsumoService.getInstance().listar(this.getHotelSession().getCodigo());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -81,7 +81,7 @@ public class InsumoView {
 			e.printStackTrace();
 		}
 	try {
-			setListaInsumos(InsumoService.getInstance().listar());
+			setListaInsumos(InsumoService.getInstance().listar(this.getHotelSession().getCodigo()));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

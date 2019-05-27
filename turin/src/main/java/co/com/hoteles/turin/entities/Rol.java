@@ -18,6 +18,8 @@ public class Rol implements Serializable {
 	@Id
 	private String nombre;
 
+	private int hotel;
+
 	
 	public Rol() {
 	}
@@ -28,6 +30,14 @@ public class Rol implements Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public int getHotel() {
+		return hotel;
+	}
+
+	public void setHotel(int hotel) {
+		this.hotel = hotel;
 	}
 
 	

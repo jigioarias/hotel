@@ -29,7 +29,7 @@ public class InsumoService {
         return insumoService;
     }
 	
-	public List<Insumo> listar() throws Exception{
+	public List<Insumo> listar(int hotel) throws Exception{
 		
 		EntityManager em = JPAUtility.getEntityManager();
 		Query query = em.createNamedQuery("Insumo.findAll");

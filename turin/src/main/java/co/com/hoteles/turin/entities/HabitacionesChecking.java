@@ -26,6 +26,8 @@ public class HabitacionesChecking implements Serializable {
 
 	@Column(name="id_habitacion")
 	private int idHabitacion;
+	
+	private int hotel;
 
 	public HabitacionesChecking() {
 	}
@@ -58,6 +60,14 @@ public class HabitacionesChecking implements Serializable {
 
 	public void setIdHabitacion(int idHabitacion) {
 		this.idHabitacion = idHabitacion;
+	}
+
+	public int getHotel() {
+		return hotel;
+	}
+
+	public void setHotel(int hotel) {
+		this.hotel = hotel;
 	}
 
 }

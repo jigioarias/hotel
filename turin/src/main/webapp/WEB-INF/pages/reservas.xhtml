@@ -67,16 +67,21 @@
  
     </div>
     
+ 
+    
+    
+</h:form>
+    		
      <p:dataTable var="reserva"
 								value="#{reservasView.listaReservas}"
-								id="listaResevas" emptyMessage="No hay Resevas">
+								id="listaReservas" emptyMessage="No hay Resevas">
 								<f:facet name="header">
-        						${msg['reservas.listaReservas']}
+        						${msg['reserva.listaReservas']}
     						</f:facet>
-							  <p:column headerText="${msg['reserva.fechaEntrada']}">
+							
+								 <p:column headerText="${msg['reserva.fechaEntrada']}">
 									<h:outputText value="#{reserva.fechaEntrada}" />
 								</p:column>
-								
 								  <p:column headerText="${msg['reserva.fechaSalida']}">
 									<h:outputText value="#{reserva.fechaSalida}" />
 								</p:column>
@@ -102,13 +107,15 @@
 								<p:column headerText="${msg['reserva.numeroNinos']}">
 									<h:outputText value="#{reserva.numeroNinos}" />
 								</p:column>
+								<p:column headerText="${msg['reserva.operacion']}">
+										<p:commandButton id="borrarReserva"
+							value="${msg['reserva.borrar']}" icon="ui-icon-trash"
+							update="listaReservas" 
+							actionListener="#{reservasView.borrarReserva(reserva.idreserva)}" />
+								</p:column>
 							
-    </p:dataTable>  
-    
-    
-</h:form>
-    		
-    		
+							
+    </p:dataTable>     		
     		
     			
     	

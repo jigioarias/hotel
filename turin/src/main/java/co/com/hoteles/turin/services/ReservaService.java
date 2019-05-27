@@ -47,11 +47,40 @@ public class ReservaService {
 	}
 	
 	
+	public void borrar(int idReserva)throws Exception {
+
+
+	    Reserva r = find(idReserva);
+	    r.setActiva("N");
+	   
+		
+		EntityManager em = JPAUtility.getEntityManager();
+
+		em.getTransaction().begin();
+		em.merge(r);
+		em.getTransaction().commit();
+		JPAUtility.close();
+	}
 	
-	public List<Reserva> listar()throws Exception {
+	public List<Reserva> listar(int hotel)throws Exception {
 
 		EntityManager em = JPAUtility.getEntityManager();
 		Query query = em.createNamedQuery("Reserva.findAll");
+		query.setParameter("hotel", hotel);
+		List<Reserva> results = query.getResultList();
+		
+		return results;
+	
+	}
+	
+	
+	public List<Reserva> listar(String activo,int hotel)throws Exception {
+
+		EntityManager em = JPAUtility.getEntityManager();
+		Query query = em.createNamedQuery("Reserva.findEstado");
+		query.setParameter("activo", activo);
+		query.setParameter("hotel", hotel);
+
 		List<Reserva> results = query.getResultList();
 		
 		return results;
@@ -59,4 +88,13 @@ public class ReservaService {
 	}
 
 
+	public Reserva find(int idReserva)throws Exception {
+
+		EntityManager em = JPAUtility.getEntityManager();
+		Reserva reservaI = em.getReference(Reserva.class, idReserva);
+		
+		return reservaI;
+	
+	}
+	
 }

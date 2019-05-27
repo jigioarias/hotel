@@ -61,6 +61,8 @@ public class LoginBean extends GenericBB {
 		
 		try {
 			usuarioC = usuarioService.findXClave(usuario);
+			System.out.println(hotel.getCodigo());
+
 			hotelC =  HotelService.getInstance().find(hotel.getCodigo());
 		
 		if (usuarioC != null) {
@@ -69,8 +71,7 @@ public class LoginBean extends GenericBB {
 			this.guardarHotel(FacesContext.getCurrentInstance(), hotelC);
 
 			return "/index.xhtml?faces-redirect=true";	
-			
-			
+						
 		} else {
 			this.borrarSession(FacesContext.getCurrentInstance());
 
