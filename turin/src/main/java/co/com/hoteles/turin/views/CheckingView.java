@@ -860,6 +860,9 @@ public class CheckingView extends GenericBB implements Serializable {
 					u.setCantidad(insumosChecking.getCantidad());
 					u.setNombre(i.getNombre());
 					u.setValor(i.getValor());
+					listainsumos.add(u);
+					
+					System.out.println(u.getNombre()+":"+ u.getValor());
 
 				}
 
@@ -887,7 +890,7 @@ public class CheckingView extends GenericBB implements Serializable {
 				CheckingDTO checkingDTO = new CheckingDTO();
 				checkingDTO.setHabitaciones(habitacionSeleccionada);
 				checkingDTO.setServicios(servicios);
-				checkingDTO.setListaInsumos(listainsumos);
+				checkingDTO.setInsumos(listainsumos);
 
 				List<CheckingDTO> lista = new ArrayList<CheckingDTO>();
 				lista.add(checkingDTO);

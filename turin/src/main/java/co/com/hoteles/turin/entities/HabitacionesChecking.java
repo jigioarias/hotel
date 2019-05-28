@@ -13,7 +13,7 @@ import javax.persistence.*;
 @NamedQuery(name="HabitacionesChecking.findAll", query="SELECT h FROM HabitacionesChecking h")
 @NamedQuery(name="HabitacionesChecking.findxCkecking", query="SELECT h FROM HabitacionesChecking h where h.idCkecking=:id")
 @NamedQuery(name="HabitacionesChecking.findxCkeckingxHabitacion", query="SELECT h FROM HabitacionesChecking h where h.idCkecking=:idCkecking and h.idHabitacion=:idHabitacion")
-@NamedQuery(name="HabitacionesChecking.findxHabitacion", query="SELECT h.idCkecking FROM HabitacionesChecking h where  h.idHabitacion=:idHabitacion")
+@NamedQuery(name="HabitacionesChecking.findxHabitacion", query="SELECT h.idCkecking FROM HabitacionesChecking h, Ckecking c where  h.idHabitacion=:idHabitacion and c.id=h.idCkecking and c.estado=:estado ")
 
 public class HabitacionesChecking implements Serializable {
 	private static final long serialVersionUID = 1L;

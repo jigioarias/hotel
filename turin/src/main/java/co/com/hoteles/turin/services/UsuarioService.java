@@ -46,7 +46,6 @@ public List<Usuario> listar() throws Exception{
 		   List<Usuario> usuarios =findXLogin(usuario.getId());
 		    EntityManager em = JPAUtility.getEntityManager();
 		    em.getTransaction().begin();
-		    System.out.println("TAMANO DE LA LISTA:"+usuarios.size());
 		    
 		    if(!usuarios.isEmpty()) {
 		     Usuario usuarioConsultada=  usuarios.get(0);

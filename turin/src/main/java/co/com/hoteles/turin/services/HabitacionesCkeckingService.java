@@ -91,6 +91,7 @@ public class HabitacionesCkeckingService {
 		EntityManager em = JPAUtility.getEntityManager();
 		Query query = em.createNamedQuery("HabitacionesChecking.findxHabitacion");
 		query.setParameter("idHabitacion", idHabitacion);
+		query.setParameter("estado", "A");
 		int  results =  (Integer) query.getSingleResult();
 	 
 	     return results;

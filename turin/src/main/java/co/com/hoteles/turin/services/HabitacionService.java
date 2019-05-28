@@ -75,7 +75,6 @@ public List<Habitacion> listarOcupadas() throws Exception{
 		   List<Habitacion> habitaciones =findXNombre(habitacion.getNombre());
 		    EntityManager em = JPAUtility.getEntityManager();
 		    em.getTransaction().begin();
-		    System.out.println("TAMANO DE LA LISTA:"+habitaciones.size());
 		    
 		    if(!habitaciones.isEmpty()) {
 		     Habitacion habitacionConsultada=  habitaciones.get(0);

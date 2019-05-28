@@ -80,11 +80,20 @@
 			<fieldDescription><![CDATA[cantidad]]></fieldDescription>
 		</field>
 	</subDataset>
-	<subDataset name="DInsumos" uuid="fa298476-1ff6-41fb-a4cf-a69aa5402b46">
-		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<subDataset name="insumosDataSet" uuid="fa298476-1ff6-41fb-a4cf-a69aa5402b46">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="arrayChecking"/>
 		<queryString>
 			<![CDATA[]]>
 		</queryString>
+		<field name="nombre" class="java.lang.String">
+			<fieldDescription><![CDATA[nombre]]></fieldDescription>
+		</field>
+		<field name="valor" class="java.lang.Integer">
+			<fieldDescription><![CDATA[valor]]></fieldDescription>
+		</field>
+		<field name="cantidad" class="java.lang.Integer">
+			<fieldDescription><![CDATA[cantidad]]></fieldDescription>
+		</field>
 	</subDataset>
 	<parameter name="nombreCliente" class="java.lang.String"/>
 	<parameter name="correo" class="java.lang.String"/>
@@ -112,7 +121,7 @@
 		<fieldDescription><![CDATA[acompanantes]]></fieldDescription>
 	</field>
 	<field name="insumos" class="java.util.List">
-		<fieldDescription><![CDATA[acompanantes]]></fieldDescription>
+		<fieldDescription><![CDATA[insumos]]></fieldDescription>
 	</field>
 	<title>
 		<band height="181" splitType="Stretch">
@@ -154,7 +163,7 @@
 				<textElement textAlignment="Right"/>
 				<text><![CDATA[Fecha:]]></text>
 			</staticText>
-			<textField pattern="EEEEE dd MMMMM yyyy">
+			<textField pattern="MMM d, yyyy">
 				<reportElement x="468" y="10" width="84" height="20" uuid="bb10dbe1-0a4f-4722-9953-c163b63cf979"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
@@ -361,34 +370,58 @@
 			</staticText>
 			<staticText>
 				<reportElement x="350" y="200" width="89" height="20" uuid="5439fd55-355c-410c-aa0f-c5eff97eca73"/>
-				<text><![CDATA[Total a pagar :]]></text>
+				<text><![CDATA[Total a Pagar :]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="440" y="200" width="100" height="20" uuid="4687e607-b9f3-4c8c-ac32-a081cf2af748"/>
 				<textFieldExpression><![CDATA[$P{subtotal}]]></textFieldExpression>
 			</textField>
 			<componentElement>
-				<reportElement x="10" y="130" width="400" height="30" uuid="4daddf60-3d20-448c-9078-83853ae030cc"/>
-				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<datasetRun subDataset="serviciosDataSet" uuid="44c414f5-faaf-48e9-a05f-7a903f763fc4">
-						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<reportElement isPrintRepeatedValues="false" x="7" y="164" width="400" height="16" uuid="4daddf60-3d20-448c-9078-83853ae030cc">
+					<property name="net.sf.jasperreports.export.headertoolbar.table.name" value=""/>
+				</reportElement>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="insumosDataSet" uuid="e162bdcf-415c-4d96-b36e-b9284c3eea60">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{insumos})]]></dataSourceExpression>
 					</datasetRun>
-					<jr:listContents height="30" width="400">
+					<jr:listContents height="16" width="400">
 						<textField>
-							<reportElement x="0" y="0" width="100" height="30" uuid="78b10511-65af-422f-bacc-8175bbb84a1c"/>
+							<reportElement x="0" y="0" width="174" height="16" uuid="78b10511-65af-422f-bacc-8175bbb84a1c"/>
 							<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 						</textField>
-						<textField>
-							<reportElement x="100" y="0" width="150" height="30" uuid="ca745bfa-4557-442b-883f-6d7d0839942a"/>
+						<textField isBlankWhenNull="true">
+							<reportElement x="174" y="0" width="100" height="16" uuid="ca745bfa-4557-442b-883f-6d7d0839942a"/>
 							<textFieldExpression><![CDATA[$F{valor}]]></textFieldExpression>
 						</textField>
-						<textField>
-							<reportElement x="250" y="0" width="150" height="30" uuid="3252544c-9dec-4e47-ac0b-116d9d2cc45c"/>
+						<textField isBlankWhenNull="true">
+							<reportElement x="280" y="0" width="120" height="16" uuid="3252544c-9dec-4e47-ac0b-116d9d2cc45c"/>
 							<textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
 						</textField>
 					</jr:listContents>
 				</jr:list>
 			</componentElement>
+			<staticText>
+				<reportElement x="6" y="123" width="125" height="20" uuid="553f2705-a2b9-4de4-9664-b185f7f52b72">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Insumos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="144" width="80" height="20" uuid="72d5844c-fda0-48be-91cf-4c4352cb4b33"/>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="144" width="89" height="20" uuid="37c168b7-a88a-4d39-97d1-70834104ef16"/>
+				<text><![CDATA[Valor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="286" y="144" width="106" height="20" uuid="fab4d0b8-dc64-4786-86ac-7f3602c9acb6"/>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
 		</band>
 	</summary>
 </jasperReport>

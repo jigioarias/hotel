@@ -19,7 +19,7 @@
 
     <p:growl id="msg" />
 
-	<p:panel header="${msg['limpieza.habitacion']}">
+	<p:panel header="${msg['limpieza.habitacion']}" id="listaHabitaciones">
 					<p:messages />
 							  <h:panelGrid columns="1" style="margin-bottom:10px" cellpadding="5">
 	       					 <p:selectOneMenu id="habitacion" value="#{reportarLimpiezaView.codigoHabitacion}" >
@@ -54,7 +54,7 @@
     
     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
      
-        <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" update="insumos" icon="pi pi-check" />
+        <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" update=":forma:listaHabitaciones" icon="pi pi-check" ajax="false" />
         <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
     </p:confirmDialog>  
     

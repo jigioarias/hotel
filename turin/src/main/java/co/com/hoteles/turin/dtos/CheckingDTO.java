@@ -13,7 +13,7 @@ public class CheckingDTO {
 	private List<Habitacion> habitaciones;
 	private List<Cliente> acompanantes;
 	private List<VentaDTO> ventas;
-	private List<InsumoDTO> listaInsumos;
+	private List<InsumoDTO> insumos;
 
 	public List<Servicio> getServicios() {
 		return servicios;
@@ -33,11 +33,11 @@ public class CheckingDTO {
 	public void setAcompanantes(List<Cliente> acompanantes) {
 		this.acompanantes = acompanantes;
 	}
-	public List<InsumoDTO> getListaInsumos() {
-		return listaInsumos;
+	public List<InsumoDTO> getInsumos() {
+		return insumos;
 	}
-	public void setListaInsumos(List<InsumoDTO> listaInsumos) {
-		this.listaInsumos = listaInsumos;
+	public void setInsumos(List<InsumoDTO> insumos) {
+		this.insumos = insumos;
 	}
 	public List<VentaDTO> getVentas() {
 		return ventas;

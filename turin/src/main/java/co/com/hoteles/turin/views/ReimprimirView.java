@@ -883,7 +883,7 @@ public class ReimprimirView extends GenericBB implements Serializable {
 				CheckingDTO checkingDTO = new CheckingDTO();
 				checkingDTO.setHabitaciones(habitacionSeleccionada);
 				checkingDTO.setServicios(servicios);
-				checkingDTO.setListaInsumos(listainsumos);
+				checkingDTO.setInsumos(listainsumos);
 
 				List<CheckingDTO> lista = new ArrayList<CheckingDTO>();
 				lista.add(checkingDTO);
