@@ -862,7 +862,6 @@ public class CheckingView extends GenericBB implements Serializable {
 					u.setValor(i.getValor());
 					listainsumos.add(u);
 					
-					System.out.println(u.getNombre()+":"+ u.getValor());
 
 				}
 

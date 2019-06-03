@@ -19,6 +19,6 @@ public class JPAUtility {
 	
 	
 	public static void close(){
-		emFactory.close();
+		//emFactory.close();
 	}
 } 

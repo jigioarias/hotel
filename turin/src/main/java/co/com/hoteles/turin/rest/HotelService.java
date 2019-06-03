@@ -11,6 +11,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import co.com.hoteles.turin.entities.Reserva;
+import co.com.hoteles.turin.reportes.JPAUtilityRest;
 import co.com.hoteles.turin.services.ReservaService;
 
 
@@ -18,18 +19,7 @@ import co.com.hoteles.turin.services.ReservaService;
 @Path("/hotel/reserva")
 public class HotelService {
 
-	@GET
-	@Path("/get")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Reserva getReserva() {
-
-		Reserva reserva = new Reserva();
-		reserva.setIdreserva(33);
-		reserva.setCelular("234234");
-
-		return reserva;
-
-	}
+	
 
 	@POST
 	@Path("/post")
@@ -38,7 +28,8 @@ public class HotelService {
 
 	    try {
 	    	
-			ReservaService.getInstance().ingresar(reserva);
+	    	JPAUtilityRest jpaRest = new JPAUtilityRest();
+	    	jpaRest.ingresar(reserva);
 			return Response.status(201).entity("OK").build();
 
 	    } catch (Exception e) {

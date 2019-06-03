@@ -24,7 +24,6 @@ public class RolView {
 		rol = new Rol();
 		try {
 			listaRoles= RolService.getInstance().listar();
-			System.out.println("lista roles:"+listaRoles.size());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

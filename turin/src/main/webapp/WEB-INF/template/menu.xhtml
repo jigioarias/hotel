@@ -11,7 +11,7 @@
 <h:head>
 </h:head>
 <h:body>
-	<h:form>  
+	<h:form id="menu">  
     <p:growl id="messages"/>
     
     
@@ -54,7 +54,7 @@
             
        </p:submenu>      
         
-        <p:menuitem value="Reservas (#{reservasView.numeroReservas})" url="reservas.xhtml" icon="pi pi-user-plus"
+        <p:menuitem value="Reservas (#{reservasView.numeroReservas})" id="reservas" url="reservas.xhtml" icon="pi pi-user-plus"
         rendered="#{loginBean.usuarioSession.rol ne 'ASEO'}" />
       
         <p:menuitem value="Home" url="index.xhtml" icon="pi pi-user-plus" />

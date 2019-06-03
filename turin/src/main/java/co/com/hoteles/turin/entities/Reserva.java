@@ -30,8 +30,11 @@ public class Reserva implements Serializable {
 		this.numeroAdultos = numeroAdultos;
 		this.numeroHabitaciones = numeroHabitaciones;
 		this.numeroNinos = numeroNinos;
+		this.hotel = hotel;
 	}
 
+	
+	
 	@Id 
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idreserva;

@@ -16,6 +16,7 @@
   <input type="text" name="numeroNinos" placeholder="Search7...">
   <input type="text" name="numeroAdultos" placeholder="Search8...">
   <input type="text" name="numeroHabitaciones" placeholder="Search9...">
+  <input type="hidden" name="hotel" value="1">
   <input type="hidden" name="url" value="http://localhost:8080/turin/rest/hotel/reserva/post">
   
 
@@ -28,7 +29,7 @@
 <script>
 
  $(document).ready(function() {
-  
+  	
  $("#boton").click(function(){
   // Get some values from elements on the page:
   var $form = $( "#searchForm" ),
@@ -41,20 +42,11 @@
     numeroAdultos = $form.find( "input[name='numeroAdultos']" ).val(),
     numeroHabitaciones = $form.find( "input[name='numeroHabitaciones']" ).val(),
 	url = $form.find( "input[name='url']" ).val();
-alert(correo);
-alert(fechaEntrada);
-alert(nombre);
-alert(fechaSalida);
-alert(celular);
-alert(numeroNinos);
-alert(numeroHabitaciones);
-alert(numeroAdultos);
+	hotel = $form.find( "input[name='hotel']" ).val();
 
-  // Send the data using post
-  /*var posting = $.post( url, 
-		  dataType: "json",
-               { nombre: nombre,correo: correo, fechaEntrada:fechaEntrada,fechaSalida:fechaSalida,celular:celular, numeroNinos:numeroNinos,numeroAdultos:numeroAdultos, numeroHabitaciones: numeroHabitaciones } 
-                       );*/
+
+
+
 			   
                        var settings = {
                     		   "async": true,
@@ -66,16 +58,13 @@ alert(numeroAdultos);
                     		     "cache-control": "no-cache",
              		             },
                     		   "processData": false,
-                    		   "data": "{    \"nombre\": \""+nombre+"\",    \"correo\": \""+correo+"\",    \"fechaEntrada\": \""+fechaEntrada+"\",\n\t    \"fechaSalida\": \""+fechaSalida+"\",\n\t    \"celular\": \""+celular+"\",\n\t    \"numeroNinos\": \""+numeroNinos+"\",\n\t    \"numeroAdultos\": \""+numeroAdultos+"\",\n\t    \"idreserva\": \"0\",\n\t    \"numeroHabitaciones\": \""+numeroHabitaciones+"\"\n\t}"
+                    		   "data": "{    \"nombre\": \""+nombre+"\", \"hotel\": \""+hotel+"\",    \"correo\": \""+correo+"\",    \"fechaEntrada\": \""+fechaEntrada+"\",\n\t    \"fechaSalida\": \""+fechaSalida+"\",\n\t    \"celular\": \""+celular+"\",\n\t    \"numeroNinos\": \""+numeroNinos+"\",\n\t    \"numeroAdultos\": \""+numeroAdultos+"\",\n\t    \"idreserva\": \"0\",\n\t    \"numeroHabitaciones\": \""+numeroHabitaciones+"\"\n\t}"
                     		 }
 
                     		 $.ajax(settings).done(function (response) {
                     		   console.log(response);
                     		 });
-  // Put the results in a div
-  /*posting.done(function( data ) {
-        alert( "mensaje: " + data );
-  });*/
+
   });
 });
 </script>

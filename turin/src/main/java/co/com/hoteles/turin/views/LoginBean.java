@@ -61,7 +61,6 @@ public class LoginBean extends GenericBB {
 		
 		try {
 			usuarioC = usuarioService.findXClave(usuario);
-			System.out.println(hotel.getCodigo());
 
 			hotelC =  HotelService.getInstance().find(hotel.getCodigo());
 		

@@ -11,6 +11,54 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 	<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	 <script>
+
+ $(document).ready(function() {	
+  	
+ 	$("#boton").click(function(){
+		  // Get some values from elements on the page:
+		  var $form = $( "#searchForm" ),
+		    nombre = $form.find( "input[name='nombre']" ).val(),
+		    correo = $form.find( "input[name='correo']" ).val(),
+		    fechaEntrada = $form.find( "input[name='fechaEntrada']" ).val(),
+		    fechaSalida = $form.find( "input[name='fechaSalida']" ).val(),
+		    celular = $form.find( "input[name='celular']" ).val(),
+		    numeroNinos = $form.find( "input[name='numeroNinos']" ).val(),
+		    numeroAdultos = $form.find( "input[name='numeroAdultos']" ).val(),
+		    numeroHabitaciones = $form.find( "input[name='numeroHabitaciones']" ).val(),
+			url = $form.find( "input[name='url']" ).val();
+			hotel = $form.find( "input[name='hotel']" ).val();
+		
+		
+		    if(numeroHabitaciones!='' && numeroAdultos!='' && numeroNinos!='' && celular!='' && fechaSalida!='' && fechaEntrada!='' && correo!='' && nombre!=''){
+		
+					   
+		                       var settings = {
+		                    		   "async": true,
+		                    		   "crossDomain": true,
+		                    		   "url": url,
+		                    		   "method": "POST",
+		                    		   "headers": {
+		                    		     "content-type": "application/json",
+		                    		     "cache-control": "no-cache",
+		             		             },
+		                    		   "processData": false,
+		                    		   "data": "{    \"nombre\": \""+nombre+"\", \"hotel\": \""+hotel+"\",    \"correo\": \""+correo+"\",    \"fechaEntrada\": \""+fechaEntrada+"\",\n\t    \"fechaSalida\": \""+fechaSalida+"\",\n\t    \"celular\": \""+celular+"\",\n\t    \"numeroNinos\": \""+numeroNinos+"\",\n\t    \"numeroAdultos\": \""+numeroAdultos+"\",\n\t    \"idreserva\": \"0\",\n\t    \"numeroHabitaciones\": \""+numeroHabitaciones+"\"\n\t}"
+		                    		 }
+		
+		                    		 $.ajax(settings).done(function (response) {
+		                    		   alert('Señor(a) '+nombre+' su reserva ha sido enviada con éxito, lo estaremos contactando, gracias por utilizar nuestros servicios	');
+		                    		 });
+		    }else{
+		    	
+     		   alert('Por favor diligencie toda la información solicitada para la reserva');
+
+		    }                    
+		
+		  });
+});
+</script>
 	</head>
 	<body class="is-preload">
 
@@ -50,22 +98,34 @@
 			    </div>
 				<a href="#Reservas" class="button style2 down anchored">Next</a>
 			</section>
-
+	
+	
 		<!-- Reservas -->
 			<section id="Reservas" class="main style2 left dark fullscreen">
+			
 				<div class="content box style2">
-				
-						<form method="post" action="#" name="reservar">
+				<h2><strong>Reservar Habitaciones </strong></h2>
+						<form id="searchForm" >
+
 							<div class="fields">
-								<div class="field half"><input type="text" name="name" placeholder="nombre" /></div>
-								<div class="field half"><input type="email" name="email" placeholder="celular" /></div>
-								<div class="field"><input name="message" placeholder="fecha"></input></div>
+							<div class="field"><input type="text" name="nombre" placeholder="Nombre"></div>
+							
+    						<div class="field"><input type="text" name="correo" placeholder="Correo"></div>
+                            <div class="field"><input type="text" name="fechaEntrada" placeholder="Fecha Entrada (YYYY-MM-DD)"></div>
+ 						    <div class="field"><input type="text" name="fechaSalida" size="10" placeholder="Fecha Salida  (YYYY-MM-DD)"></div>
+ 							<div class="field"><input type="text" name="celular" placeholder="Celular"></div>
+ 							<div class="field half"> <input type="text" name="numeroNinos" placeholder="Niños"></div>
+  							<div class="field half"><input type="text" name="numeroAdultos" placeholder="Adultos"></div>
+  							<div class="field"><input type="text" name="numeroHabitaciones" placeholder="Habitaciones"></div>
+  							<input type="hidden" name="hotel" value="1"></div>
+                           <input type="hidden" name="url" value="http://localhost:8080/turin/rest/hotel/reserva/post">								
+								
+								</form>
 							</div>
 							<ul class="actions special">
-								<li><input name="Enviar" type="button" value="Reservar" onclick="javascript:alert('llamar')" />
+								<li><<input type="button" id="boton" value="Reservar">
 								</li>
 							</ul>
-						</form>
 					</div>
 					
 					

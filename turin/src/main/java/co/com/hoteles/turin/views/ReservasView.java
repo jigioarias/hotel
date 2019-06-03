@@ -50,7 +50,6 @@ public class ReservasView extends GenericBB {
     public void borrarReserva(int idReserva) {
     	
     	try {
-    		System.out.println(idReserva);
 			ReservaService.getInstance().borrar(idReserva);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -61,7 +60,6 @@ public class ReservasView extends GenericBB {
  public void borrarReserva() {
     	
     	try {
-    		System.out.println("BORRANDO HP");
 			
 		} catch (Exception e) {
 			e.printStackTrace();

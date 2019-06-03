@@ -66,7 +66,6 @@ public class InsumoHabitacionService {
 
 		EntityManager em = JPAUtility.getEntityManager();
 		Insumoshabitacion insumoshabitacion2=find(insumoshabitacion.getId());
-		System.out.println("insumohh2::"+insumoshabitacion2);
 		if(insumoshabitacion2== null || insumoshabitacion2.getId()==null) {
 			em.getTransaction().begin();
 			em.persist(insumoshabitacion);

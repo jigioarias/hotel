@@ -220,9 +220,6 @@ public void buscarInsumos() {
 public void adicionar(AjaxBehaviorEvent event) {
 	
     String id = event.getComponent().toString();
-    System.out.println(id);
-	System.out.println("codigoHabitacion::"+codigoHabitacion);
-    System.out.println("lista de  seleccion::"+selectedHabitaciones.length);
 }  
 
 public void confirmar() {
