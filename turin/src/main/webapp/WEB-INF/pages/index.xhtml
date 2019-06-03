@@ -31,7 +31,7 @@
  
  .centered {
 text-align: center;
-margin-left: 10%;
+margin-left: 30%;
 }
     body {
     background-image: url("#{resource['img/logo.png']}");
@@ -40,45 +40,51 @@ margin-left: 10%;
     background-attachment:fixed;
 
 }
+
+
     
 </style>
+
+<style type="text/css">
+       
+    .ui-orderlist .ui-orderlist-list {
+        height: auto;
+    }
+</style>
+ 
  
  <div  class="centered" >
-<h:form id="form">
-
-  <p:growl id="messages" showDetail="true" />
-  <p>
-  </p>
- <p:panel  header="Estado Habitaciones"  >   
-   <h:panelGrid columns="3" columnClasses="value, value,value">
-    <p:dataList value="#{indexView.habitaciones}" var="habitacion" type="definition" emptyMessage="No hay habitaciones Disponibles">
-        <f:facet name="header">
-            Disponibles
-        </f:facet>
-        #{habitacion.nombre} Precio: #{habitacion.precio}
-    </p:dataList>
  
-    <p:dataList value="#{indexView.habitaciones2}" var="habitacion" type="definition" emptyMessage="No hay habitaciones Ocupadas">
-        <f:facet name="header">
-            Ocupadas
-        </f:facet>
-        Nombre: #{habitacion.nombre}  Precio: #{habitacion.precio}
-       	
-    </p:dataList>
-    
-    
-    <p:dataList value="#{indexView.habitaciones3}" var="habitacion" type="definition" emptyMessage="No hay habitaciones en Limpieza">
-        <f:facet name="header">
-            Limpieza
-        </f:facet>
-        Nombre: #{habitacion.nombre} Precio: #{habitacion.precio}
-       	
-    </p:dataList>
- </h:panelGrid>
-  </p:panel>
- 
-</h:form>
-    	</div>
+		<h:form id="form">
+		
+		 
+		 
+        <p:panelGrid columns="1" columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-4,ui-g-12 ui-md-2,ui-g-12 ui-md-4" layout="grid" styleClass="ui-panelgrid-blank ui-fluid">
+		    <p:dataList value="#{indexView.habitaciones}" var="habitacion" type="definition" emptyMessage="No hay habitaciones Disponibles">
+		        <f:facet name="header">
+		            Disponibles
+		        </f:facet>
+		        #{habitacion.nombre} Precio: #{habitacion.precio}
+		    </p:dataList>
+		   
+		    <p:dataList value="#{indexView.habitaciones2}" var="habitacion" type="definition" emptyMessage="No hay habitaciones Ocupadas">
+		        <f:facet name="header">
+		            Ocupadas
+		        </f:facet>
+		        Nombre: #{habitacion.nombre}  Precio: #{habitacion.precio}
+		       	
+		    </p:dataList>
+		 
+		
+		 
+		 </p:panelGrid>   
+		    
+		   
+		 
+		 
+		 
+		</h:form>
+</div>
     	</ui:define>
     		
 	

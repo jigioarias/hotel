@@ -38,7 +38,7 @@
                      <f:selectItem itemLabel="Inactivo" itemValue="I" ></f:selectItem>
                     </p:selectOneRadio>
    
-          <p:commandButton value="Guardar" update="mensaje,listaSevicios"   action="#{servicioView.enviar}" icon="pi pi-check"  />
+          <p:commandButton value="Guardar" update="mensaje,listaSevicios" ajax="false"   action="#{servicioView.enviar}" icon="pi pi-check"  />
               <h:outputText id="mensaje" value="#{servicioView.mensaje}" />
       
        

@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 @Entity
-@NamedQuery(name="Servicio.findAll", query="SELECT c FROM Servicio c")
+@NamedQuery(name="Servicio.findAll", query="SELECT c FROM Servicio c where c.hotel=:hotel")
 @NamedQuery(name="Servicio.findXNombre", query="SELECT c FROM Servicio c where c.nombre=:nombre")
 
 public class Servicio  implements Serializable  {

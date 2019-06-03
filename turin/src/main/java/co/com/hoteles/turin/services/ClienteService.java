@@ -32,13 +32,19 @@ public class ClienteService {
 		
 		EntityManager em = JPAUtility.getEntityManager();
 		Cliente ClienteConsultado = getFindXDocumento(cliente.getDocumento());
+		
 	    
 		em.getTransaction().begin();
 	    if(ClienteConsultado==null) {
 			em.persist(cliente);
 	    	
 	    }else {
-	    	em.merge(cliente);
+	    	ClienteConsultado.setCelular(cliente.getCelular());
+	    	ClienteConsultado.setCorreo(cliente.getCorreo());
+	    	ClienteConsultado.setExtranjero(cliente.getExtranjero());
+	    	ClienteConsultado.setNombre(cliente.getNombre());
+	    	ClienteConsultado.setTipoDocumento(cliente.getTipoDocumento());
+	    	em.merge(ClienteConsultado);
 	    }
 	    em.getTransaction().commit();
 	    em.close();

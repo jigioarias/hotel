@@ -31,7 +31,7 @@
            <h:outputLabel for="valor" value="${msg['insumo.valor']}:" style="font-weight:bold" />
            <p:inputText id="valor" value="#{insumoView.insumo.valor}" required="true"  maxlength="6"  />
    
-          <p:commandButton value="Guardar" update="mensaje,listaInsumos"   action="#{insumoView.enviar}" icon="pi pi-check"  />
+          <p:commandButton value="Guardar" update="mensaje,listaInsumos" ajax="false"  action="#{insumoView.enviar}" icon="pi pi-check"  />
               <h:outputText id="mensaje" value="#{insumoView.mensaje}" />
       
        

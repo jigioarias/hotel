@@ -485,7 +485,7 @@ public class ReimprimirView extends GenericBB implements Serializable {
 		List<Servicio> listaServicios;
 		List<Servicio> filteredServicio = null;
 		try {
-			listaServicios = ServicioService.getInstance().listar();
+			listaServicios = ServicioService.getInstance().listar(this.getHotelSession().getCodigo());
 
 			filteredServicio = new ArrayList<Servicio>();
 			int contador = 0;

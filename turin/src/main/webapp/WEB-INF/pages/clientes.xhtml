@@ -36,37 +36,51 @@
     
    <h:form>
     <div class="ui-fluid">
-           <h2> <h:outputLabel value="Clientes" style="font-weight:bold" /> </h2>
-
+     <p:panel header="Clientes">
+     		<p:growl id="messages" showDetail="true" sticky="true" />
+     
         <p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4" layout="grid" styleClass="ui-fluid">
 
-            <h:outputLabel for="nombre" value="Nombre:" style="font-weight:bold" />
-             <p:inputText id="nombre" value="#{clienteView.nombre}" />
+            <h:outputLabel for="nombre" value="Nombre *:" style="font-weight:bold" />
+             <p:inputText id="nombre" value="#{clienteView.nombre}"  required="true" requiredMessage="El nombre del cliente es requerido"/>
  
-            <h:outputLabel for="correo" value="Correo:" style="font-weight:bold" />      
-            <p:inputText id="correo" value="#{clienteView.correo}" />
+            <h:outputLabel for="correo" value="Correo *:" style="font-weight:bold" />      
+            <p:inputText id="correo" value="#{clienteView.correo}" 
+            required="true"   
+                     requiredMessage="El correo es requerido" 
+                     validatorMessage="El correo es invalido"
+                     maxlength="50" size="50">
+                     <f:validateRegex
+		                   pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                     </p:inputText>
  
-             <h:outputLabel for="celular" value="Celular:" style="font-weight:bold" />
-            <p:inputText id="celular" value="#{clienteView.celular}" />
+             <h:outputLabel for="celular" value="Celular *:" style="font-weight:bold" />
+            <p:inputText id="celular" value="#{clienteView.celular}" required="true" requiredMessage="El celular es requerido" />
         
-            <h:outputLabel for="documento" value="Documento:" style="font-weight:bold" />
-             <p:spinner id="documento" value="#{clienteView.documento}" min="0" max="20" />
+            <h:outputLabel for="documento" value="Documento *:" style="font-weight:bold" />
+             <p:inputText	 id="documento" value="#{clienteView.documento}" required="true" requiredMessage="El documento es requerido" />
         
-           <h:outputLabel for="tipoDocumento" value="Tipo Documento:" style="font-weight:bold" />
-           <p:spinner id="tipoDocumento" value="#{clienteView.tipoDocumento}" min="1" max="10" />
+           <h:outputLabel for="tipoDocumento" value="Tipo Documento *:" style="font-weight:bold" />
+         <p:selectOneMenu id="tipoDocunento" value="#{clienteView.tipoDocumento}" >
+                        <f:selectItems value="#{clienteView.tiposDocumento}" />
+                     </p:selectOneMenu>
+        	 <p:outputLabel for="extranjero" value="${msg['checking.extranjero']}" />
+                     <p:selectOneRadio id="extranjero" value="#{clienteView.extranjero}" unselectable="true"
+                     required="true" requiredMessage="Debe seleccionar si el ciente es extranjero o no">
+                     <f:selectItem itemLabel="Si" itemValue="S" />
+                     <f:selectItem itemLabel="No" itemValue="N"  />
+                   </p:selectOneRadio>
         
-         <h:outputLabel for="fechaNacimiento" value="Fecha Nacimiento:" style="font-weight:bold" />
-        <p:calendar id="fechaNacimiento" value="#{clienteView.fechaNacimiento}" showOn="button"/>
+         <h:outputLabel for="fechaNacimiento" value="Fecha Nacimiento *:" style="font-weight:bold" />
+        <p:calendar id="fechaNacimiento" value="#{clienteView.fechaNacimiento}" showOn="button" pattern="dd-MM-yyyy" />
         
-         <h:outputLabel for="fechaRegistro" value="Fecha Registro:" style="font-weight:bold" />
-        <p:calendar id="fechaSalida" value="#{clienteView.fechaRegistro}" showOn="button" />
-          <p:commandButton value="Guardar" update="mensaje" action="#{clienteView.enviar}" icon="pi pi-check" />
-              <h:outputText id="mensaje" value="#{clienteView.mensaje}" />
+        
+          <p:commandButton value="Guardar" update="mensaje" action="#{clienteView.enviar}" icon="pi pi-check"  ajax="false" />
           
             <p:spacer />
             <p:spacer />
         </p:panelGrid>
- 
+ </p:panel>
      
        
  

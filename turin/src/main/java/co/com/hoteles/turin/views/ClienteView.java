@@ -1,7 +1,12 @@
 package co.com.hoteles.turin.views;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
@@ -9,21 +14,53 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import org.primefaces.PrimeFaces;
-
 import co.com.hoteles.turin.entities.Cliente;
-import co.com.hoteles.turin.entities.Reserva;
+import co.com.hoteles.turin.services.ClienteService;
 
 @ManagedBean
 public class ClienteView extends GenericBB {
      
     private String nombre;
+	private List<String> extranjeros;
+	private Map<String, String> tiposDocumento;
+	public List<String> getExtranjeros() {
+		return extranjeros;
+	}
+
+	public void setExtranjeros(List<String> extranjeros) {
+		this.extranjeros = extranjeros;
+	}
+
+	public Map<String, String> getTiposDocumento() {
+		return tiposDocumento;
+	}
+
+	public void setTiposDocumento(Map<String, String> tiposDocumento) {
+		this.tiposDocumento = tiposDocumento;
+	}
+
+
+	private String extranjero;
     private String correo;
     private String celular;
     private String tipoDocumento;
     private String documento;
     public String getTipoDocumento() {
 		return tipoDocumento;
+	}
+    
+    @PostConstruct
+	public void init() {
+
+		
+		extranjeros = new ArrayList<String>();
+		extranjeros.add("S");
+		extranjeros.add("N");
+		tiposDocumento = new HashMap<String, String>();
+		tiposDocumento.put("Cedula", "CC");
+		tiposDocumento.put("Pasaporte", "PP");
+		tiposDocumento.put("Cedula Extranjeria", "CE");
+
 	}
 	public void setTipoDocumento(String tipoDocumento) {
 		this.tipoDocumento = tipoDocumento;
@@ -72,28 +109,34 @@ public class ClienteView extends GenericBB {
 
 	 public void enviar() {
 		 
-		 EntityManagerFactory emf = Persistence
-	                .createEntityManagerFactory("HotelPU");
-	        em = emf.createEntityManager();
-		 
-		    em.getTransaction().begin();
 	        Cliente cliente = new Cliente();
 	        cliente.setCelular(celular);
 	        cliente.setCorreo(correo);
-	        cliente.setFechaRegistro(fechaRegistro);
+	        cliente.setFechaRegistro(new Date());
 	        cliente.setFechaNacimiento(fechaNacimiento);
 	        cliente.setDocumento(documento);
 	        cliente.setTipoDocumento(tipoDocumento);
 	        cliente.setNombre(nombre);
+	        cliente.setUsuarioUIngreso(this.getUsuarioSession().getId());
+	        cliente.setExtranjero(extranjero);
 	        cliente.setHotel(this.getHotelSession().getCodigo());
 	        
-	        em.persist(cliente);
-	        em.getTransaction().commit();
-	        
-	        this.mensaje ="El cliente fue creado con exito";
-	        
-			 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Gracias", "reservado señor:"+nombre);
+	        try {
+	        	
+				ClienteService.getInstance().ingresar(cliente);
+		        this.mensaje ="El cliente fue creado con exito";
+		   	   FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cliente", "Cliente:"+nombre+" creado");
+			   FacesContext.getCurrentInstance().addMessage(null, message);
+
+	        } catch (Exception e) {
+	        	e.printStackTrace();
+	       	 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cliente", "Cliente:"+nombre+"no fue creado");
 			 FacesContext.getCurrentInstance().addMessage(null, message);
+
+			}
+	       
+	        
+	        
 
 		 
 	 }     
@@ -104,6 +147,15 @@ public class ClienteView extends GenericBB {
 	}
 	public void setMensaje(String mensaje) {
 		this.mensaje = mensaje;
+	}
+
+
+		public String getExtranjero() {
+		return extranjero;
+	}
+
+	public void setExtranjero(String extranjero) {
+		this.extranjero = extranjero;
 	}
 
 

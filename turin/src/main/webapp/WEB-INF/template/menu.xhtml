@@ -17,7 +17,7 @@
     
     
  
-    <p:menubar>
+    <p:menubar columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-4,ui-g-12 ui-md-2,ui-g-12 ui-md-4">
         <p:submenu label="Checking" icon="pi pi-file" >
            
             <p:menuitem value="Ingresar" url="checking.xhtml"  rendered="#{loginBean.usuarioSession.rol ne 'ASEO'}"/>
@@ -54,10 +54,10 @@
             
        </p:submenu>      
         
-        <p:menuitem value="Reservas (#{reservasView.numeroReservas})" id="reservas" url="reservas.xhtml" icon="pi pi-user-plus"
+        <p:menuitem value="Reservas (#{reservasView.numeroReservas})"  id="reservas" url="reservas.xhtml" icon="pi pi-user-plus"
         rendered="#{loginBean.usuarioSession.rol ne 'ASEO'}" />
       
-        <p:menuitem value="Home" url="index.xhtml" icon="pi pi-user-plus" />
+        <p:menuitem value="Home" url="index.xhtml"  />
             
    
 

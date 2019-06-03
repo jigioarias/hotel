@@ -72,6 +72,7 @@ public class InsumoView extends GenericBB {
 
 		InsumoService insumoService = InsumoService.getInstance();
 		try {
+			insumo.setHotel(this.getHotelSession().getCodigo());
 			insumoService.actualizar(insumo);
           
 			FacesContext.getCurrentInstance().addMessage("messages",new FacesMessage(FacesMessage.SEVERITY_ERROR, "El insumo se guardo con exito", ""));

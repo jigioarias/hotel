@@ -41,10 +41,11 @@ public class ServicioService {
 	   }
 	
 	
-   public List<Servicio> listar()throws Exception {
+   public List<Servicio> listar(int hotel)throws Exception {
 		
 	 EntityManager em = JPAUtility.getEntityManager();
 	Query query = em.createNamedQuery("Servicio.findAll");
+	query.setParameter("hotel", hotel);
 	
 	  List<Servicio> results = query.getResultList();
  

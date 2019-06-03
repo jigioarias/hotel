@@ -395,6 +395,7 @@ public class CheckingView extends GenericBB implements Serializable {
 
 	public void adicionarServicio() {
 
+		servicioSeleccionado.setCantidad(1);
 		servicios.add(servicioSeleccionado);
 		servicioSeleccionado = new Servicio();
 		RequestContext context = RequestContext.getCurrentInstance();
@@ -488,7 +489,7 @@ public class CheckingView extends GenericBB implements Serializable {
 		List<Servicio> listaServicios;
 		List<Servicio> filteredServicio = null;
 		try {
-			listaServicios = ServicioService.getInstance().listar();
+			listaServicios = ServicioService.getInstance().listar(this.getHotelSession().getCodigo());
 
 			filteredServicio = new ArrayList<Servicio>();
 			int contador = 0;
@@ -496,7 +497,7 @@ public class CheckingView extends GenericBB implements Serializable {
 				Servicio servicio = iterator.next();
 
 				if (servicio.getNombre().toUpperCase().contains(query.toUpperCase())) {
-
+                    servicio.setCantidad(1);
 					filteredServicio.add(servicio);
 				}
 

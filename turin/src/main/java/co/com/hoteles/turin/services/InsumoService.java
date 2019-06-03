@@ -33,6 +33,7 @@ public class InsumoService {
 		
 		EntityManager em = JPAUtility.getEntityManager();
 		Query query = em.createNamedQuery("Insumo.findAll");
+		query.setParameter("hotel", hotel);
 		List<Insumo> results = query.getResultList();
 	    return results;
 
