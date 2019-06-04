@@ -1,7 +1,13 @@
 package co.com.hoteles.turin.entities;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 
 /**
@@ -12,7 +18,7 @@ import javax.persistence.*;
 @NamedQuery(name="Habitacion.findAll", query="SELECT h FROM Habitacion h")
 @NamedQuery(name="Habitacion.findEstado", query="SELECT h FROM Habitacion h where estado=:estado")
 @NamedQuery(name="Habitacion.findNombre", query="SELECT h FROM Habitacion h where nombre=:nombre")
-
+@Table(name="habitacion")
 public class Habitacion implements Serializable {
 	public Habitacion(int capacidad, String descripcion, String estado, String nombre, int precio) {
 		super();

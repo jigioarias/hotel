@@ -1,7 +1,14 @@
 package co.com.hoteles.turin.entities;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.util.Date;
 
 
@@ -12,7 +19,7 @@ import java.util.Date;
 @Entity
 @NamedQuery(name="Ckecking.findAll", query="SELECT c FROM Ckecking c")
 @NamedQuery(name="Ckecking.findIdCliente", query="SELECT c FROM Ckecking c where idCliente=:id and estado=:estado and hotel=:hotel")
-
+@Table(name="ckecking")
 public class Ckecking implements Serializable {
 	private static final long serialVersionUID = 1L;
 
