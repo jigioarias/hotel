@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `turin` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */;
-USE `turin`;
 -- MySQL dump 10.13  Distrib 8.0.15, for Win64 (x86_64)
 --
 -- Host: localhost    Database: turin
@@ -29,7 +27,7 @@ CREATE TABLE `acompanantes_checking` (
   `id_cliente` int(11) DEFAULT NULL,
   `id_checking` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +36,6 @@ CREATE TABLE `acompanantes_checking` (
 
 LOCK TABLES `acompanantes_checking` WRITE;
 /*!40000 ALTER TABLE `acompanantes_checking` DISABLE KEYS */;
-INSERT INTO `acompanantes_checking` VALUES (27,9,66);
 /*!40000 ALTER TABLE `acompanantes_checking` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -55,12 +52,12 @@ CREATE TABLE `ckecking` (
   `numero_personas` int(11) NOT NULL,
   `fecha_entrada` date NOT NULL,
   `fecha_salida` date NOT NULL,
-  `fecha_registro` date NOT NULL,
+  `fecha_registro` datetime NOT NULL,
   `usuario` varchar(20) NOT NULL,
   `estado` varchar(1) DEFAULT 'A',
   `hotel` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,7 +66,6 @@ CREATE TABLE `ckecking` (
 
 LOCK TABLES `ckecking` WRITE;
 /*!40000 ALTER TABLE `ckecking` DISABLE KEYS */;
-INSERT INTO `ckecking` VALUES (66,15,1,'2019-05-26','2019-05-30','2019-05-27','jinni','I',1),(67,34,1,'2019-05-27','2019-05-31','2019-05-28','jinni','A',1);
 /*!40000 ALTER TABLE `ckecking` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -88,13 +84,13 @@ CREATE TABLE `clientes` (
   `celular` varchar(45) DEFAULT NULL,
   `correo` varchar(45) DEFAULT NULL,
   `fechaNacimiento` date DEFAULT NULL,
-  `fechaRegistro` date NOT NULL,
+  `fechaRegistro` datetime DEFAULT NULL,
   `extranjero` varchar(1) NOT NULL DEFAULT 'N',
   `usuarioIngreso` varchar(45) DEFAULT NULL,
   `hotel` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `documento_UNIQUE` (`documento`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -103,7 +99,7 @@ CREATE TABLE `clientes` (
 
 LOCK TABLES `clientes` WRITE;
 /*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
-INSERT INTO `clientes` VALUES (3,'PP','15384787','JINNI GIOVANNI ARIAS ROMAN','33333','jigioarias@gmail.com','2018-06-03','2019-05-22','S','jinni',1),(4,'CC','15386565','camilo patiño','aasd','jigioarias@gmail.com','2019-03-15','2019-05-27','S','jinni',1),(5,'PP','15441106','BERNARDO DE JESUS ARIAS','33333','jigioarias@gmail.com','2017-12-25','2019-05-27','N','jinni',1),(6,'CE','3933939','AMPARO GRISALES','4949494','jigioarias@gmail.com','2018-06-30','2019-03-21','N',NULL,1),(7,'CC',' 233093030','CRISANTO VARGAS',' 222222','crisanto@gmail.com','2019-03-05','2019-05-27','N','jinni',1),(9,'PP','222DDD','LOLA CALIMIDADES','2222222','LOLA@GMAIL.COM','2019-02-12','2019-04-05','S',NULL,1),(10,'PP','404040','NUEVAYORK',' ',' ','2019-03-30','2019-03-30','N',NULL,1),(11,'PP','3404044004','PEDRO RIMALES',' ',' ','2019-03-30','2019-03-30','S',NULL,1),(12,'CC',' 404040404','YEYO',' ',' ','2019-03-30','2019-03-30','N',NULL,1),(13,'PP',' 43040401','PATRICIA TOÑA',' ',' ','2019-03-31','2019-03-31','S',NULL,1),(14,'PP','GGHGH','JINNAN',' 453453453','jigioarias@gmail.com','2019-03-29','2019-05-22','S','jinni',1),(15,'CC',' 1040032878','NATALI MONSALVE',' 2324242','SSS@GMSDS.COM','2019-03-30','2019-05-27','N','jinni',1),(16,'PP',' 44949','PARIS HILTON',' ',' ','2019-04-04','2019-04-04','S',NULL,1),(17,'PP','12340987','HUGO LEON','303033','JIGIOARIAS@GMAIL.COM','2019-05-03','2019-05-20','S','jinni',1),(18,'PP','NUEVO',' ASDAS','3333','jigioarias@gmail.com','2019-05-14','2019-05-27','N','jinni',1),(19,'CE',' 2221','DORIS LA MUECA',' ',' ','2019-05-18','2019-05-18','N',NULL,1),(20,'CE','33333349445','PEDRO NAVAJAS',' ',' ','2019-05-18','2019-05-18','S',NULL,1),(21,'CE','3424243','PACHO TUERCAS','33030303','fsdfs@gmail.com','2019-05-18','2019-05-27','N','jinni',1),(22,'PP','67676767','VLADIMIR HERNANDEZ','12233344','jigioarias@gmail.com',NULL,'2019-05-27','S','jinni',1),(23,'PP','223344','Aldo leao ramirez','1222333333','algo@gmail.com','2019-05-25','2019-05-27','S','jinni',1),(24,'PP','337755',' CEPELLINI',' ',' ','2019-05-27','2019-05-27','N',NULL,1),(25,'PP','238989','PALAVECINO','2020202020','PALA@GMAIL.COM','2019-05-16','2019-05-27','S','jinni',1),(26,'PP',' ASDA',' ASDA',' ',' ','2019-05-27','2019-05-27','N',NULL,1),(27,'CE','L3393939','LUZ ELENA ROMAN',' ',' ','2019-05-27','2019-05-27','S',NULL,1),(28,'CE','33030312S','NATALIA VERGARA',' ',' ','2019-05-27','2019-05-27','S',NULL,1),(29,'PP','C2239393','CANARIO','2223434343','CANARIO@FGGMG.XOM','2019-05-26','2019-05-27','S','jinni',1),(30,'PP',' X3339393','LAMICA',' ',' ','2019-05-27','2019-05-27','N',NULL,0),(31,'PP','330303HDHDH','CHECHO ACOSTA','3039393939','DDF@GMAIL.COM','2019-05-17','2019-05-27','S','jinni',1),(32,'CE',' ASDASD','ASDASD',' ',' ','2019-05-27','2019-05-27','S',NULL,1),(33,'PP',' SSS','ASASAADAD',' ',' ','2019-05-27','2019-05-27','S',NULL,1),(34,'PP','P4494949','Papo toribio','2333333333','papo@gmail.com',NULL,'2019-05-28','S','jinni',1);
+INSERT INTO `clientes` VALUES (49,'PP','3333','PEDRO SE CASO','30303003','DEEE@FFF.COM','2019-06-27','2019-06-03 17:10:20','S','jinni',1);
 /*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -140,7 +136,7 @@ DROP TABLE IF EXISTS `facturas`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `facturas` (
   `numero` int(11) NOT NULL,
-  `fecha` date NOT NULL,
+  `fecha` datetime NOT NULL,
   `cliente` varchar(45) NOT NULL,
   `nit` varchar(20) NOT NULL,
   `telefono` varchar(20) NOT NULL,
@@ -166,7 +162,6 @@ CREATE TABLE `facturas` (
 
 LOCK TABLES `facturas` WRITE;
 /*!40000 ALTER TABLE `facturas` DISABLE KEYS */;
-INSERT INTO `facturas` VALUES (13,'2019-05-27','NATALI MONSALVE','1',' +57 (4) 5683199','TURIN','11','LA CEJA',153200,1,'SSS@GMSDS.COM',' 2324242','CC',' 1040032878','2019-05-26','2019-05-30',66);
 /*!40000 ALTER TABLE `facturas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -195,7 +190,7 @@ CREATE TABLE `habitacion` (
 
 LOCK TABLES `habitacion` WRITE;
 /*!40000 ALTER TABLE `habitacion` DISABLE KEYS */;
-INSERT INTO `habitacion` VALUES (9,30000,1,'DIS','SIN TV Y CON DUCHAS','101',0),(10,350066,4,'DIS','CON TV Y DOS CAMAS NUEVO','102',0),(13,3666,20,'RPF','pruebas','301',0),(14,30000,1,'DIS','as','sda',0),(15,234234,1,'DIS','ASA','asdasd',0),(16,30000,1,'DIS','ASDA','ASDS',0),(17,3242,1,'DIS','ASDAD','ASDAS',0),(18,45000,2,'DIS','TIENE DE TODO','401',0),(19,444949,1,'DIS','ESTA TIENE BALCON','402',0),(20,344450,2,'DIS','QUEDA EN LA ESQUINA TIENE DOS NEVERAS','NUEVA PRUEBA',0),(21,42342,2,'DIS','NUEVA','445',0),(22,555555,8,'DIS','ADASDAD','HABITACION FULL EN LA ESQUINA',0);
+INSERT INTO `habitacion` VALUES (9,30000,1,'OCU','SIN TV Y CON DUCHAS','101',0),(10,350066,4,'REP','CON TV Y DOS CAMAS NUEVO','102',0),(13,3666,20,'DIS','pruebas','301',0),(14,30000,1,'DIS','as','sda',0),(15,234234,1,'DIS','ASA','asdasd',0),(16,30000,1,'DIS','ASDA','ASDS',0),(17,3242,1,'DIS','ASDAD','ASDAS',0),(18,45000,2,'DIS','TIENE DE TODO','401',0),(19,444949,1,'DIS','ESTA TIENE BALCON','402',0),(20,344450,2,'DIS','QUEDA EN LA ESQUINA TIENE DOS NEVERAS','NUEVA PRUEBA',0),(21,42342,2,'DIS','NUEVA','445',0),(22,555555,8,'DIS','ADASDAD','HABITACION FULL EN LA ESQUINA',0);
 /*!40000 ALTER TABLE `habitacion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -212,7 +207,7 @@ CREATE TABLE `habitaciones_checking` (
   `id_habitacion` int(11) NOT NULL,
   `hotel` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -221,7 +216,6 @@ CREATE TABLE `habitaciones_checking` (
 
 LOCK TABLES `habitaciones_checking` WRITE;
 /*!40000 ALTER TABLE `habitaciones_checking` DISABLE KEYS */;
-INSERT INTO `habitaciones_checking` VALUES (58,66,9,1),(59,67,13,1);
 /*!40000 ALTER TABLE `habitaciones_checking` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -269,7 +263,7 @@ CREATE TABLE `insumos` (
   `valor` int(11) NOT NULL,
   `hotel` int(11) DEFAULT NULL,
   PRIMARY KEY (`codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -278,7 +272,7 @@ CREATE TABLE `insumos` (
 
 LOCK TABLES `insumos` WRITE;
 /*!40000 ALTER TABLE `insumos` DISABLE KEYS */;
-INSERT INTO `insumos` VALUES (1,'TOALLA',1000,1),(2,'TV',30000,1),(3,'CONTROL',20000,1),(4,'NEVERA',44444,1),(5,'DOS CAMAS',333000,1),(6,'4 SABANAS',333000,1);
+INSERT INTO `insumos` VALUES (1,'TOALLA',1000,1),(2,'TV',30000,1),(3,'CONTROL',20000,1),(4,'NEVERA',44444,1),(5,'DOS CAMAS',333000,1),(6,'4 SABANAS',333000,1),(7,'PERRA',200000,0),(8,'PERRA',200000,0),(9,'PERRA',200000,0),(10,'PERRAS',20200,1);
 /*!40000 ALTER TABLE `insumos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -296,7 +290,7 @@ CREATE TABLE `insumos_checking` (
   `cantidad` int(11) NOT NULL,
   `hotel` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -358,7 +352,7 @@ CREATE TABLE `parametros` (
 
 LOCK TABLES `parametros` WRITE;
 /*!40000 ALTER TABLE `parametros` DISABLE KEYS */;
-INSERT INTO `parametros` VALUES (1,'resolucion','12','N','2000','1',1);
+INSERT INTO `parametros` VALUES (1,'resolucion','1','N','2000','1',1);
 /*!40000 ALTER TABLE `parametros` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -382,7 +376,7 @@ CREATE TABLE `reservas` (
   `activa` varchar(1) DEFAULT 'S',
   `hotel` int(11) NOT NULL,
   PRIMARY KEY (`idreserva`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -391,7 +385,7 @@ CREATE TABLE `reservas` (
 
 LOCK TABLES `reservas` WRITE;
 /*!40000 ALTER TABLE `reservas` DISABLE KEYS */;
-INSERT INTO `reservas` VALUES (1,'Jinni','jigio','3233',2,2,4,'2019-03-18','2019-03-18','N',1),(2,'sda','asda','asdas',1,1,0,'2019-03-20','2019-03-20','N',2),(3,'23232','asdas','asdas',1,0,1,'2019-03-21','2019-03-28','S',2),(4,'Nombre','jigioarias','djdjdjdjdjd',1,1,0,'2019-03-18','2019-03-18','S',1),(5,'jinni arias','ads','asdasd',2,0,0,'2019-03-19','2019-03-08','S',1),(6,'sada','<zxcz','zxczxcXCZ',1,1,0,'2019-03-18','2019-03-18','S',1),(7,'sd','asdq','asda',1,0,1,'2019-03-22','2019-03-25','S',2),(8,'ALBERTO','gamero','121212',1,0,1,'2019-05-14','2019-05-14','S',2),(9,'jinnito','jigioariassdasd@gmail.com','122222',1,1,1,'2019-05-03','2019-02-03','S',1),(10,'nataly','naty@gmail.com','122222',1,1,1,'2019-05-03','2019-02-03','S',1),(11,'nataly','naty@gmail.com','122222',1,1,1,'2019-05-03','2019-02-03','S',2),(12,'natealy','naty@gmail.com','122222',1,1,1,'2019-05-03','2019-02-03','S',2),(13,'checho','checho@gmail.com','122224244',1,0,2,'2019-06-03','2019-06-05','N',1),(14,'bibibian','bibiana@gmail.com','122224244',1,0,2,'2019-06-03','2019-06-05','N',1),(15,'gameoftrhones','games@gmail.com','122224244',1,0,2,'2019-06-03','2019-06-05','N',1),(16,'gameoftrhones','games@gmail.com','122224244',1,0,2,'2019-06-03','2019-06-05','N',1),(17,'gameoftrhones','games@gmail.com','122224244',1,0,2,'2019-06-03','2019-06-05','N',1),(18,'gameoftrhones','games@gmail.com','122224244',1,0,2,'2019-06-03','2019-06-05','N',1),(19,'gameoftrhones','games@gmail.com','122224244',1,0,2,'2019-06-03','2019-06-05','N',1);
+INSERT INTO `reservas` VALUES (24,'jinni','games@gmail.com','122224244',1,0,2,'2019-06-03','2019-06-05','N',1),(25,'juanfer','games@gmail.com','122224244',1,0,2,'2019-06-03','2019-06-05','S',2),(26,'ffffff','jwswni@gmail.com','432344',1,0,2,'2019-06-15','2019-06-15','N',1),(27,'amparo','amparo@gmail.com','5555666',1,10,2,'2019-07-05','2019-07-05','S',2),(28,'esperanza','jinni@gmail.com','122222',1,1,2,'2019-06-05','2019-06-05','S',2),(29,'jinni','jinni@gmail.com','122222',12,11,1,'2019-06-05','2019-06-05','S',2),(30,'jinni','jinni@gmail.com','122222',18,5,13,'2019-06-05','2019-06-05','N',1),(31,'dcas','AS','122222322',1,1,1,'2019-06-05','2019-06-05','N',1),(32,'natali','jinni@gmail.com','122222333',3,1,3,'2019-06-05','2019-06-05','N',1),(33,'natali','jinni@gmail.com','122222333',3,1,3,'2019-06-05','2019-06-05','N',1),(34,'jinni','jinni@gmail.com','12222233',2,1,2,'2019-06-05','2019-06-05','N',1),(35,'jinni','jinni@gmail.com','12222233',2,1,2,'2019-06-05','2019-06-05','N',1),(36,'jinni','jinni@gmail.com','12222233',2,1,2,'2019-06-05','2019-06-05','N',1),(37,'jinni','jinni@gmail.com','12222233',2,1,2,'2019-06-05','2019-06-05','N',1),(38,'jinni','jinni@gmail.com','12222233',2,1,2,'2019-06-05','2019-06-05','N',1),(39,'jinni','jinni@gmail.com','122222',1,1,1,'2019-06-05','2019-06-05','N',1),(40,'jinni','jinni@gmail.com','122222',1,1,1,'2019-06-05','2019-06-05','N',1),(41,'jinni','jinni@gmail.com','122222',1,1,1,'2019-06-05','2019-06-05','N',1),(42,'jinni','jinni@gmail.com','122222',3,2,2,'2019-06-05','2019-06-05','N',1),(43,'jinni arias','jinni@gmail.com','122222',3,2,2,'2019-06-05','2019-06-05','N',1),(44,'MARIA JOSE ARIAS','mariajose@gmail.com','3007608895',4,2,3,'2019-06-15','2019-06-25','N',1),(45,'MARIA JOSE ARIAS','mariajose@gmail.com','3007608895',4,2,3,'2019-06-15','2019-06-25','N',1),(46,'MARIA JOSE ARIAS','mariajose@gmail.com','3007608895',4,2,3,'2019-06-15','2019-06-25','N',1),(47,'jinni','jinni@gmail.com','122222',2,2,2,'2019-06-05','2019-06-05','N',1),(48,'jinni sambo','jinni@gmail.com','122222',2,2,2,'2019-06-05','2019-06-05','N',1),(49,'jinni','jinni@gmail.com','122222',3,3,3,'2019-06-05','2019-06-05','N',1),(50,'jinni','jinni@gmail.com','122222',2,3,2,'2019-06-05','2019-06-05','N',1),(51,'jinni','jinni@gmail.com','122222',1,0,1,'2019-06-05','2019-06-05','N',1),(52,'jinni arias roman','pato@gmail.com','4234242',6,4,5,'2019-07-05','2019-07-15','N',1),(53,'jinni arias roman','pato@gmail.com','4234242',6,4,5,'2019-07-05','2019-07-15','N',1),(54,'jinni','jinni@gmail.com','22342424',7,2,12,'2019-06-05','2019-06-05','S',1),(55,'jinni','jinni@gmail.com','22342424',7,2,12,'2019-06-05','2019-06-05','S',1);
 /*!40000 ALTER TABLE `reservas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -433,7 +427,7 @@ CREATE TABLE `servicio` (
   `estado` varchar(1) NOT NULL DEFAULT 'A',
   `hotel` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -442,7 +436,7 @@ CREATE TABLE `servicio` (
 
 LOCK TABLES `servicio` WRITE;
 /*!40000 ALTER TABLE `servicio` DISABLE KEYS */;
-INSERT INTO `servicio` VALUES (1,'Gaseosa',2300,'A',1),(2,'Mesa',23000,'A',1),(3,'EMPANADAS',3200,'A',1),(4,'SEXO',333333,'A',1),(5,'ingrese servicio',0,'A',1),(6,'ESTERA',22222,'A',1),(7,'EMPANADAS CHILENA',33333,'A',1),(8,'LAVANDERIA A MANO',202020202,'A',1),(10,'VOLADORES',22200,'A',1),(11,'CANECAS DE GUARO',222220,'A',1),(12,'LAVAVO',330,'A',1),(13,'MACHETES',20000,'A',1),(14,'CASTAÑO',303030,'A',1),(15,'WISKEY',44555,'A',1),(16,'FUEGO',3030303,'A',1),(17,'wer2er2r2',23333,'A',1);
+INSERT INTO `servicio` VALUES (1,'Gaseosa',2300,'A',1),(2,'Mesa',23000,'A',1),(3,'EMPANADAS',3200,'A',1),(4,'SEXO',333333,'A',1),(5,'ingrese servicio',0,'A',1),(6,'ESTERA',22222,'A',1),(7,'EMPANADAS CHILENA',33333,'A',1),(8,'LAVANDERIA A MANO',202020202,'A',1),(10,'VOLADORES',22200,'A',1),(11,'CANECAS DE GUARO',222220,'A',1),(12,'LAVAVO',330,'A',1),(13,'MACHETES',20000,'A',1),(14,'CASTAÑO',303030,'A',1),(15,'WISKEY',44555,'A',1),(16,'FUEGO',3030303,'A',1),(17,'wer2er2r2',23333,'A',1),(18,'NUEVAS PERRAA',300000,'A',1);
 /*!40000 ALTER TABLE `servicio` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -460,7 +454,7 @@ CREATE TABLE `servicios_ckeking` (
   `cantidad` int(11) NOT NULL,
   `hotel` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -469,7 +463,6 @@ CREATE TABLE `servicios_ckeking` (
 
 LOCK TABLES `servicios_ckeking` WRITE;
 /*!40000 ALTER TABLE `servicios_ckeking` DISABLE KEYS */;
-INSERT INTO `servicios_ckeking` VALUES (28,66,3,1,1);
 /*!40000 ALTER TABLE `servicios_ckeking` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -485,7 +478,7 @@ CREATE TABLE `usuarios` (
   `clave` varchar(60) NOT NULL,
   `correo` varchar(191) NOT NULL,
   `activado` varchar(1) NOT NULL DEFAULT 'S',
-  `fechaCreacion` date NOT NULL,
+  `fechaCreacion` datetime NOT NULL,
   `rol` varchar(50) NOT NULL,
   `usuarioCreacion` varchar(45) NOT NULL,
   `hotel` int(11) DEFAULT NULL,
@@ -499,7 +492,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES ('carolina','qweqw','asdas','N','2019-05-09','ASEO','jINNI',NULL),('FAFA','ASDAS','ASDA','S','2019-05-09','ASEO','jINNI',NULL),('jinni','asda','asda','S','2019-05-09','ADMIN','jINNI',NULL),('maria','ada','asda','S','2019-05-09','NUEVO','jINNI',NULL),('maria2','ada','asda','S','2019-05-09','NUEVO','jINNI',NULL);
+INSERT INTO `usuarios` VALUES ('carolina','qweqw','asdas','N','2019-05-09 00:00:00','ASEO','jINNI',NULL),('FAFA','ASDAS','ASDA','S','2019-05-09 00:00:00','ASEO','jINNI',NULL),('jinni','asda','asda','S','2019-05-09 00:00:00','ADMIN','jINNI',NULL),('maria','ada','asda','S','2019-05-09 00:00:00','NUEVO','jINNI',NULL),('maria2','ada','asda','S','2019-05-09 00:00:00','NUEVO','jINNI',NULL);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -512,4 +505,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-27 21:45:40
+-- Dump completed on 2019-06-03 22:07:49
