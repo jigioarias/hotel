@@ -33,6 +33,7 @@ import co.com.hoteles.turin.entities.Habitacion;
 import co.com.hoteles.turin.entities.HabitacionesChecking;
 import co.com.hoteles.turin.entities.Insumo;
 import co.com.hoteles.turin.entities.InsumosChecking;
+import co.com.hoteles.turin.entities.Pais;
 import co.com.hoteles.turin.entities.Parametro;
 import co.com.hoteles.turin.entities.Servicio;
 import co.com.hoteles.turin.entities.ServiciosCkeking;
@@ -44,6 +45,7 @@ import co.com.hoteles.turin.services.HabitacionService;
 import co.com.hoteles.turin.services.HabitacionesCkeckingService;
 import co.com.hoteles.turin.services.InsumoService;
 import co.com.hoteles.turin.services.InsumosCheckingService;
+import co.com.hoteles.turin.services.PaisService;
 import co.com.hoteles.turin.services.ParametroService;
 import co.com.hoteles.turin.services.ServicioService;
 import co.com.hoteles.turin.services.ServiciosCkeckingService;
@@ -63,9 +65,19 @@ public class CheckingView extends GenericBB implements Serializable {
 	private Date fechaSalida;
 	private String formatFechaSalida;
 	private String formatFechaEntrada;
+	public Map<String, String> getPaises() {
+		return paises;
+	}
+
+	public void setPaises(Map<String, String> paises) {
+		this.paises = paises;
+	}
+
 	private int numeroPersonas;
 	private DualListModel<String> habitacionesPickList;
 	private boolean hayFactura;
+	private Map<String, String> paises;
+
 
 	private Date todayDate = new Date();
 
@@ -88,6 +100,8 @@ public class CheckingView extends GenericBB implements Serializable {
 	private String celular = " ";
 	private String nombre = " ";
 	private String tipoDocumento = " ";
+	private String nacionalidad = " ";
+	
 
 	public CheckingView() {
 
@@ -386,6 +400,8 @@ public class CheckingView extends GenericBB implements Serializable {
 		acompanante.setCelular(celular);
 		acompanante.setFechaNacimiento(fechaNacimiento);
 		acompanante.setExtranjero(extranjero);
+		acompanante.setNacionalidad(nacionalidad);
+
 		acompanante.setFechaRegistro(new Date());
 		acompanantes.add(acompanante);
 		RequestContext context = RequestContext.getCurrentInstance();
@@ -595,6 +611,16 @@ public class CheckingView extends GenericBB implements Serializable {
 		tiposDocumento.put("Cedula", "CC");
 		tiposDocumento.put("Pasaporte", "PP");
 		tiposDocumento.put("Cedula Extranjeria", "CE");
+		paises = new HashMap<String, String>(); 
+
+		try {
+			List<Pais> listaPaises =PaisService.getInstance().listar();
+			for (Pais pais : listaPaises) {
+				paises.put(pais.getGentilicio(),pais.getCodigo());
+			}
+		} catch (Exception e) {
+			 e.printStackTrace();
+		}
 
 	}
 
@@ -954,5 +980,13 @@ public class CheckingView extends GenericBB implements Serializable {
 
 	public void setHayFactura(boolean hayFactura) {
 		this.hayFactura = hayFactura;
+	}
+
+	public String getNacionalidad() {
+		return nacionalidad;
+	}
+
+	public void setNacionalidad(String nacionalidad) {
+		this.nacionalidad = nacionalidad;
 	}
 }

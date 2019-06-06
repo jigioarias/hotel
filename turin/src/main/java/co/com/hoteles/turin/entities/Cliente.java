@@ -78,6 +78,8 @@ public class Cliente implements Serializable {
 	private String correo;
 	
 	private String usuarioIngreso;
+	
+	private String nacionalidad;
 
 
 	public Cliente(String tipoDocumento, String documento, String nombre, String celular, Date fechaRegistro,
@@ -163,6 +165,14 @@ public int getHotel() {
 
 public void setHotel(int hotel) {
 	this.hotel = hotel;
+}
+
+public String getNacionalidad() {
+	return nacionalidad;
+}
+
+public void setNacionalidad(String nacionalidad) {
+	this.nacionalidad = nacionalidad;
 }	
 	
 }

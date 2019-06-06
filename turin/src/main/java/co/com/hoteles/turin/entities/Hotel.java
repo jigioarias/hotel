@@ -32,6 +32,8 @@ public class Hotel implements Serializable {
 	private String redessociales;
 
 	private String telefono;
+	
+	private String ciudad;
 
 	public Hotel() {
 	}
@@ -106,6 +108,14 @@ public class Hotel implements Serializable {
 
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
+	}
+
+	public String getCiudad() {
+		return ciudad;
+	}
+
+	public void setCiudad(String ciudad) {
+		this.ciudad = ciudad;
 	}
 
 }

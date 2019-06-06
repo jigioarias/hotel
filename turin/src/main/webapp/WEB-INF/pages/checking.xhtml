@@ -86,7 +86,11 @@ width: 1500px
                      <f:selectItem itemLabel="No" itemValue="N"  />
                    </p:selectOneRadio>
 							
-					
+					 <p:outputLabel for="nacionalidad" value="Nacionalidad *:"  />
+         <p:selectOneMenu id="nacionalidad" value="#{checkingView.cliente.nacionalidad}" >
+			            <f:selectItem itemLabel="Seleccione un Pais" itemValue="" />
+                        <f:selectItems value="#{checkingView.paises}" />
+                     </p:selectOneMenu>
 					 <h:outputLabel for="correo" value="${msg['checking.correo']}"  />      
                      <p:inputText id="correo" value="#{checkingView.cliente.correo}" 
                      required="true"   
@@ -223,6 +227,12 @@ width: 1500px
                      <f:selectItem itemLabel="No" itemValue="N"  />
                     </p:selectOneRadio>
 					
+								
+					 <p:outputLabel for="nacionalidadE" value="Nacionalidad *:"  />
+         <p:selectOneMenu id="nacionalidadE" value="#{checkingView.nacionalidad}" >
+			            <f:selectItem itemLabel="Seleccione un Pais" itemValue="" />
+                        <f:selectItems value="#{checkingView.paises}" />
+                     </p:selectOneMenu>
 					 <!-- h:outputLabel for="correoAcompante" value="${msg['checking.correo']}"  >
 					 
 					

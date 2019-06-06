@@ -15,7 +15,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import co.com.hoteles.turin.entities.Cliente;
+import co.com.hoteles.turin.entities.Pais;
 import co.com.hoteles.turin.services.ClienteService;
+import co.com.hoteles.turin.services.PaisService;
 
 @ManagedBean
 public class ClienteView extends GenericBB {
@@ -23,6 +25,9 @@ public class ClienteView extends GenericBB {
     private String nombre;
 	private List<String> extranjeros;
 	private Map<String, String> tiposDocumento;
+	private Map<String, String> paises;
+
+	
 	public List<String> getExtranjeros() {
 		return extranjeros;
 	}
@@ -45,6 +50,7 @@ public class ClienteView extends GenericBB {
     private String celular;
     private String tipoDocumento;
     private String documento;
+    private String nacionalidad;
     public String getTipoDocumento() {
 		return tipoDocumento;
 	}
@@ -60,6 +66,15 @@ public class ClienteView extends GenericBB {
 		tiposDocumento.put("Cedula", "CC");
 		tiposDocumento.put("Pasaporte", "PP");
 		tiposDocumento.put("Cedula Extranjeria", "CE");
+		paises = new HashMap<String, String>(); 
+		try {
+			List<Pais> listaPaises =PaisService.getInstance().listar();
+			for (Pais pais : listaPaises) {
+				paises.put(pais.getGentilicio(),pais.getCodigo());
+			}
+		} catch (Exception e) {
+			 e.printStackTrace();
+		}
 
 	}
 	public void setTipoDocumento(String tipoDocumento) {
@@ -117,6 +132,7 @@ public class ClienteView extends GenericBB {
 	        cliente.setDocumento(documento);
 	        cliente.setTipoDocumento(tipoDocumento);
 	        cliente.setNombre(nombre);
+	        cliente.setNacionalidad(nacionalidad);
 	        cliente.setUsuarioUIngreso(this.getUsuarioSession().getId());
 	        cliente.setExtranjero(extranjero);
 	        cliente.setHotel(this.getHotelSession().getCodigo());
@@ -159,8 +175,24 @@ public class ClienteView extends GenericBB {
 	}
 
 
-		private static EntityManager em;
+		public String getNacionalidad() {
+		return nacionalidad;
+	}
 
+	public void setNacionalidad(String nacionalidad) {
+		this.nacionalidad = nacionalidad;
+	}
+
+	public Map<String, String> getPaises() {
+		return paises;
+	}
+
+	public void setPaises(Map<String, String> paises) {
+		this.paises = paises;
+	}
+
+
+	
  
    
 }
