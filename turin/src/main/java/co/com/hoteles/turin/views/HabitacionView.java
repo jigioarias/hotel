@@ -1,9 +1,13 @@
 package co.com.hoteles.turin.views;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -22,6 +26,7 @@ import co.com.hoteles.turin.entities.Cliente;
 import co.com.hoteles.turin.entities.Habitacion;
 import co.com.hoteles.turin.entities.Insumo;
 import co.com.hoteles.turin.entities.Reserva;
+import co.com.hoteles.turin.enums.TipoHabitacion;
 import co.com.hoteles.turin.services.AcompanantesCkeckingService;
 import co.com.hoteles.turin.services.CkeckingService;
 import co.com.hoteles.turin.services.HabitacionService;
@@ -38,6 +43,8 @@ public class HabitacionView extends GenericBB {
 	private Habitacion  habitacionBusqueda;
 	private List<Habitacion> listaHabitaciones;
     private DualListModel<String> insumos;
+      
+	private Map<String, String> tipoHabitaciones;
 
 
 
@@ -61,11 +68,17 @@ public class HabitacionView extends GenericBB {
     public void init() {
        
     	List<String> insumosDisponibles = new ArrayList<String>();
+    	 List<TipoHabitacion> listatiposHabitaciones = new ArrayList<TipoHabitacion>(Arrays.asList(TipoHabitacion.values()));
+    	
 		try {
 			for(Insumo i:InsumoService.getInstance().listar(this.getHotelSession().getCodigo())) {
 				insumosDisponibles.add(i.getNombre());
 			}
-		
+			tipoHabitaciones = new HashMap<String, String>();
+			 for (TipoHabitacion tipoHabitacion : listatiposHabitaciones) {
+
+				 tipoHabitaciones.put(tipoHabitacion.getDescripcion(), tipoHabitacion.getCodigo());	
+		      }
 		    List<String> insumosSeleccionados = new ArrayList<String>();
             insumos = new DualListModel<String>(insumosDisponibles, insumosSeleccionados);
 		} catch (Exception e) {
@@ -88,11 +101,17 @@ public class HabitacionView extends GenericBB {
 		try {
 			habitacionService.actualizar(habitacion,insumos.getTarget());
           
-			FacesContext.getCurrentInstance().addMessage("messages",new FacesMessage(FacesMessage.SEVERITY_ERROR, "La habitacion se guardo con exito", ""));
+
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error",
+					"La habitacion se guardo con exito"));
 
 		} catch (Exception e) {
 
 			e.printStackTrace();
+
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error",
+					"La habitacion no se guardo con exito"));
+
 		}
 	try {
 			listaHabitaciones = HabitacionService.getInstance().listar();
@@ -184,6 +203,12 @@ public class HabitacionView extends GenericBB {
 	}
 	public void setListaHabitaciones(List<Habitacion> listaHabitaciones) {
 		this.listaHabitaciones = listaHabitaciones;
+	}
+	public Map<String, String> getTipoHabitaciones() {
+		return tipoHabitaciones;
+	}
+	public void setTipoHabitaciones(Map<String, String> tipoHabitaciones) {
+		this.tipoHabitaciones = tipoHabitaciones;
 	}
 
 }

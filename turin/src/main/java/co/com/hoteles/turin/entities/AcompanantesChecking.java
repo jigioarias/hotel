@@ -12,6 +12,7 @@ import javax.persistence.*;
 @Table(name="acompanantes_checking")
 @NamedQuery(name="AcompanantesChecking.findAll", query="SELECT a FROM AcompanantesChecking a")
 @NamedQuery(name="AcompanantesChecking.findxCkecking", query="SELECT a FROM AcompanantesChecking a where a.idChecking=:id")
+@NamedQuery(name="AcompanantesChecking.findxHabitacion", query="SELECT a.habitacion FROM AcompanantesChecking a where a.idChecking=:idChecking and a.idCliente=:idCliente")
 @NamedQuery(name="AcompanantesChecking.findxCkeckingxCliente", query="SELECT a FROM AcompanantesChecking a where a.idChecking=:idChecking and a.idCliente=:idCliente")
 
 public class AcompanantesChecking implements Serializable {
@@ -26,12 +27,19 @@ public class AcompanantesChecking implements Serializable {
 		this.idCliente = idCliente;
 	}
 
+	public AcompanantesChecking(int idChecking, int idCliente,String habitacion) {
+		super();
+		this.idChecking = idChecking;
+		this.idCliente = idCliente;
+		this.habitacion = habitacion;
+	}
 	@Column(name="id_checking")
 	private int idChecking;
 
 	@Column(name="id_cliente")
 	private int idCliente;
 	
+	private String habitacion;
 
 	public AcompanantesChecking() {
 	}
@@ -58,6 +66,14 @@ public class AcompanantesChecking implements Serializable {
 
 	public void setIdCliente(int idCliente) {
 		this.idCliente = idCliente;
+	}
+
+	public String getHabitacion() {
+		return habitacion;
+	}
+
+	public void setHabitacion(String habitacion) {
+		this.habitacion = habitacion;
 	}
 
 

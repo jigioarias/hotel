@@ -82,4 +82,17 @@ public class AcompanantesCkeckingService {
 
 	}
    
+   public String getFindXHabitacion(int idCkecking,int idAcompanante) throws Exception{
+		
+		EntityManager em = JPAUtility.getEntityManager();
+		Query query = em.createNamedQuery("AcompanantesChecking.findxHabitacion");
+		query.setParameter("idChecking", idCkecking);
+		query.setParameter("idCliente", idAcompanante);
+		String results =  (String) query.getSingleResult();
+		
+	    
+	     return results;
+
+	}
+   
 }

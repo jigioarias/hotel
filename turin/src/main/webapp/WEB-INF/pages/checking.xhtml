@@ -18,6 +18,12 @@ width: 1500px
  
 
 </style>
+
+<style type="text/css">
+    .ui-row-editor .ui-row-editor-pencil {
+        margin-left:8px;
+    }
+</style>
 	</h:head>
 <h:body>
 <ui:composition template="../template/hotelLayout.xhtml">
@@ -40,7 +46,7 @@ width: 1500px
 
 			<p:tab id="reeserva" title="${msg['checking.datosReserva']}" >
 				
-					<p:panel header="${msg['checking.buscarCliente']}" toggleable="true" toggleOrientation="horizontal" collapsed="true">
+					<p:panel header="${msg['checking.buscarCliente']}" toggleable="true" toggleOrientation="horizontal" collapsed="false	">
 					
 					
 					<h:panelGrid columns="3" columnClasses="value, value,value">
@@ -91,10 +97,10 @@ width: 1500px
 			            <f:selectItem itemLabel="Seleccione un Pais" itemValue="" />
                         <f:selectItems value="#{checkingView.paises}" />
                      </p:selectOneMenu>
+					
 					 <h:outputLabel for="correo" value="${msg['checking.correo']}"  />      
                      <p:inputText id="correo" value="#{checkingView.cliente.correo}" 
-                     required="true"   
-                     requiredMessage="El correo es requerido" 
+                     required="false"   
                      validatorMessage="El correo es invalido"
                      maxlength="50" size="50">
                      <f:validateRegex
@@ -168,7 +174,7 @@ width: 1500px
 			
 			
 					<p:panel  header="${msg['checking.buscarAcompanante']}" toggleable="true" 
-					toggleOrientation="horizontal" collapsed="true">
+					toggleOrientation="horizontal" collapsed="false">
 					
 					
 					<h:panelGrid columns="3" columnClasses="value, value,value">
@@ -202,27 +208,27 @@ width: 1500px
 				
 					<p:dialog header="${msg['checking.adicionarAcompanantes']}" widgetVar="dlgAcompanantes" resizable="false"
 					  modal="true"
-						width="90%" height="90%">
+						width="90%" height="90%" id="dAcompanante">
 
 						<h:panelGrid columns="2" cellpadding="5"  columnClasses="value,value">
 							
 								
-					 <p:outputLabel for="tipoDocunentoAcompanante" value="Tipo Documnento: " />
+					 <p:outputLabel for="tipoDocunentoAcompanante" value="Tipo Documento: " />
 					 <p:selectOneMenu id="tipoDocunentoAcompanante" value="#{checkingView.tipoDocumento}" >
                         <f:selectItems value="#{checkingView.tiposDocumento}" />
                      </p:selectOneMenu>
 							
 							<h:outputLabel for="documentoAcompanante" value="Documento:" />
 							<p:inputText id="documentoAcompanante" value="#{checkingView.documento}" size="30" maxlength="30"
-								required="true" label="documentoAcompanante" />
+								 label="documentoAcompanante" />
 			              
 			        
 			          <h:outputText value="${msg['checking.nombreCliente']}" />
-						<p:inputText value="#{checkingView.nombre}" required="true" requiredMessage="El nombre es requerido"
+						<p:inputText value="#{checkingView.nombre}" 
 							label="Nombre del Cliente" id="nombreAcompante" size="50"  maxlength="50"/>
 					
 					 <p:outputLabel for="extranjeroAcompanante" value="${msg['checking.extranjero']}" />
-                     <p:selectOneRadio id="extranjeroAcompanante" value="#{checkingView.extranjero}" unselectable="true">
+                     <p:selectOneRadio id="extranjeroAcompanante" value="#{checkingView.extranjero}">
                      <f:selectItem itemLabel="Si" itemValue="S" />
                      <f:selectItem itemLabel="No" itemValue="N"  />
                     </p:selectOneRadio>
@@ -233,26 +239,11 @@ width: 1500px
 			            <f:selectItem itemLabel="Seleccione un Pais" itemValue="" />
                         <f:selectItems value="#{checkingView.paises}" />
                      </p:selectOneMenu>
-					 <!-- h:outputLabel for="correoAcompante" value="${msg['checking.correo']}"  >
-					 
 					
-		                   
-					 </h:outputLabel>      
-                     <p:inputText id="correoAcompanante" value="#{checkingView.correo}" 
-                      >
-                    
-                     </p:inputText>
-                     
-                     <h:outputLabel for="celularAcompanante" value="${msg['checking.celular']}"/>
-                     <p:inputText id="celularAcompanante" value="#{checkingView.celular}" />
-						
-	
-					 <h:outputLabel for="fechaNacimientoAcompanante" value="${msg['checking.fechaNacimiento']}" />
-                  <p:calendar id="fechaNacimientoAcompanante" value="#{checkingView.fechaNacimiento}" required="false"  showOn="button"/
-                   -->
                   
 					<f:facet name="footer">
-								<p:commandButton value="${msg['checking.guardar']}"   update="listaAcompanantes"
+								<p:commandButton value="${msg['checking.guardar']}"   update="listaAcompanantes,dAcompanante"
+								 
 									actionListener="#{checkingView.adicionarAcompanante}"
 									styleClass="btn btn-default u-btn-naranja"
 									oncomplete="handleHalbRequest(xhr,status,args)"  />
@@ -265,16 +256,20 @@ width: 1500px
 
 
 	             <p:dataTable var="acompanante"
+	                          editable="true" editMode="cell"
+	                            
 								value="#{checkingView.acompanantes}"
 								id="listaAcompanantes" emptyMessage="No hay acompañantes">
 								<f:facet name="header">
         						${msg['checking.listaAcompanantes']}
     						</f:facet>
 							
-                                 <p:column headerText="Tipo Documento">
+                                 <p:ajax event="cellEdit" listener="#{checkingView.onCellEdit}" immediate="true" update="listaAcompanantes" process="@this"/>
+                               
+                                <p:column headerText="Tipo Documento">
 									<h:outputText value="#{acompanante.tipoDocumento}" />
 								</p:column>
-							
+						
 							
 								<p:column headerText="Documento">
 									<h:outputText value="#{acompanante.documento}" />
@@ -288,6 +283,22 @@ width: 1500px
 								<p:column headerText="Extranjero">
 									<h:outputText value="#{acompanante.extranjero}" />
 								</p:column>
+								
+								
+                              
+                               <p:column headerText="Habitacion">
+          				  <p:cellEditor>
+                		<f:facet name="output"><h:outputText value="#{acompanante.habitacion}" /></f:facet>
+                	<f:facet name="input">
+                       <p:selectOneMenu id="habitacionAcompanante" value="#{acompanante.habitacion}"  >
+                          <f:selectItems value="#{checkingView.codigosHabitacion}" var="habit" itemLabel="#{habit}" itemValue="#{habit}" />
+                          
+                     </p:selectOneMenu>
+                </f:facet>
+            </p:cellEditor>
+        </p:column>
+        
+								
 								<!--p:column headerText="Correo">
 									<h:outputText value="#{acompanante.correo}" />
 								</p:column>
@@ -455,7 +466,9 @@ width: 1500px
 								<p:column headerText="Extranjero">
 									<h:outputText value="#{acompanante.extranjero}" />
 								</p:column>
-
+								<p:column headerText="Habitacion">
+									<h:outputText value="#{acompanante.habitacion}" />
+								</p:column>
 							</p:dataTable>
 	
 	                      <p:dataTable var="servicio"

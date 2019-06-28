@@ -275,7 +275,7 @@
 				<text><![CDATA[Habitaciones:]]></text>
 			</staticText>
 			<componentElement>
-				<reportElement stretchType="ContainerBottom" x="1" y="-232" width="228" height="18" uuid="3edfaac1-a5f3-480f-b88b-0d782d524c37">
+				<reportElement positionType="Float" x="1" y="-232" width="228" height="18" uuid="3edfaac1-a5f3-480f-b88b-0d782d524c37">
 					<property name="net.sf.jasperreports.export.headertoolbar.table.name" value=""/>
 				</reportElement>
 				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical" ignoreWidth="true">
@@ -311,7 +311,7 @@
 				<text><![CDATA[Servicios:]]></text>
 			</staticText>
 			<componentElement>
-				<reportElement stretchType="ContainerBottom" x="237" y="-232" width="330" height="16" uuid="3edfaac1-a5f3-480f-b88b-0d782d524c37"/>
+				<reportElement positionType="Float" stretchType="ContainerBottom" x="237" y="-232" width="330" height="16" uuid="3edfaac1-a5f3-480f-b88b-0d782d524c37"/>
 				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical" ignoreWidth="true">
 					<datasetRun subDataset="serviciosDataSet" uuid="9f4b3ce8-5aaf-4ae7-afe2-ffc13f77cf3d">
 						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{servicios})]]></dataSourceExpression>
@@ -409,18 +409,6 @@
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Insumos:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="9" y="144" width="80" height="20" uuid="72d5844c-fda0-48be-91cf-4c4352cb4b33"/>
-				<text><![CDATA[Nombre]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="180" y="144" width="89" height="20" uuid="37c168b7-a88a-4d39-97d1-70834104ef16"/>
-				<text><![CDATA[Valor]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="286" y="144" width="106" height="20" uuid="fab4d0b8-dc64-4786-86ac-7f3602c9acb6"/>
-				<text><![CDATA[Cantidad]]></text>
 			</staticText>
 		</band>
 	</summary>

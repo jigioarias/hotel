@@ -50,40 +50,66 @@ margin-left: 30%;
     .ui-orderlist .ui-orderlist-list {
         height: auto;
     }
+    
+    
 </style>
- 
+ <style type="text/css">
+  
+    
+    #disponibles_list.ui-datalist-data {
+    background-image: none;
+    background-color: green;
+}
+ #ocupadas_list.ui-datalist-data {
+    background-image: none;
+    background-color: red;
+}
+#limpieza_list.ui-datalist-data {
+    background-image: none;
+    background-color: blue;
+}
+
+
+</style>
  
  <div  class="centered" >
  
-		<h:form id="form">
 		
 		 
 		 
         <p:panelGrid columns="1" columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-4,ui-g-12 ui-md-2,ui-g-12 ui-md-4" layout="grid" styleClass="ui-panelgrid-blank ui-fluid">
-		    <p:dataList value="#{indexView.habitaciones}" var="habitacion" type="definition" emptyMessage="No hay habitaciones Disponibles">
-		        <f:facet name="header">
+		    <p:dataList value="#{indexView.habitaciones}" var="habitacion" type="definition" emptyMessage="No hay habitaciones Disponibles"
+		    id="disponibles" >
+		      <f:facet name="header">
 		            Disponibles
 		        </f:facet>
 		        #{habitacion.nombre} Precio: #{habitacion.precio}
+		        
 		    </p:dataList>
 		   
-		    <p:dataList value="#{indexView.habitaciones2}" var="habitacion" type="definition" emptyMessage="No hay habitaciones Ocupadas">
+		    <p:dataList value="#{indexView.habitaciones2}" var="habitacion" type="definition" emptyMessage="No hay habitaciones Ocupadas"
+		     id="ocupadas" >
 		        <f:facet name="header">
 		            Ocupadas
 		        </f:facet>
-		        Nombre: #{habitacion.nombre}  Precio: #{habitacion.precio}
-		       	
+		        #{habitacion.nombre} Precio: #{habitacion.precio}
 		    </p:dataList>
 		 
-		
-		 
+		  <p:dataList value="#{indexView.habitaciones3}" var="habitacion" type="definition" emptyMessage="No hay habitaciones Limpieza"
+		     id="limpieza" >
+		       <f:facet name="header">
+		            Limpieza
+		        </f:facet>
+		        #{habitacion.nombre} Precio: #{habitacion.precio}
+		        
+		    </p:dataList>
+		 	
 		 </p:panelGrid>   
 		    
 		   
 		 
 		 
 		 
-		</h:form>
 </div>
     	</ui:define>
     		

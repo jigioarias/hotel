@@ -20,7 +20,9 @@ import javax.servlet.http.HttpSession;
 
 import org.primefaces.PrimeFaces;
 import org.primefaces.context.RequestContext;
+import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.FlowEvent;
+import org.primefaces.event.RowEditEvent;
 import org.primefaces.model.DualListModel;
 
 import co.com.hoteles.turin.dtos.CheckingDTO;
@@ -65,6 +67,7 @@ public class CheckingView extends GenericBB implements Serializable {
 	private Date fechaSalida;
 	private String formatFechaSalida;
 	private String formatFechaEntrada;
+	private List<String> codigosHabitacion;
 	public Map<String, String> getPaises() {
 		return paises;
 	}
@@ -94,7 +97,7 @@ public class CheckingView extends GenericBB implements Serializable {
 	private List<Habitacion> habitacionSeleccionada;
 
 	private Date fechaNacimiento = new Date();
-	private String extranjero = "N";
+	private String extranjero = "	";
 	private String documento = " ";
 	private String correo = " ";
 	private String celular = " ";
@@ -114,6 +117,7 @@ public class CheckingView extends GenericBB implements Serializable {
 
 			List<String> habitacionesSeleccionados = new ArrayList<String>();
 			habitacionesPickList = new DualListModel<String>(habitacionesDisponibles, habitacionesSeleccionados);
+			setCodigosHabitacion(new ArrayList<String>());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -353,12 +357,15 @@ public class CheckingView extends GenericBB implements Serializable {
 				for (Cliente acompanante : acompanantes) {
 					acompanante.setHotel(this.getHotelSession().getCodigo());
 					ClienteService.getInstance().ingresar(acompanante);
+					
 					if ("S".equals(acompanante.getExtranjero())) {
 						hayExtrajeros = true;
 					}
 					Cliente acompananteConsultado = ClienteService.getInstance()
 							.getFindXDocumento(acompanante.getDocumento());
-					AcompanantesChecking  a= new AcompanantesChecking(CkeckingConsultado.getId(), acompananteConsultado.getId());
+					
+					
+					AcompanantesChecking  a= new AcompanantesChecking(CkeckingConsultado.getId(), acompananteConsultado.getId(),acompanante.getHabitacion());
 					AcompanantesCkeckingService.getInstance().ingresar(a
 							);
 
@@ -406,6 +413,11 @@ public class CheckingView extends GenericBB implements Serializable {
 		acompanantes.add(acompanante);
 		RequestContext context = RequestContext.getCurrentInstance();
 		context.addCallbackParam("adicionado", true);
+		documento =""; 	
+		correo ="";
+		nombre ="";
+		celular ="";
+		extranjero=null;
 
 	}
 
@@ -562,6 +574,8 @@ public class CheckingView extends GenericBB implements Serializable {
 
 						habitacionesSeleccionados
 								.add(h.getNombre() + "-Capacidad:" + h.getCapacidad() + "-Precio:" + h.getPrecio());
+						
+						
 
 					}
 
@@ -575,9 +589,14 @@ public class CheckingView extends GenericBB implements Serializable {
 				HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext()
 						.getSession(true);
 				session.setAttribute("listaHabitaciones", habitacionSeleccionada);
+				
 
 				servicios = ServiciosCkeckingService.getInstance().getInstance().getFindXChecking(checking.getId());
 				acompanantes = AcompanantesCkeckingService.getInstance().getFindXChecking(checking.getId());
+				for(Cliente c: acompanantes) {
+					c.setHabitacion(AcompanantesCkeckingService.getInstance().getFindXHabitacion(checking.getId(), c.getId()));
+					
+				}
 				setHayFactura(true);
 			} else {
 				FacesContext context = FacesContext.getCurrentInstance();
@@ -640,7 +659,9 @@ public class CheckingView extends GenericBB implements Serializable {
 			String[] datos = idHabitacion.split("-");
 
 			try {
-				habitacionSeleccionada.add((HabitacionService.getInstance().findXNombre(datos[0])).get(0));
+				Habitacion x = (HabitacionService.getInstance().findXNombre(datos[0])).get(0);
+				habitacionSeleccionada.add(x);
+				codigosHabitacion.add(idHabitacion);
 
 			} catch (NumberFormatException e) {
 
@@ -989,4 +1010,57 @@ public class CheckingView extends GenericBB implements Serializable {
 	public void setNacionalidad(String nacionalidad) {
 		this.nacionalidad = nacionalidad;
 	}
+	
+	  public void onCellEdit(CellEditEvent event) {
+	        Object oldValue = event.getOldValue();
+	        Object newValue = event.getNewValue();
+	  
+		        
+	    	   
+	        if(newValue != null && !newValue.equals(oldValue)) {
+	            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
+	            FacesContext.getCurrentInstance().addMessage(null, msg);
+	        }
+	    }
+	  
+	  public void onRowEdit(RowEditEvent event) {	
+		  
+	        
+	    }
+
+	public List<String> getCodigosHabitacion() {
+	
+
+		if(!codigosHabitacion.isEmpty()){
+			codigosHabitacion.clear();
+		}
+		
+			
+			
+		habitacionSeleccionada = new ArrayList<Habitacion>();
+
+			for (String idHabitacion : habitacionesPickList.getTarget()) {
+				String[] datos = idHabitacion.split("-");
+
+				try {
+					Habitacion x = (HabitacionService.getInstance().findXNombre(datos[0])).get(0);
+					codigosHabitacion.add(idHabitacion);
+
+				} catch (NumberFormatException e) {
+
+					e.printStackTrace();
+				} catch (Exception e) {
+
+					e.printStackTrace();
+				}
+
+			}
+		
+			
+		return codigosHabitacion;
+	}
+
+	public void setCodigosHabitacion(List<String> codigosHabitacion) {
+		this.codigosHabitacion = codigosHabitacion;
+	} 
 }

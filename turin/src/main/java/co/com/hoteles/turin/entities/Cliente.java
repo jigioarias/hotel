@@ -44,7 +44,8 @@ public class Cliente implements Serializable {
 	}
 
 	public String getDocumento() {
-		return documento;
+		return documento ;    
+				
 	}
 
 	public void setDocumento(String documento) {
@@ -81,6 +82,16 @@ public class Cliente implements Serializable {
 	
 	private String nacionalidad;
 
+	 transient String habitacion; // not persistent because of transient
+
+
+	public String getHabitacion() {
+		return habitacion;
+	}
+
+	public void setHabitacion(String habitacion) {
+		this.habitacion = habitacion;
+	}
 
 	public Cliente(String tipoDocumento, String documento, String nombre, String celular, Date fechaRegistro,
 			Date fechaNacimiento, String correo) {

@@ -57,6 +57,10 @@
                      <f:selectItem itemLabel="Inactiva" itemValue="INA" ></f:selectItem>
 
                     </p:selectOneRadio>
+            <h:outputLabel for="tipoHabitacion" value="TipoHabitacion *:" style="font-weight:bold" />
+         <p:selectOneMenu id="tipoHabitacion" value="#{habitacionView.habitacion.tipoHabitacion}">
+                        <f:selectItems value="#{habitacionView.tipoHabitaciones}"/>
+                     </p:selectOneMenu>        
         
             <h:outputLabel for="capacidad" value="${msg['habitacion.capacidad']}:" style="font-weight:bold" />
              <p:spinner id="capacidad" value="#{habitacionView.habitacion.capacidad}" min="1" max="20" />        
@@ -103,7 +107,9 @@
 								  <p:column headerText="${msg['habitacion.precio']}">
 									<h:outputText value="#{habitacion.precio}" />
 								</p:column>
-							
+							  <p:column headerText="${msg['habitacion.tipoHabitacion']}">
+									<h:outputText value="#{habitacion.tipoHabitacion}" />
+								</p:column>
 							</p:dataTable>  
  
     </div>

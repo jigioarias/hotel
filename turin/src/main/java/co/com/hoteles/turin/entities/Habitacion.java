@@ -46,6 +46,9 @@ public class Habitacion implements Serializable {
 	private int precio;
 
 	private int hotel;
+	
+	private String tipoHabitacion;
+	
 	public Habitacion() {
 	}
 
@@ -103,6 +106,14 @@ public class Habitacion implements Serializable {
 
 	public void setHotel(int hotel) {
 		this.hotel = hotel;
+	}
+
+	public String getTipoHabitacion() {
+		return tipoHabitacion;
+	}
+
+	public void setTipoHabitacion(String tipoHabitacion) {
+		this.tipoHabitacion = tipoHabitacion;
 	}
 
 }
