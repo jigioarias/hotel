@@ -12,6 +12,7 @@ import javax.persistence.*;
 @Table(name="parametros")
 @NamedQuery(name="Parametro.findAll", query="SELECT p FROM Parametro p where p.hotel=:hotel")
 @NamedQuery(name="Parametro.findNombre", query="SELECT p FROM Parametro p where p.nombreParametro=:nombre")
+@NamedQuery(name="Parametro.findNombreXhotel", query="SELECT p FROM Parametro p where p.nombreParametro=:nombre and p.hotel=:hotel")
 
 public class Parametro implements Serializable {
 	private static final long serialVersionUID = 1L;

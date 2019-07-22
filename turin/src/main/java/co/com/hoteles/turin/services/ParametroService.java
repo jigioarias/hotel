@@ -59,11 +59,31 @@ public Parametro find(int id) throws Exception{
 
 	}
 
+public Parametro findXHotel(int id) throws Exception{
+	
+	EntityManager em = JPAUtility.getEntityManager();
+    return em.find(Parametro.class, id);
+
+}
+
+
 public Parametro findXNombre(String nombre) throws Exception{
 	
 	EntityManager em = JPAUtility.getEntityManager();
 	Query query = em.createNamedQuery("Parametro.findNombre");
 	query.setParameter("nombre", nombre);
+	Parametro results = (Parametro) query.getSingleResult();
+    return results;
+    
+}
+
+public Parametro findXNombreXHotel(String nombre, int hotel) throws Exception{
+	
+	EntityManager em = JPAUtility.getEntityManager();
+	Query query = em.createNamedQuery("Parametro.findNombreXhotel");
+	query.setParameter("nombre", nombre);
+	query.setParameter("hotel", hotel);
+	
 	Parametro results = (Parametro) query.getSingleResult();
     return results;
     

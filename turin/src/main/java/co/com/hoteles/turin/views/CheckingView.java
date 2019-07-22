@@ -869,9 +869,12 @@ public class CheckingView extends GenericBB implements Serializable {
 				int dias = (int) ((fechaSalida.getTime() - fechaEntrada.getTime()) / 86400000);
 				dias = dias + 1;
 				parametros.put("dias", (dias));
-				Parametro parametroResolucion = ParametroService.getInstance().find(1);
+				Parametro parametroResolucion = ParametroService.getInstance().findXNombreXHotel("resolucion", this.getHotelSession().getCodigo());
+				Parametro parametroIVA = ParametroService.getInstance().findXNombre("iva");
+
 				String resolucion = parametroResolucion.getValor();
 				int consecutivo = Integer.parseInt(resolucion);
+				int iva = Integer.parseInt(parametroIVA.getValor());
 				parametros.put("consecutivo", consecutivo);
 				factura.setResolucion(resolucion);
 				consecutivo++;
@@ -912,8 +915,14 @@ public class CheckingView extends GenericBB implements Serializable {
 					
 
 				}
-
-				parametros.put("subtotal", subtotal);
+                int total = subtotal;
+				subtotal = total / (1 + (iva/100));
+                parametros.put("subtotal", subtotal);
+				int ivaFactura = subtotal/(iva/100);
+				parametros.put("iva",ivaFactura);
+                parametros.put("total", total);
+				
+				
 				factura.setTotal(subtotal);
 				factura.setHotel(this.getHotelSession().getCodigo());
 				factura.setFecha(new Date());

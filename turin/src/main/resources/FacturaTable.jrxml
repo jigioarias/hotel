@@ -108,6 +108,8 @@
 	<parameter name="subtotal" class="java.lang.Integer"/>
 	<parameter name="dias" class="java.lang.Integer"/>
 	<parameter name="consecutivo" class="java.lang.Integer"/>
+	<parameter name="iva" class="java.lang.Integer"/>
+	<parameter name="total" class="java.lang.Integer"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -158,7 +160,7 @@
 				<text><![CDATA[Fecha Salida:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="415" y="10" width="50" height="20" uuid="0f86baff-6386-4f3f-b3fe-2388707babe8"/>
+				<reportElement x="409" y="10" width="50" height="20" uuid="0f86baff-6386-4f3f-b3fe-2388707babe8"/>
 				<box rightPadding="4"/>
 				<textElement textAlignment="Right"/>
 				<text><![CDATA[Fecha:]]></text>
@@ -232,13 +234,13 @@
 				</reportElement>
 			</line>
 			<staticText>
-				<reportElement x="414" y="28" width="65" height="15" uuid="708a7606-6501-411e-a86c-e6637986a95e"/>
+				<reportElement x="411" y="28" width="80" height="15" uuid="708a7606-6501-411e-a86c-e6637986a95e"/>
 				<box rightPadding="4"/>
 				<textElement textAlignment="Right"/>
-				<text><![CDATA[Factura #:]]></text>
+				<text><![CDATA[Recibo de Caja #:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="482" y="28" width="64" height="15" uuid="0b5472c5-42db-4ebe-bed6-4f4b6810402a"/>
+				<reportElement x="491" y="28" width="64" height="15" uuid="0b5472c5-42db-4ebe-bed6-4f4b6810402a"/>
 				<textFieldExpression><![CDATA[$P{consecutivo}]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -369,11 +371,11 @@
 				<text><![CDATA[Cantidad]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="350" y="200" width="89" height="20" uuid="5439fd55-355c-410c-aa0f-c5eff97eca73"/>
-				<text><![CDATA[Total a Pagar :]]></text>
+				<reportElement x="350" y="217" width="89" height="20" uuid="5439fd55-355c-410c-aa0f-c5eff97eca73"/>
+				<text><![CDATA[Subtotal :]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="440" y="200" width="100" height="20" uuid="4687e607-b9f3-4c8c-ac32-a081cf2af748"/>
+				<reportElement x="440" y="217" width="100" height="20" uuid="4687e607-b9f3-4c8c-ac32-a081cf2af748"/>
 				<textFieldExpression><![CDATA[$P{subtotal}]]></textFieldExpression>
 			</textField>
 			<componentElement>
@@ -410,6 +412,22 @@
 				</textElement>
 				<text><![CDATA[Insumos:]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="353" y="194" width="89" height="20" uuid="9909c798-b764-4d2c-9d16-a1ac9ba15fce"/>
+				<text><![CDATA[IVA :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="440" y="196" width="100" height="20" uuid="fbf85041-9032-45eb-8452-8af49a8e7af2"/>
+				<textFieldExpression><![CDATA[$P{iva}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="348" y="234" width="89" height="20" uuid="2260a4d9-6ccd-469f-83d7-245265821170"/>
+				<text><![CDATA[Total a Pagar :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="438" y="235" width="100" height="20" uuid="64c1504a-d2d7-4ac4-aed3-cf2f72cfaac9"/>
+				<textFieldExpression><![CDATA[$P{total}]]></textFieldExpression>
+			</textField>
 		</band>
 	</summary>
 </jasperReport>
