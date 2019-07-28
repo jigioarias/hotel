@@ -37,7 +37,7 @@ public class IndexView  extends GenericBB {
 			habitaciones = HabitacionService.getInstance().listar("DIS");
 		
            habitaciones2 =  HabitacionService.getInstance().listar("OCU");
-           setHabitaciones3(HabitacionService.getInstance().listar("LIM"));
+           setHabitaciones3(HabitacionService.getInstance().listar("FAC"));
 
         } catch (Exception e) {
 			// TODO Auto-generated catch block

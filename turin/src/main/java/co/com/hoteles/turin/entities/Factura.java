@@ -51,7 +51,9 @@ public class Factura implements Serializable {
 
 	private String tipodocumentoCliente;
 
-	private int total;
+	private float total;
+	
+//	private float iva;
 
 	public Factura() {
 	}
@@ -160,11 +162,11 @@ public class Factura implements Serializable {
 		this.tipodocumentoCliente = tipodocumentoCliente;
 	}
 
-	public int getTotal() {
+	public float getTotal() {
 		return this.total;
 	}
 
-	public void setTotal(int total) {
+	public void setTotal(float total) {
 		this.total = total;
 	}
 
@@ -191,5 +193,13 @@ public class Factura implements Serializable {
 	public void setChecking(int checking) {
 		this.checking = checking;
 	}
+
+	/*public float getIva() {
+		return iva;
+	}
+
+	public void setIva(float iva) {
+		this.iva = iva;
+	}*/
 
 }

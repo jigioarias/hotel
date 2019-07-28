@@ -42,6 +42,8 @@ public class Ckecking implements Serializable {
 
 	@Column(name="id_cliente")
 	private int idCliente;
+	
+	
 
 	@Column(name="numero_personas")
 	private int numeroPersonas;
@@ -49,6 +51,8 @@ public class Ckecking implements Serializable {
 	private String usuario;
 	
 	private int hotel;
+
+	private String habitacion;
 
 	public Ckecking() {
 	}
@@ -123,6 +127,14 @@ public class Ckecking implements Serializable {
 
 	public void setHotel(int hotel) {
 		this.hotel = hotel;
+	}
+
+	public String getHabitacion() {
+		return habitacion;
+	}
+
+	public void setHabitacion(String habitacion) {
+		this.habitacion = habitacion;
 	}
 
 }

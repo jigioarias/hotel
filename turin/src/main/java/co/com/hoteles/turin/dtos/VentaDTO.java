@@ -5,12 +5,12 @@ import java.util.Date;
 public class VentaDTO {
 
 	
-	private int valor;
+	private float valor;
 	Date fecha;
-	public int getValor() {
+	public float getValor() {
 		return valor;
 	}
-	public void setValor(int valor) {
+	public void setValor(float valor) {
 		this.valor = valor;
 	}
 	public Date getFecha() {

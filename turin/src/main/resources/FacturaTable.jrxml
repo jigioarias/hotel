@@ -105,11 +105,11 @@
 	<parameter name="fechaSalida" class="java.util.Date"/>
 	<parameter name="rutaImagen" class="java.lang.String"/>
 	<parameter name="rutaReportes" class="java.lang.String"/>
-	<parameter name="subtotal" class="java.lang.Integer"/>
+	<parameter name="subtotal" class="java.lang.Float"/>
 	<parameter name="dias" class="java.lang.Integer"/>
 	<parameter name="consecutivo" class="java.lang.Integer"/>
-	<parameter name="iva" class="java.lang.Integer"/>
-	<parameter name="total" class="java.lang.Integer"/>
+	<parameter name="iva" class="java.lang.Float"/>
+	<parameter name="total" class="java.lang.Float"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -181,7 +181,7 @@
 				<textElement>
 					<font size="19" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Hotel Turin]]></text>
+				<text><![CDATA[Recibo de Caja]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="417" y="48" width="160" height="15" uuid="b8cc42fd-b569-497d-834d-7e854040ad18"/>

@@ -66,6 +66,10 @@ public class ClienteView extends GenericBB {
 		tiposDocumento.put("Cedula", "CC");
 		tiposDocumento.put("Pasaporte", "PP");
 		tiposDocumento.put("Cedula Extranjeria", "CE");
+		tiposDocumento.put("Tarjeta Identidad", "TI");
+		tiposDocumento.put("Nit", "NI");
+		tiposDocumento.put("Registro Civil", "RC");
+		
 		paises = new HashMap<String, String>(); 
 		try {
 			List<Pais> listaPaises =PaisService.getInstance().listar();

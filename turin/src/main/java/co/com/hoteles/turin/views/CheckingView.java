@@ -99,11 +99,12 @@ public class CheckingView extends GenericBB implements Serializable {
 	private Date fechaNacimiento = new Date();
 	private String extranjero = "	";
 	private String documento = " ";
-	private String correo = " ";
-	private String celular = " ";
+	private String correo = "turin@gmail.com";
+	private String celular = "3333333300";
 	private String nombre = " ";
 	private String tipoDocumento = " ";
 	private String nacionalidad = " ";
+	private String habitacionCliente="";
 	
 
 	public CheckingView() {
@@ -311,7 +312,11 @@ public class CheckingView extends GenericBB implements Serializable {
 			ck.setNumeroPersonas(numeroPersonas);
 			ck.setUsuario(getUsuarioSession().getId());
             ck.setHotel(this.getHotelSession().getCodigo());
+           
+            	ck.setHabitacion(habitacionCliente);
+            
 			CkeckingService.getInstance().ingresar(ck);
+			
 
 			Ckecking CkeckingConsultado = CkeckingService.getInstance().getFindXCliente(ClienteIngresado.getId(), "A",this.getHotelSession().getCodigo());
 			if (CkeckingConsultado != null) {
@@ -630,6 +635,10 @@ public class CheckingView extends GenericBB implements Serializable {
 		tiposDocumento.put("Cedula", "CC");
 		tiposDocumento.put("Pasaporte", "PP");
 		tiposDocumento.put("Cedula Extranjeria", "CE");
+		tiposDocumento.put("Tarjeta Identidad", "TI");
+		tiposDocumento.put("Nit", "NI");
+		tiposDocumento.put("Registro Civil", "RC");
+		
 		paises = new HashMap<String, String>(); 
 
 		try {
@@ -771,11 +780,13 @@ public class CheckingView extends GenericBB implements Serializable {
 			parametros.put("tipoDocumentoCliente", cliente.getTipoDocumento());
 			parametros.put("documentoCliente", cliente.getDocumento());
 			parametros.put("nombreCliente", cliente.getNombre());
+			System.err.println("documento>>>>>>>>"+cliente.getDocumento());
 			parametros.put("correo", cliente.getCorreo());
 			parametros.put("celular", cliente.getCelular());
 			parametros.put("fechaEntrada", fechaEntrada);
 			parametros.put("fechaSalida", fechaSalida);
 			parametros.put("numeroPersonas", numeroPersonas);
+			parametros.put("habitacionCliente",habitacionCliente);
 			parametros.put("rutaImagen", realpathImagenes);
 			parametros.put("rutaReportes",
 					FacesContext.getCurrentInstance().getExternalContext().getInitParameter("ruta_reportes"));
@@ -874,7 +885,7 @@ public class CheckingView extends GenericBB implements Serializable {
 
 				String resolucion = parametroResolucion.getValor();
 				int consecutivo = Integer.parseInt(resolucion);
-				int iva = Integer.parseInt(parametroIVA.getValor());
+				float iva = Float.parseFloat(parametroIVA.getValor());
 				parametros.put("consecutivo", consecutivo);
 				factura.setResolucion(resolucion);
 				consecutivo++;
@@ -889,7 +900,7 @@ public class CheckingView extends GenericBB implements Serializable {
 				parametros.put("rutaReportes",
 						FacesContext.getCurrentInstance().getExternalContext().getInitParameter("ruta_reportes"));
 
-				int subtotal = 0;
+				float subtotal = 0;
 				for (Servicio servicio : servicios) {
 
 					subtotal += servicio.getCantidad() * servicio.getValor();
@@ -915,10 +926,12 @@ public class CheckingView extends GenericBB implements Serializable {
 					
 
 				}
-                int total = subtotal;
-				subtotal = total / (1 + (iva/100));
+                float total = subtotal;
+                float denom = (1 + (iva/100));
+				subtotal = total /denom;
+              
                 parametros.put("subtotal", subtotal);
-				int ivaFactura = subtotal/(iva/100);
+				float ivaFactura = total-subtotal;
 				parametros.put("iva",ivaFactura);
                 parametros.put("total", total);
 				
@@ -957,7 +970,7 @@ public class CheckingView extends GenericBB implements Serializable {
 				HttpServletResponse httpservlet = (HttpServletResponse) FacesContext.getCurrentInstance()
 						.getExternalContext().getResponse();
 				httpservlet.addHeader("Content-disposition",
-						"attachment;filename=factura_" + cliente.getDocumento() + new Date() + ".pdf");
+						"attachment;filename=recibo_" + cliente.getDocumento() + new Date() + ".pdf");
 				ServletOutputStream servletout = httpservlet.getOutputStream();
 				JasperExportManager.exportReportToPdfStream(jasperprint, servletout);
 				FacesContext.getCurrentInstance().responseComplete();
@@ -1071,5 +1084,13 @@ public class CheckingView extends GenericBB implements Serializable {
 
 	public void setCodigosHabitacion(List<String> codigosHabitacion) {
 		this.codigosHabitacion = codigosHabitacion;
+	}
+
+	public String getHabitacionCliente() {
+		return habitacionCliente;
+	}
+
+	public void setHabitacionCliente(String habitacionCliente) {
+		this.habitacionCliente = habitacionCliente;
 	} 
 }

@@ -835,7 +835,7 @@ public class ReimprimirView extends GenericBB implements Serializable {
 				parametros.put("rutaReportes",
 						FacesContext.getCurrentInstance().getExternalContext().getInitParameter("ruta_reportes"));
 
-				int subtotal = 0;
+				float subtotal = 0;
 				for (Servicio servicio : servicios) {
 
 					subtotal += servicio.getCantidad() * servicio.getValor();

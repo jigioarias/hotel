@@ -12,23 +12,23 @@
 		<param-value>dark-hive</param-value>
 	</context-param>
   
-	<!--context-param>
+	<context-param>
 		<param-name>ruta_reportes</param-name>
-		<param-value>C:/Users/user/git/hotel/turin/src/main/resources/</param-value>
+		<param-value>C:/Users/Camilo P/git/hotel/turin/src/main/resources/</param-value>
 	</context-param>
 	<context-param>
 		<param-name>ruta_imagenes</param-name>
-		<param-value>C:/Users/user/git/hotel/turin/src/main/webapp/resources/img/</param-value>
-	</context-param-->
+		<param-value>C:/Users/Camilo P/git/hotel/turin/src/main/webapp/resources/img/</param-value>
+	</context-param>
 
-	<context-param>
+	<!--context-param>
 		<param-name>ruta_reportes</param-name>
 		<param-value>/usr/java/apache-tomcat-8.5.43/webapps/turin/WEB-INF/classes/</param-value>
 	</context-param>
 	<context-param>
 		<param-name>ruta_imagenes</param-name>
 		<param-value>/usr/java/apache-tomcat-8.5.43/webapps/turin/resources/img/</param-value>
-	</context-param>
+	</context-param-->
 	
 	
   <filter>

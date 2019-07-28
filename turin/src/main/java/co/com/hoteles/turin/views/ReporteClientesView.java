@@ -143,7 +143,7 @@ public class ReporteClientesView extends  GenericBB {
 					
 			checkingDTO.setVentas(listaVentas);
 			
-			int totalVenta = 0;
+			float totalVenta = 0;
 			
 			for (VentaDTO venta : listaVentas) {
 				

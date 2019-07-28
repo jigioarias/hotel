@@ -155,13 +155,20 @@ width: 1500px
           </p:calendar>
 				
 		  <p:outputLabel value="${msg['checking.habitaciones']}" for="pickListHabitaciones" />
-		  <p:pickList style="width:460;" required="true"  requiredMessage="Las habitaciones son requeridas"
-		  id="pickListHabitaciones" value="#{checkingView.habitacionesPickList}" var="habitaciones" itemLabel="#{habitaciones}" itemValue="#{habitaciones}" />
+		  <p:pickList style="width:460;" required="true"  requiredMessage="Las habitaciones son requeridas" 
+		  id="pickListHabitaciones" value="#{checkingView.habitacionesPickList}" var="habitaciones" itemLabel="#{habitaciones}" itemValue="#{habitaciones}" >
+		  
+		  <p:ajax event="transfer"  update="habitacionCliente" />
+		  </p:pickList>
 		  
 		  
-       	
+       		 <p:outputLabel for="habitacionCliente" value="Habitacion Cliente *:"  />
+
 					
-					
+					  <p:selectOneMenu id="habitacionCliente" value="#{checkingView.habitacionCliente}"  >
+                          <f:selectItems value="#{checkingView.codigosHabitacion}" var="habit" itemLabel="#{habit}" itemValue="#{habit}" />
+                          
+                     </p:selectOneMenu>
 					</h:panelGrid>
 	
 				</p:panel>
@@ -171,6 +178,10 @@ width: 1500px
 			
 
 			<p:tab id="acompanantes" title="${msg['checking.acompanantes']}">
+			
+			
+					
+				
 			
 			
 					<p:panel  header="${msg['checking.buscarAcompanante']}" toggleable="true" 
@@ -442,7 +453,8 @@ width: 1500px
 			            <h:outputText value="${msg['checking.fechaSalidaResumen']}" />
 					    <h:outputText value="#{checkingView.formatFechaSalida} " />
 	
-	
+						 <h:outputText value="Habitación" />
+					    <h:outputText value="#{checkingView.habitacionCliente} " />
 	
 	             <p:dataTable var="acompanante"
 								value="#{checkingView.acompanantes}"

@@ -10,10 +10,10 @@
         
         <properties>
         
-            <property name="hibernate.connection.url" value="jdbc:mysql://turin.c93byowrsedc.us-east-2.rds.amazonaws.com:3306/adminTurin"/>
+            <property name="hibernate.connection.url" value="jdbc:mysql://dbturin.c93byowrsedc.us-east-2.rds.amazonaws.com:3306/hturin"/>
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
-            <property name="hibernate.connection.username" value="adminTurin" />
-            <property name="hibernate.connection.password" value="Cris2019*" />
+            <property name="hibernate.connection.username" value="hadmin" />
+            <property name="hibernate.connection.password" value="Jotel2019*" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLInnoDBDialect"/>
             <property name="hibernate.show_sql" value="false" />
             <property name="hibernate.format_sql" value="false" />
