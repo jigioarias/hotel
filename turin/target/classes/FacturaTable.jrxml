@@ -371,11 +371,11 @@
 				<text><![CDATA[Cantidad]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="350" y="217" width="89" height="20" uuid="5439fd55-355c-410c-aa0f-c5eff97eca73"/>
+				<reportElement x="350" y="188" width="89" height="20" uuid="5439fd55-355c-410c-aa0f-c5eff97eca73"/>
 				<text><![CDATA[Subtotal :]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="440" y="217" width="100" height="20" uuid="4687e607-b9f3-4c8c-ac32-a081cf2af748"/>
+				<reportElement x="440" y="188" width="100" height="20" uuid="4687e607-b9f3-4c8c-ac32-a081cf2af748"/>
 				<textFieldExpression><![CDATA[$P{subtotal}]]></textFieldExpression>
 			</textField>
 			<componentElement>
@@ -413,11 +413,11 @@
 				<text><![CDATA[Insumos:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="353" y="194" width="89" height="20" uuid="9909c798-b764-4d2c-9d16-a1ac9ba15fce"/>
+				<reportElement x="353" y="208" width="89" height="20" uuid="9909c798-b764-4d2c-9d16-a1ac9ba15fce"/>
 				<text><![CDATA[IVA :]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="440" y="196" width="100" height="20" uuid="fbf85041-9032-45eb-8452-8af49a8e7af2"/>
+				<reportElement x="440" y="210" width="105" height="20" uuid="fbf85041-9032-45eb-8452-8af49a8e7af2"/>
 				<textFieldExpression><![CDATA[$P{iva}]]></textFieldExpression>
 			</textField>
 			<staticText>

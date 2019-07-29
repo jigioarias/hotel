@@ -780,7 +780,12 @@ public class CheckingView extends GenericBB implements Serializable {
 			parametros.put("tipoDocumentoCliente", cliente.getTipoDocumento());
 			parametros.put("documentoCliente", cliente.getDocumento());
 			parametros.put("nombreCliente", cliente.getNombre());
-			System.err.println("documento>>>>>>>>"+cliente.getDocumento());
+			System.out.println("tipodocumento>>>>>>>>"+ cliente.getTipoDocumento());
+			System.out.println("documento>>>>>>>>"+cliente.getDocumento());
+			System.out.println("nombre>>>>>>>>"+cliente.getNombre());
+			System.out.println("correo>>>>>>>>"+cliente.getCorreo());
+		
+			
 			parametros.put("correo", cliente.getCorreo());
 			parametros.put("celular", cliente.getCelular());
 			parametros.put("fechaEntrada", fechaEntrada);
@@ -938,7 +943,7 @@ public class CheckingView extends GenericBB implements Serializable {
 				
 				factura.setTotal(subtotal);
 				factura.setHotel(this.getHotelSession().getCodigo());
-				factura.setFecha(new Date());
+				factura.setFecha(fechaEntrada);
 				factura.setRazonSocial(this.getHotelSession().getNomgre());
 				parametroResolucion.setValor((consecutivo) + "");
 				parametroResolucion.setHotel(this.getHotelSession().getCodigo());

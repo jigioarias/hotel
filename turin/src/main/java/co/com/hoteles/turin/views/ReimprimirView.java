@@ -863,7 +863,8 @@ public class ReimprimirView extends GenericBB implements Serializable {
 				parametros.put("subtotal", subtotal);
 				factura.setTotal(subtotal);
 				factura.setHotel(this.getHotelSession().getCodigo());
-				factura.setFecha(new Date());
+				factura.setFecha(ci.getFechaEntrada());
+
 				factura.setRazonSocial(this.getHotelSession().getNomgre());
 				parametroResolucion.setValor((consecutivo) + "");
 				ParametroService.getInstance().actualizar(parametroResolucion);
