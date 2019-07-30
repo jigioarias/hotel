@@ -79,7 +79,7 @@ public class LimpiezaView extends GenericBB implements Serializable {
 		SelectItem[] habitacionesOcu= null;
 
 		try {
-			List<Habitacion> habitaciones= HabitacionService.getInstance().listar("FAC");
+			List<Habitacion> habitaciones= HabitacionService.getInstance().listar("FAC",this.getHotelSession().getCodigo());
 			habitacionesOcu= new SelectItem[habitaciones.size()];
 			int contador =0;
 			for (Habitacion habitacion : habitaciones) {

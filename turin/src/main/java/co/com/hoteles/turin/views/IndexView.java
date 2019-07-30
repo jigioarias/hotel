@@ -34,10 +34,10 @@ public class IndexView  extends GenericBB {
 	
     public IndexView () {
         try {
-			habitaciones = HabitacionService.getInstance().listar("DIS");
+			habitaciones = HabitacionService.getInstance().listar("DIS",this.getHotelSession().getCodigo());
 		
-           habitaciones2 =  HabitacionService.getInstance().listar("OCU");
-           setHabitaciones3(HabitacionService.getInstance().listar("FAC"));
+           habitaciones2 =  HabitacionService.getInstance().listar("OCU",this.getHotelSession().getCodigo());
+           setHabitaciones3(HabitacionService.getInstance().listar("FAC",this.getHotelSession().getCodigo()));
 
         } catch (Exception e) {
 			// TODO Auto-generated catch block

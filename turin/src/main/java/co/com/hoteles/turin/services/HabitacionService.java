@@ -31,39 +31,45 @@ public class HabitacionService {
         return habitacionService;
     }
 	
-	public List<Habitacion> listarDisponibles() throws Exception{
+	public List<Habitacion> listarDisponibles(int hotel) throws Exception{
 		
 		EntityManager em = JPAUtility.getEntityManager();
 		Query query = em.createNamedQuery("Habitacion.findEstado");
 		query.setParameter("estado", "DIS");
+		query.setParameter("hotel", hotel);
+		
 		List<Habitacion> results = query.getResultList();
 	    return results;
 
 	}
 	
 	
-public List<Habitacion> listar() throws Exception{
+public List<Habitacion> listar(int hotel) throws Exception{
 		
 		EntityManager em = JPAUtility.getEntityManager();
 		Query query = em.createNamedQuery("Habitacion.findAll");
+		query.setParameter("hotel", hotel);
 		List<Habitacion> results = query.getResultList();
 	    return results;
 
 	}
 
-public List<Habitacion> listar(String estado) throws Exception{
+public List<Habitacion> listar(String estado, int hotel) throws Exception{
 	
 	EntityManager em = JPAUtility.getEntityManager();
 	Query query = em.createNamedQuery("Habitacion.findEstado");
 	query.setParameter("estado", estado);
+	query.setParameter("hotel", hotel);
+
 	List<Habitacion> results = query.getResultList();
     return results;
 
 }
-public List<Habitacion> listarOcupadas() throws Exception{
+public List<Habitacion> listarOcupadas(int hotel) throws Exception{
 		
 		EntityManager em = JPAUtility.getEntityManager();
 		Query query = em.createNamedQuery("Habitacion.findEstado");
+		query.setParameter("hotel", hotel);
 		query.setParameter("estado", "OCU");
 		List<Habitacion> results = query.getResultList();
 	    return results;

@@ -94,7 +94,7 @@ public class ReimprimirView extends GenericBB implements Serializable {
 
 		List<String> habitacionesDisponibles = new ArrayList<String>();
 		try {
-			for (Habitacion i : HabitacionService.getInstance().listarDisponibles()) {
+			for (Habitacion i : HabitacionService.getInstance().listarDisponibles(this.getHotelSession().getCodigo())) {
 				habitacionesDisponibles
 						.add(i.getNombre() + "-Capacidad:" + i.getCapacidad() + "-Precio:" + i.getPrecio());
 			}
@@ -113,7 +113,7 @@ public class ReimprimirView extends GenericBB implements Serializable {
 		List<Habitacion> filteredHabitacion = new ArrayList<Habitacion>();
 		;
 		try {
-			habitacionesDisponibles = HabitacionService.getInstance().listarDisponibles();
+			habitacionesDisponibles = HabitacionService.getInstance().listarDisponibles(this.getHotelSession().getCodigo());
 
 			for (int i = 0; i < habitacionesDisponibles.size(); i++) {
 				Habitacion habitacion = habitacionesDisponibles.get(i);
@@ -523,7 +523,7 @@ public class ReimprimirView extends GenericBB implements Serializable {
 				habitacionSeleccionada = HabitacionesCkeckingService.getInstance().getFindXChecking(checking.getId());
 
 				try {
-					for (Habitacion i : HabitacionService.getInstance().listarDisponibles()) {
+					for (Habitacion i : HabitacionService.getInstance().listarDisponibles(this.getHotelSession().getCodigo())) {
 
 						habitacionesDisponibles
 								.add(i.getNombre() + "-Capacidad:" + i.getCapacidad() + "-Precio:" + i.getPrecio());

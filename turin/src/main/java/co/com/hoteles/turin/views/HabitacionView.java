@@ -58,7 +58,7 @@ public class HabitacionView extends GenericBB {
 	public HabitacionView(){
 		habitacion = new Habitacion();
 		try {
-			listaHabitaciones = HabitacionService.getInstance().listar();
+			listaHabitaciones = HabitacionService.getInstance().listar(this.getHotelSession().getCodigo());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -98,6 +98,8 @@ public class HabitacionView extends GenericBB {
 
 		HabitacionService habitacionService = HabitacionService.getInstance();
 		InsumoHabitacionService insumoHabitacionService = InsumoHabitacionService.getInstance();
+		
+		habitacion.setHotel(this.getHotelSession().getCodigo());
 		try {
 			habitacionService.actualizar(habitacion,insumos.getTarget());
           
@@ -114,7 +116,7 @@ public class HabitacionView extends GenericBB {
 
 		}
 	try {
-			listaHabitaciones = HabitacionService.getInstance().listar();
+			listaHabitaciones = HabitacionService.getInstance().listar(this.getHotelSession().getCodigo());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -146,7 +148,7 @@ public class HabitacionView extends GenericBB {
 		List<Habitacion> habitacionesDisponibles;
 		List<Habitacion> filteredHabitacion = new ArrayList<Habitacion>();;
 		try {
-			habitacionesDisponibles = HabitacionService.getInstance().listar();
+			habitacionesDisponibles = HabitacionService.getInstance().listar(this.getHotelSession().getCodigo());
 
 			for (int i = 0; i < habitacionesDisponibles.size(); i++) {
 				Habitacion habitacion = habitacionesDisponibles.get(i);
