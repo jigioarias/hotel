@@ -780,10 +780,7 @@ public class CheckingView extends GenericBB implements Serializable {
 			parametros.put("tipoDocumentoCliente", cliente.getTipoDocumento());
 			parametros.put("documentoCliente", cliente.getDocumento());
 			parametros.put("nombreCliente", cliente.getNombre());
-			System.out.println("tipodocumento>>>>>>>>"+ cliente.getTipoDocumento());
-			System.out.println("documento>>>>>>>>"+cliente.getDocumento());
-			System.out.println("nombre>>>>>>>>"+cliente.getNombre());
-			System.out.println("correo>>>>>>>>"+cliente.getCorreo());
+			
 		
 			
 			parametros.put("correo", cliente.getCorreo());

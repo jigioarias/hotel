@@ -86,12 +86,13 @@ margin-left: 30%;
 		        
 		    </p:dataList>
 		   
-		    <p:dataList value="#{indexView.habitaciones2}" var="habitacion" type="definition" emptyMessage="No hay habitaciones Ocupadas"
+		    <p:dataList value="#{indexView.habitacionesOcupadas}" var="habitacionDto" type="definition" emptyMessage="No hay habitaciones Ocupadas"
 		     id="ocupadas" >
 		        <f:facet name="header">
 		            Ocupadas
 		        </f:facet>
-		        #{habitacion.nombre} Precio: #{habitacion.precio}
+		        #{habitacionDto.habitacion.nombre}
+		        Cliente : #{habitacionDto.cliente}
 		    </p:dataList>
 		 
 		  <p:dataList value="#{indexView.habitaciones3}" var="habitacion" type="definition" emptyMessage="No hay habitaciones Limpieza"

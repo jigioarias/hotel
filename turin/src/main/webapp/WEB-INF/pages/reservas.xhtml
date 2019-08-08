@@ -37,11 +37,27 @@
            <p:spinner id="numerHabitaciones" value="#{reservasView.numeroHabitaciones}" min="1" max="10" />
         
          <h:outputLabel for="fechaEntrada" value="Fecha Entrada:"  style="font-weight:bold" />
-        <p:calendar id="fechaEntrada" value="#{reservasView.fechaEntrada}" required="true"  showOn="button"/>
+        <p:calendar id="fechaEntrada" pattern="dd-MM-yyyy" value="#{reservasView.fechaEntrada}" required="true"  
+           binding="#{dateIniComponent}"
+         mindate="#{reservasView.todayDate}"
+        showOn="button">
+        <f:validator validatorId="dateRangeValidator" />
+                  <f:attribute name="dateFinComponent" value="#{bindingDateFinComponent}" />
+		        <f:attribute name="range" value="year" />
+		        <f:attribute name="reference" value="ini" />
+		  </p:calendar>      
         
          <h:outputLabel for="fechaSalida" value="Fecha Salida:" style="font-weight:bold" />
-        <p:calendar id="fechaSalida" value="#{reservasView.fechaSalida}" showOn="button" required="true"  />
-          <p:commandButton value="Reservar" update="mensaje,menu" action="#{reservasView.enviar}" icon="pi pi-check" />
+        <p:calendar id="fechaSalida" value="#{reservasView.fechaSalida}" pattern="dd-MM-yyyy" showOn="button" required="true"
+                 mindate="#{reservasView.todayDate}"
+        
+        >
+         <f:validator validatorId="dateRangeValidator" />
+                  <f:attribute name="dateFinComponent" value="#{bindingDateFinComponent}" />
+		        <f:attribute name="range" value="year" />
+		        <f:attribute name="reference" value="ini" />
+		  </p:calendar>
+          <p:commandButton value="Reservar" update="mensaje,menu,listaReservas" action="#{reservasView.enviar}" icon="pi pi-check" />
               <h:outputText id="mensaje" value="#{reservasView.mensaje}" />
       
       

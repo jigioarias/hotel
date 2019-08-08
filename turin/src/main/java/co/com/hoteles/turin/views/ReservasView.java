@@ -30,6 +30,8 @@ public class ReservasView extends GenericBB {
     private String mensaje;
     private int numeroReservas;
     private List<Reserva> listaReservas;
+	private Date todayDate = new Date();
+
     
     public  ReservasView() {
     	
@@ -127,11 +129,15 @@ public class ReservasView extends GenericBB {
 	        reserva.setNumeroAdultos(numeroAdultos);
 	        reserva.setNumeroHabitaciones(numeroHabitaciones);
 	        reserva.setNumeroNinos(numeroNinos);
+	        reserva.setHotel(this.getHotelSession().getCodigo());
+	        reserva.setActiva("S");
 	        ReservaService reservaService = ReservaService.getInstance();
 	        try {
 				reservaService.ingresar(reserva);
 		        this.mensaje ="La reserva fue creada con exito,señor(a) "+ nombre +" lo estaremos contactando";
 				 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Gracias", "reservado señor:"+nombre);
+				listaReservas =reservaService.listar("S",this.getHotelSession().getCodigo());
+
 
 			} catch (Exception e) {
 		        this.mensaje ="La reserva no fue creada por favor contacte al administrador : "+e.getMessage();
@@ -163,6 +169,14 @@ public class ReservasView extends GenericBB {
 	}
 	public void setListaReservas(List<Reserva> listaReservas) {
 		this.listaReservas = listaReservas;
+	}
+
+	public Date getTodayDate() {
+		return todayDate;
+	}
+
+	public void setTodayDate(Date todayDate) {
+		this.todayDate = todayDate;
 	}    
 
 		 
