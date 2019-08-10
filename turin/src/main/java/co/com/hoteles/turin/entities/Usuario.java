@@ -28,6 +28,7 @@ public class Usuario implements Serializable {
 
 	private String correo;
 	
+	private int hotel;
 	
 
 	@Temporal(TemporalType.DATE)
@@ -101,6 +102,14 @@ public class Usuario implements Serializable {
 
 	public void setUsuarioCreacion(String usuarioCreacion) {
 		this.usuarioCreacion = usuarioCreacion;
+	}
+
+	public int getHotel() {
+		return hotel;
+	}
+
+	public void setHotel(int hotel) {
+		this.hotel = hotel;
 	}
 
 	

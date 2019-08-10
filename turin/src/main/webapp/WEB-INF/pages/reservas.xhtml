@@ -37,6 +37,7 @@
            <p:spinner id="numerHabitaciones" value="#{reservasView.numeroHabitaciones}" min="1" max="10" />
         
          <h:outputLabel for="fechaEntrada" value="Fecha Entrada:"  style="font-weight:bold" />
+         
         <p:calendar id="fechaEntrada" pattern="dd-MM-yyyy" value="#{reservasView.fechaEntrada}" required="true"  
            binding="#{dateIniComponent}"
          mindate="#{reservasView.todayDate}"
@@ -57,6 +58,10 @@
 		        <f:attribute name="range" value="year" />
 		        <f:attribute name="reference" value="ini" />
 		  </p:calendar>
+		  
+		  <h:outputLabel for="Habitaciones" value="Habitaciones:" style="font-weight:bold" />
+            <p:inputText id="Habitaciones" value="#{reservasView.habitaciones}" required="true"  />
+		  
           <p:commandButton value="Reservar" update="mensaje,menu,listaReservas" action="#{reservasView.enviar}" icon="pi pi-check" />
               <h:outputText id="mensaje" value="#{reservasView.mensaje}" />
       
@@ -122,6 +127,9 @@
 								</p:column>
 								<p:column headerText="${msg['reserva.numeroNinos']}">
 									<h:outputText value="#{reserva.numeroNinos}" />
+								</p:column>
+								<p:column headerText="${msg['reserva.habitaciones']}">
+									<h:outputText value="#{reserva.habitaciones}" />
 								</p:column>
 								<p:column headerText="${msg['reserva.operacion']}">
 										<p:commandButton id="borrarReserva"

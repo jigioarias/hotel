@@ -61,8 +61,8 @@ public class UsuarioView extends  GenericBB {
 		UsuarioService insumoService = UsuarioService.getInstance();
 		try {
 			usuario.setFechaCreacion(new Date());
-			//TODO usuario.setUsuarioCreacion(this.getUsuarioSession().getLogin());
-			usuario.setUsuarioCreacion("jINNI");
+			usuario.setUsuarioCreacion(this.getUsuarioSession().getId());
+			usuario.setHotel(this.getHotelSession().getCodigo());
 			insumoService.actualizar(usuario);
           
 			FacesContext.getCurrentInstance().addMessage("messages",new FacesMessage(FacesMessage.SEVERITY_ERROR, "El usuario	 se guardo con exito", ""));

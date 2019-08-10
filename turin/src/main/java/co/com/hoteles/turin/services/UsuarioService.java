@@ -51,7 +51,7 @@ public List<Usuario> listar() throws Exception{
 		     Usuario usuarioConsultada=  usuarios.get(0);
 		     usuarioConsultada.setCorreo(usuario.getCorreo());
 		     usuarioConsultada.setClave(usuario.getClave());
-		   
+		    
 		     em.merge(usuarioConsultada);
 		    
 		   }else {

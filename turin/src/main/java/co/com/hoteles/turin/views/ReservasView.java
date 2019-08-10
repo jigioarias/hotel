@@ -27,6 +27,8 @@ public class ReservasView extends GenericBB {
     private Date fechaEntrada;
     private Date fechaSalida;
     private int numeroHabitaciones;
+    private String habitaciones;
+    
     private String mensaje;
     private int numeroReservas;
     private List<Reserva> listaReservas;
@@ -129,6 +131,7 @@ public class ReservasView extends GenericBB {
 	        reserva.setNumeroAdultos(numeroAdultos);
 	        reserva.setNumeroHabitaciones(numeroHabitaciones);
 	        reserva.setNumeroNinos(numeroNinos);
+	        reserva.setHabitaciones(habitaciones);
 	        reserva.setHotel(this.getHotelSession().getCodigo());
 	        reserva.setActiva("S");
 	        ReservaService reservaService = ReservaService.getInstance();
@@ -177,6 +180,14 @@ public class ReservasView extends GenericBB {
 
 	public void setTodayDate(Date todayDate) {
 		this.todayDate = todayDate;
+	}
+
+	public String getHabitaciones() {
+		return habitaciones;
+	}
+
+	public void setHabitaciones(String habitaciones) {
+		this.habitaciones = habitaciones;
 	}    
 
 		 

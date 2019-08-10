@@ -61,11 +61,13 @@ public class LoginBean extends GenericBB {
 		
 		try {
 			usuarioC = usuarioService.findXClave(usuario);
-
-			hotelC =  HotelService.getInstance().find(hotel.getCodigo());
+			
+		   
 		
-		if (usuarioC != null) {
+		if (usuarioC != null && (usuarioC.getHotel()== hotel.getCodigo() || usuarioC.getRol().equals("ADMIN"))  ) {
 			usuario = usuarioC;
+			
+			hotelC =  HotelService.getInstance().find(hotel.getCodigo());
 			this.guardarUsuario(FacesContext.getCurrentInstance(), usuarioC);
 			this.guardarHotel(FacesContext.getCurrentInstance(), hotelC);
 

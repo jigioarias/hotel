@@ -94,6 +94,7 @@
 	<parameter name="rutaImagen" class="java.lang.String"/>
 	<parameter name="rutaReportes" class="java.lang.String"/>
 	<parameter name="habitacionCliente" class="java.lang.String"/>
+	<parameter name="noches" class="java.lang.Integer"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -204,11 +205,11 @@
 				<reportElement x="146" y="88" width="24" height="14" uuid="124ec6e1-4ed9-4dd6-98c7-459bccd265ae"/>
 				<textFieldExpression><![CDATA[$P{tipoDocumentoCliente}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="dd-MM-yyyy" isBlankWhenNull="true">
 				<reportElement x="89" y="133" width="100" height="22" uuid="b9b1298f-e581-4124-acf4-598ebe89bd65"/>
 				<textFieldExpression><![CDATA[$P{fechaEntrada}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="dd-MM-yyyy" isBlankWhenNull="true">
 				<reportElement x="283" y="133" width="100" height="22" uuid="60927068-633a-469d-a8ab-0595e14ef0e5"/>
 				<textFieldExpression><![CDATA[$P{fechaSalida}]]></textFieldExpression>
 			</textField>
@@ -229,6 +230,14 @@
 			<textField>
 				<reportElement x="92" y="158" width="178" height="17" uuid="e4c30a20-407a-486f-a243-0f752df6d87a"/>
 				<textFieldExpression><![CDATA[$P{habitacionCliente}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="435" y="131" width="80" height="22" uuid="928e14c0-db0b-42b1-82b7-024589bcf84b"/>
+				<text><![CDATA[ Noches:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="494" y="132" width="55" height="22" uuid="edb1be6c-53cf-4280-b27a-1fbf8fd7ee13"/>
+				<textFieldExpression><![CDATA[$P{noches}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>

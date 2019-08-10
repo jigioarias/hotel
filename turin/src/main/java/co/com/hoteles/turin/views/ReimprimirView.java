@@ -67,6 +67,8 @@ public class ReimprimirView extends GenericBB implements Serializable {
 	private int numeroPersonas;
 	private DualListModel<String> habitacionesPickList;
 	private boolean hayFactura;
+	private String habitacionCliente="";
+
 
 	private Date todayDate = new Date();
 
@@ -284,24 +286,18 @@ public class ReimprimirView extends GenericBB implements Serializable {
 			} else {
 				ClienteIngresado = ClienteService.getInstance().getFindXDocumento(cliente.getDocumento());
 			}
-			Ckecking ck = new Ckecking();
-			ck.setEstado("A");
-			ck.setFechaEntrada(fechaEntrada);
-			ck.setFechaRegistro(new Date());
-			ck.setFechaSalida(fechaSalida);
-			ck.setIdCliente(ClienteIngresado.getId());
-			ck.setNumeroPersonas(numeroPersonas);
-			ck.setUsuario(getUsuarioSession().getId());
+			Ckecking ck = CkeckingService.getInstance().getFindXCliente(cliente.getId(), "A", this.getHotelSession().getCodigo());
+		
+			
+			
 
 			CkeckingService.getInstance().ingresar(ck);
 
 			Ckecking CkeckingConsultado = CkeckingService.getInstance().getFindXCliente(ClienteIngresado.getId(), "A",this.getHotelSession().getCodigo());
 			if (CkeckingConsultado != null) {
 
-				System.err.println(" habitacionesPickList.getTarget():" + habitacionesPickList.getTarget().size());
 				for (String habitacion : habitacionesPickList.getTarget()) {
 					String[] datos = habitacion.split("-");
-					System.err.println("codigo:" + datos[0]);
 					List<Habitacion> h2 = HabitacionService.getInstance().findXNombre(datos[0]);
 					Habitacion hc = h2.get(0);
 					HabitacionesChecking h = new HabitacionesChecking(CkeckingConsultado.getId(), hc.getId());
@@ -518,6 +514,7 @@ public class ReimprimirView extends GenericBB implements Serializable {
 				fechaSalida = checking.getFechaSalida();
 				fechaEntrada = checking.getFechaEntrada();
 				numeroPersonas = checking.getNumeroPersonas();
+				habitacionCliente = checking.getHabitacion();
 
 				List<String> habitacionesDisponibles = new ArrayList<String>();
 				habitacionSeleccionada = HabitacionesCkeckingService.getInstance().getFindXChecking(checking.getId());
@@ -709,8 +706,7 @@ public class ReimprimirView extends GenericBB implements Serializable {
 	}
 
 	public void imprimirChecking() {
-
-	JRBeanCollectionDataSource beancollection = new JRBeanCollectionDataSource(null);
+		JRBeanCollectionDataSource beancollection = new JRBeanCollectionDataSource(null);
 		String realpath = FacesContext.getCurrentInstance().getExternalContext().getInitParameter("ruta_reportes")
 				+ "checkingTable.jasper";
 		String realpathImagenes = FacesContext.getCurrentInstance().getExternalContext()
@@ -720,11 +716,19 @@ public class ReimprimirView extends GenericBB implements Serializable {
 			parametros.put("tipoDocumentoCliente", cliente.getTipoDocumento());
 			parametros.put("documentoCliente", cliente.getDocumento());
 			parametros.put("nombreCliente", cliente.getNombre());
+			
+		
+			
 			parametros.put("correo", cliente.getCorreo());
 			parametros.put("celular", cliente.getCelular());
 			parametros.put("fechaEntrada", fechaEntrada);
 			parametros.put("fechaSalida", fechaSalida);
+			
+	 
+			int nochesHotel=(int) ((fechaSalida.getTime()-fechaEntrada.getTime())/86400000);
+			parametros.put("noches", nochesHotel);
 			parametros.put("numeroPersonas", numeroPersonas);
+			parametros.put("habitacionCliente",habitacionCliente);
 			parametros.put("rutaImagen", realpathImagenes);
 			parametros.put("rutaReportes",
 					FacesContext.getCurrentInstance().getExternalContext().getInitParameter("ruta_reportes"));
@@ -755,6 +759,7 @@ public class ReimprimirView extends GenericBB implements Serializable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	
 	}
 	
 	
@@ -775,7 +780,6 @@ public class ReimprimirView extends GenericBB implements Serializable {
 	}
 
 	public void generarFactura() {
-
 		JRBeanCollectionDataSource beancollection = new JRBeanCollectionDataSource(null);
 		String realpath = FacesContext.getCurrentInstance().getExternalContext().getInitParameter("ruta_reportes")
 				+ "FacturaTable.jasper";
@@ -818,9 +822,12 @@ public class ReimprimirView extends GenericBB implements Serializable {
 				int dias = (int) ((fechaSalida.getTime() - fechaEntrada.getTime()) / 86400000);
 				dias = dias + 1;
 				parametros.put("dias", (dias));
-				Parametro parametroResolucion = ParametroService.getInstance().find(1);
+				Parametro parametroResolucion = ParametroService.getInstance().findXNombreXHotel("resolucion", this.getHotelSession().getCodigo());
+				Parametro parametroIVA = ParametroService.getInstance().findXNombreXHotel("iva", this.getHotelSession().getCodigo());
+
 				String resolucion = parametroResolucion.getValor();
 				int consecutivo = Integer.parseInt(resolucion);
+				float iva = Float.parseFloat(parametroIVA.getValor());
 				parametros.put("consecutivo", consecutivo);
 				factura.setResolucion(resolucion);
 				consecutivo++;
@@ -857,24 +864,37 @@ public class ReimprimirView extends GenericBB implements Serializable {
 					u.setCantidad(insumosChecking.getCantidad());
 					u.setNombre(i.getNombre());
 					u.setValor(i.getValor());
+					listainsumos.add(u);
+					
 
 				}
-
-				parametros.put("subtotal", subtotal);
+                float total = subtotal;
+                float denom = (1 + (iva/100));
+				subtotal = total /denom;
+              
+                parametros.put("subtotal", subtotal);
+				float ivaFactura = total-subtotal;
+				parametros.put("iva",ivaFactura);
+                parametros.put("total", total);
+				
+				
 				factura.setTotal(subtotal);
 				factura.setHotel(this.getHotelSession().getCodigo());
-				factura.setFecha(ci.getFechaEntrada());
-
+				factura.setFecha(fechaEntrada);
 				factura.setRazonSocial(this.getHotelSession().getNomgre());
+				factura.setHotel(this.getHotelSession().getCodigo());
 				parametroResolucion.setValor((consecutivo) + "");
+				parametroResolucion.setHotel(this.getHotelSession().getCodigo());
 				ParametroService.getInstance().actualizar(parametroResolucion);
 
-				FacturaService.getInstance().ingresar(factura);
+				FacturaService.getInstance().ingresar(factura,this.getHotelSession().getCodigo());
 				ci.setEstado("I");
+				ci.setHotel(this.getHotelSession().getCodigo());
 				CkeckingService.getInstance().actualizar(ci);
 				for (Habitacion habitacion : habitacionSeleccionada) {
 
 					habitacion.setEstado("FAC");
+				
 					HabitacionService.getInstance().actualizar(habitacion);
 
 				}
@@ -893,7 +913,7 @@ public class ReimprimirView extends GenericBB implements Serializable {
 				HttpServletResponse httpservlet = (HttpServletResponse) FacesContext.getCurrentInstance()
 						.getExternalContext().getResponse();
 				httpservlet.addHeader("Content-disposition",
-						"attachment;filename=factura_" + cliente.getDocumento() + new Date() + ".pdf");
+						"attachment;filename=recibo_" + cliente.getDocumento() + new Date() + ".pdf");
 				ServletOutputStream servletout = httpservlet.getOutputStream();
 				JasperExportManager.exportReportToPdfStream(jasperprint, servletout);
 				FacesContext.getCurrentInstance().responseComplete();
@@ -947,4 +967,12 @@ public class ReimprimirView extends GenericBB implements Serializable {
 	public void setHayFactura(boolean hayFactura) {
 		this.hayFactura = hayFactura;
 	}
+	
+	public String getHabitacionCliente() {
+		return habitacionCliente;
+	}
+
+	public void setHabitacionCliente(String habitacionCliente) {
+		this.habitacionCliente = habitacionCliente;
+	} 
 }

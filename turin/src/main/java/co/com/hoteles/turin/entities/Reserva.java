@@ -35,6 +35,7 @@ public class Reserva implements Serializable {
 
 	
 	
+	
 	@Id 
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idreserva;
@@ -61,6 +62,7 @@ public class Reserva implements Serializable {
 	
 	private int hotel;
 
+	private String habitaciones;
 	
 
 	public Reserva() {
@@ -152,6 +154,14 @@ public class Reserva implements Serializable {
 
 	public void setHotel(int hotel) {
 		this.hotel = hotel;
+	}
+
+	public String getHabitaciones() {
+		return habitaciones;
+	}
+
+	public void setHabitaciones(String habitaciones) {
+		this.habitaciones = habitaciones;
 	}
 
 }

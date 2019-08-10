@@ -31,9 +31,9 @@ public class FacturaService {
         return facturaService;
     }
     
-	public void ingresar(Factura Factura)throws Exception {
+	public void ingresar(Factura Factura,int hotel)throws Exception {
 		
-		Parametro parametro=ParametroService.getInstance().findXNombre("resolucion");
+		Parametro parametro=ParametroService.getInstance().findXNombreXHotel("resolucion",hotel);
 		int consecutivo = Integer.parseInt(parametro.getValor())+1;
 		Factura.setNumero(consecutivo);
 		EntityManager em = JPAUtility.getEntityManager();

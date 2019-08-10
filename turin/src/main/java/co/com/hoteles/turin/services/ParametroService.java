@@ -80,9 +80,9 @@ public Parametro findXNombre(String nombre) throws Exception{
 public Parametro findXNombreXHotel(String nombre, int hotel) throws Exception{
 	
 	EntityManager em = JPAUtility.getEntityManager();
-	Query query = em.createNamedQuery("Parametro.findNombreXhotel");
-	query.setParameter("nombre", nombre);
-	query.setParameter("hotel", hotel);
+	Query query = em.createNativeQuery("SELECT * FROM hturin.parametros where nombreParametro=? and hotel=?",Parametro.class);
+	query.setParameter(1, nombre);
+	query.setParameter(2, hotel);
 	
 	Parametro results = (Parametro) query.getSingleResult();
     return results;
