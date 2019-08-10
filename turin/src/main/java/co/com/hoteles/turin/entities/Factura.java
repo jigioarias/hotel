@@ -19,6 +19,14 @@ import javax.persistence.*;
 public class Factura implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	public int getDescuento() {
+		return descuento;
+	}
+
+	public void setDescuento(int descuento) {
+		this.descuento = descuento;
+	}
+
 	@Id
 	private int numero;
 
@@ -39,6 +47,8 @@ public class Factura implements Serializable {
     private Date fechaEntrada;
     
     private Date fechaSalida;
+    
+    private int descuento;
     
     private int checking;
 	private String razonSocial;

@@ -27,6 +27,8 @@ public class Ckecking implements Serializable {
 	private int id;
 
 	private String estado;
+	
+	private int descuento;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="fecha_entrada")
@@ -135,6 +137,14 @@ public class Ckecking implements Serializable {
 
 	public void setHabitacion(String habitacion) {
 		this.habitacion = habitacion;
+	}
+
+	public int getDescuento() {
+		return descuento;
+	}
+
+	public void setDescuento(int descuento) {
+		this.descuento = descuento;
 	}
 
 }

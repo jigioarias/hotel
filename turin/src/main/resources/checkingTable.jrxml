@@ -95,6 +95,7 @@
 	<parameter name="rutaReportes" class="java.lang.String"/>
 	<parameter name="habitacionCliente" class="java.lang.String"/>
 	<parameter name="noches" class="java.lang.Integer"/>
+	<parameter name="descuento" class="java.lang.Integer"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -108,7 +109,7 @@
 		<fieldDescription><![CDATA[acompanantes]]></fieldDescription>
 	</field>
 	<title>
-		<band height="193" splitType="Stretch">
+		<band height="200" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="80" width="84" height="25" uuid="57aed2b1-4f4e-40a3-a6ad-54dae8dd4c5a">
 					<property name="local_mesure_unitheight" value="pixel"/>
@@ -232,13 +233,21 @@
 				<textFieldExpression><![CDATA[$P{habitacionCliente}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="435" y="131" width="80" height="22" uuid="928e14c0-db0b-42b1-82b7-024589bcf84b"/>
+				<reportElement x="435" y="132" width="80" height="22" uuid="928e14c0-db0b-42b1-82b7-024589bcf84b"/>
 				<text><![CDATA[ Noches:]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="494" y="132" width="55" height="22" uuid="edb1be6c-53cf-4280-b27a-1fbf8fd7ee13"/>
 				<textFieldExpression><![CDATA[$P{noches}]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement x="476" y="155" width="66" height="24" uuid="51aa8bd4-8b82-4fad-b189-7470df54a466"/>
+				<textFieldExpression><![CDATA[$P{descuento}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="388" y="155" width="80" height="22" uuid="730506dc-dda6-42a1-bd81-f748fa014ef4"/>
+				<text><![CDATA[Descuento:]]></text>
+			</staticText>
 		</band>
 	</title>
 	<detail>

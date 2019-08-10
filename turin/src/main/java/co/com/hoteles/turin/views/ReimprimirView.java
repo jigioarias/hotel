@@ -68,6 +68,7 @@ public class ReimprimirView extends GenericBB implements Serializable {
 	private DualListModel<String> habitacionesPickList;
 	private boolean hayFactura;
 	private String habitacionCliente="";
+	private int descuento;
 
 
 	private Date todayDate = new Date();
@@ -515,6 +516,7 @@ public class ReimprimirView extends GenericBB implements Serializable {
 				fechaEntrada = checking.getFechaEntrada();
 				numeroPersonas = checking.getNumeroPersonas();
 				habitacionCliente = checking.getHabitacion();
+				descuento = checking.getDescuento();
 
 				List<String> habitacionesDisponibles = new ArrayList<String>();
 				habitacionSeleccionada = HabitacionesCkeckingService.getInstance().getFindXChecking(checking.getId());
@@ -723,6 +725,7 @@ public class ReimprimirView extends GenericBB implements Serializable {
 			parametros.put("celular", cliente.getCelular());
 			parametros.put("fechaEntrada", fechaEntrada);
 			parametros.put("fechaSalida", fechaSalida);
+			parametros.put("descuento", descuento);
 			
 	 
 			int nochesHotel=(int) ((fechaSalida.getTime()-fechaEntrada.getTime())/86400000);
@@ -836,6 +839,7 @@ public class ReimprimirView extends GenericBB implements Serializable {
 				factura.setDireccion(this.getHotelSession().getDireccion());
 				factura.setTelefono(this.getHotelSession().getTelefono());
 				factura.setNit(this.getHotelSession().getNit());
+				descuento = ci.getDescuento();
 
 				parametros.put("numeroPersonas", numeroPersonas);
 				parametros.put("rutaImagen", realpathImagenes);
@@ -869,12 +873,17 @@ public class ReimprimirView extends GenericBB implements Serializable {
 
 				}
                 float total = subtotal;
+                parametros.put("descuento", descuento);
+                total = total- descuento;
                 float denom = (1 + (iva/100));
 				subtotal = total /denom;
               
                 parametros.put("subtotal", subtotal);
+                
 				float ivaFactura = total-subtotal;
 				parametros.put("iva",ivaFactura);
+				parametros.put("descuento", descuento);
+			    total = total -descuento;
                 parametros.put("total", total);
 				
 				

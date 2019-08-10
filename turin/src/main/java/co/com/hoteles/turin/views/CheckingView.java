@@ -65,9 +65,11 @@ public class CheckingView extends GenericBB implements Serializable {
 	private List<Servicio> servicios;
 	private Date fechaEntrada;
 	private Date fechaSalida;
+	private int descuento;
 	private String formatFechaSalida;
 	private String formatFechaEntrada;
 	private List<String> codigosHabitacion;
+	private int total = 0;
 	public Map<String, String> getPaises() {
 		return paises;
 	}
@@ -81,6 +83,14 @@ public class CheckingView extends GenericBB implements Serializable {
 	private boolean hayFactura;
 	private Map<String, String> paises;
 
+
+	public int getDescuento() {
+		return descuento;
+	}
+
+	public void setDescuento(int descuento) {
+		this.descuento = descuento;
+	}
 
 	private Date todayDate = new Date();
 
@@ -310,6 +320,7 @@ public class CheckingView extends GenericBB implements Serializable {
 			ck.setFechaSalida(fechaSalida);
 			ck.setIdCliente(ClienteIngresado.getId());
 			ck.setNumeroPersonas(numeroPersonas);
+			ck.setDescuento(descuento);
 			ck.setUsuario(getUsuarioSession().getId());
             ck.setHotel(this.getHotelSession().getCodigo());
            
@@ -579,6 +590,8 @@ public class CheckingView extends GenericBB implements Serializable {
 
 						habitacionesSeleccionados
 								.add(h.getNombre() + "-Capacidad:" + h.getCapacidad() + "-Precio:" + h.getPrecio());
+						total = total + h.getPrecio();
+
 						
 						
 
@@ -665,6 +678,7 @@ public class CheckingView extends GenericBB implements Serializable {
 	public List<Habitacion> getHabitacionSeleccionada() {
 
 		habitacionSeleccionada = new ArrayList<Habitacion>();
+		total = 0;
 
 		for (String idHabitacion : habitacionesPickList.getTarget()) {
 			String[] datos = idHabitacion.split("-");
@@ -673,6 +687,7 @@ public class CheckingView extends GenericBB implements Serializable {
 				Habitacion x = (HabitacionService.getInstance().findXNombre(datos[0])).get(0);
 				habitacionSeleccionada.add(x);
 				codigosHabitacion.add(idHabitacion);
+				total = total + x.getPrecio();
 
 			} catch (NumberFormatException e) {
 
@@ -789,6 +804,7 @@ public class CheckingView extends GenericBB implements Serializable {
 			parametros.put("celular", cliente.getCelular());
 			parametros.put("fechaEntrada", fechaEntrada);
 			parametros.put("fechaSalida", fechaSalida);
+			parametros.put("descuento", descuento);
 			
 	 
 			int nochesHotel=(int) ((fechaSalida.getTime()-fechaEntrada.getTime())/86400000);
@@ -903,6 +919,8 @@ public class CheckingView extends GenericBB implements Serializable {
 				factura.setTelefono(this.getHotelSession().getTelefono());
 				factura.setNit(this.getHotelSession().getNit());
 				factura.setHotel(this.getHotelSession().getCodigo());
+				
+				
 
 				parametros.put("numeroPersonas", numeroPersonas);
 				parametros.put("rutaImagen", realpathImagenes);
@@ -936,16 +954,21 @@ public class CheckingView extends GenericBB implements Serializable {
 
 				}
                 float total = subtotal;
+                parametros.put("descuento", descuento);
+                total = total- descuento;
+                
                 float denom = (1 + (iva/100));
 				subtotal = total /denom;
               
                 parametros.put("subtotal", subtotal);
 				float ivaFactura = total-subtotal;
+				
 				parametros.put("iva",ivaFactura);
-                parametros.put("total", total);
+	            parametros.put("total", total);
 				
 				
 				factura.setTotal(subtotal);
+				factura.setDescuento(descuento);
 				factura.setHotel(this.getHotelSession().getCodigo());
 				factura.setFecha(fechaEntrada);
 				factura.setRazonSocial(this.getHotelSession().getNomgre());
@@ -1101,5 +1124,13 @@ public class CheckingView extends GenericBB implements Serializable {
 
 	public void setHabitacionCliente(String habitacionCliente) {
 		this.habitacionCliente = habitacionCliente;
+	}
+
+	public int getTotal() {
+		return total;
+	}
+
+	public void setTotal(int total) {
+		this.total = total;
 	} 
 }
