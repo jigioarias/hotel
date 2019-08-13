@@ -33,8 +33,8 @@
             <h:outputLabel for="numeroNinos" value="Número Niños:" style="font-weight:bold" />
              <p:spinner id="numeroNinos" value="#{reservasView.numeroNinos}" min="0" max="20" />
         
-           <h:outputLabel for="numerHabitaciones" value="Número Habitaciones:" style="font-weight:bold" />
-           <p:spinner id="numerHabitaciones" value="#{reservasView.numeroHabitaciones}" min="1" max="10" />
+           <h:outputLabel for="metodo" value="Medio reserva:" style="font-weight:bold" />
+           <p:inputText id="metodo" value="#{reservasView.metodo}" required="true" />
         
          <h:outputLabel for="fechaEntrada" value="Fecha Entrada:"  style="font-weight:bold" />
          
@@ -61,6 +61,11 @@
 		  
 		  <h:outputLabel for="Habitaciones" value="Habitaciones:" style="font-weight:bold" />
             <p:inputText id="Habitaciones" value="#{reservasView.habitaciones}" required="true"  />
+            
+            
+              
+		  <h:outputLabel for="abono" value="Abono:" style="font-weight:bold" />
+            <p:inputText id="abono" value="#{reservasView.abono}" required="true"  />
 		  
           <p:commandButton value="Reservar" update="mensaje,menu,listaReservas" action="#{reservasView.enviar}" icon="pi pi-check" />
               <h:outputText id="mensaje" value="#{reservasView.mensaje}" />
@@ -119,8 +124,8 @@
 								 <p:column headerText="${msg['reserva.celular']}">
 									<h:outputText value="#{reserva.celular}" />
 								</p:column>
-								 <p:column headerText="${msg['reserva.numeroHabitaciones']}">
-									<h:outputText value="#{reserva.numeroHabitaciones}" />
+								 <p:column headerText="${msg['reserva.medioReserva']}">
+									<h:outputText value="#{reserva.metodo}" />
 								</p:column>
 								<p:column headerText="${msg['reserva.numeroAdultos']}">
 									<h:outputText value="#{reserva.numeroAdultos}" />
@@ -130,6 +135,9 @@
 								</p:column>
 								<p:column headerText="${msg['reserva.habitaciones']}">
 									<h:outputText value="#{reserva.habitaciones}" />
+								</p:column>
+									<p:column headerText="${msg['reserva.abono']}">
+									<h:outputText value="#{reserva.abono}" />
 								</p:column>
 								<p:column headerText="${msg['reserva.operacion']}">
 										<p:commandButton id="borrarReserva"

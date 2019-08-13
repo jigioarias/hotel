@@ -42,6 +42,7 @@ public class CkeckingService {
 		   ckeckingConsultado.setFechaEntrada(ckecking.getFechaEntrada());
 		   ckeckingConsultado.setFechaSalida(ckecking.getFechaSalida());
 		   ckeckingConsultado.setUsuario(ckecking.getUsuario());
+		   ckeckingConsultado.setDescuento(ckecking.getDescuento());
 	       em.merge(ckeckingConsultado);
 	    }
 	    em.getTransaction().commit();

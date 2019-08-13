@@ -101,7 +101,7 @@ public class HabitacionView extends GenericBB {
 		
 		habitacion.setHotel(this.getHotelSession().getCodigo());
 		try {
-			habitacionService.actualizar(habitacion,insumos.getTarget());
+			habitacionService.actualizar(habitacion,insumos.getTarget(),this.getHotelSession().getCodigo());
           
 
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error",

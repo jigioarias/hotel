@@ -96,6 +96,7 @@
 	<parameter name="habitacionCliente" class="java.lang.String"/>
 	<parameter name="noches" class="java.lang.Integer"/>
 	<parameter name="descuento" class="java.lang.Integer"/>
+	<parameter name="total" class="java.lang.Integer"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -241,13 +242,21 @@
 				<textFieldExpression><![CDATA[$P{noches}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="476" y="155" width="66" height="24" uuid="51aa8bd4-8b82-4fad-b189-7470df54a466"/>
+				<reportElement x="327" y="158" width="66" height="22" uuid="51aa8bd4-8b82-4fad-b189-7470df54a466"/>
 				<textFieldExpression><![CDATA[$P{descuento}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="388" y="155" width="80" height="22" uuid="730506dc-dda6-42a1-bd81-f748fa014ef4"/>
+				<reportElement x="401" y="158" width="59" height="22" uuid="730506dc-dda6-42a1-bd81-f748fa014ef4"/>
+				<text><![CDATA[Total:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="275" y="158" width="80" height="22" uuid="283252b6-2ef6-4ce6-887c-4adb5c222839"/>
 				<text><![CDATA[Descuento:]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="435" y="158" width="109" height="22" uuid="2befc229-1b57-40e6-b3ad-0f41995acf12"/>
+				<textFieldExpression><![CDATA[$P{total}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<detail>
@@ -424,7 +433,7 @@
 				<text><![CDATA[Nombre]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="1" y="-266" width="100" height="20" uuid="13068b87-e866-4479-ad0b-bdc8d5a4b3fe"/>
+				<reportElement positionType="Float" x="1" y="-261" width="100" height="20" uuid="13068b87-e866-4479-ad0b-bdc8d5a4b3fe"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>

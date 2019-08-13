@@ -17,7 +17,7 @@ import co.com.hoteles.turin.services.HabitacionService;
 
 
 @ManagedBean(name="limpiezaView")
-@ViewScoped
+
 public class LimpiezaView extends GenericBB implements Serializable {
 
 
@@ -132,7 +132,7 @@ public class LimpiezaView extends GenericBB implements Serializable {
 		try {
 			h = HabitacionService.getInstance().find(Integer.parseInt(codigoHabitacion));
 			h.setEstado("DIS");
-			HabitacionService.getInstance().actualizar(h);
+			HabitacionService.getInstance().actualizar(h,this.getHotelSession().getCodigo());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -141,7 +141,9 @@ public class LimpiezaView extends GenericBB implements Serializable {
 
 	}
 
-
+	 public String enviarHome() {
+		 return "/index.xhtml?faces-redirect=true";	
+	   }
 
 
 

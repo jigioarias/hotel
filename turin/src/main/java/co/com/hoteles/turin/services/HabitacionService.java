@@ -76,9 +76,9 @@ public List<Habitacion> listarOcupadas(int hotel) throws Exception{
 
 	}
 	
-	   public void actualizar(Habitacion habitacion)throws Exception {
+	   public void actualizar(Habitacion habitacion,int hotel)throws Exception {
 			
-		   List<Habitacion> habitaciones =findXNombre(habitacion.getNombre());
+		   List<Habitacion> habitaciones =findXNombre(habitacion.getNombre(),hotel);
 		    EntityManager em = JPAUtility.getEntityManager();
 		    em.getTransaction().begin();
 		    
@@ -101,9 +101,9 @@ public List<Habitacion> listarOcupadas(int hotel) throws Exception{
 	   }
 	
 	   
-	   public void actualizar(Habitacion habitacion,List<String> listaInsumos)throws Exception {
+	   public void actualizar(Habitacion habitacion,List<String> listaInsumos,int hotel)throws Exception {
 			
-		   List<Habitacion> habitaciones =findXNombre(habitacion.getNombre());
+		   List<Habitacion> habitaciones =findXNombre(habitacion.getNombre(),hotel);
 		    EntityManager em = JPAUtility.getEntityManager();
 		    em.getTransaction().begin();
 		    InsumoHabitacionService insumoHabitacionService= InsumoHabitacionService.getInstance();
@@ -136,7 +136,7 @@ public List<Habitacion> listarOcupadas(int hotel) throws Exception{
 			   em.persist(habitacion);
 			   em.getTransaction().commit();
 			    em.close();
-			   List<Habitacion> habitacionesInsertadas =findXNombre(habitacion.getNombre());
+			   List<Habitacion> habitacionesInsertadas =findXNombre(habitacion.getNombre(),hotel);
 			   
 			   Habitacion habitacionInsertada=  habitacionesInsertadas.get(0);
 			   
@@ -164,11 +164,12 @@ public Habitacion find(int id) throws Exception{
 
 	}
 
-public List<Habitacion> findXNombre(String nombre) throws Exception{
+public List<Habitacion> findXNombre(String nombre,int hotel) throws Exception{
 	
 	EntityManager em = JPAUtility.getEntityManager();
 	Query query = em.createNamedQuery("Habitacion.findNombre");
 	query.setParameter("nombre", nombre);
+	query.setParameter("hotel",hotel);
 	List<Habitacion> results = query.getResultList();
     return results;
     

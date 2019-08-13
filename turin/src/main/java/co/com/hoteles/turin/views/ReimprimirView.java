@@ -69,6 +69,7 @@ public class ReimprimirView extends GenericBB implements Serializable {
 	private boolean hayFactura;
 	private String habitacionCliente="";
 	private int descuento;
+	private int total = 0;
 
 
 	private Date todayDate = new Date();
@@ -299,12 +300,12 @@ public class ReimprimirView extends GenericBB implements Serializable {
 
 				for (String habitacion : habitacionesPickList.getTarget()) {
 					String[] datos = habitacion.split("-");
-					List<Habitacion> h2 = HabitacionService.getInstance().findXNombre(datos[0]);
+					List<Habitacion> h2 = HabitacionService.getInstance().findXNombre(datos[0],this.getHotelSession().getCodigo());
 					Habitacion hc = h2.get(0);
 					HabitacionesChecking h = new HabitacionesChecking(CkeckingConsultado.getId(), hc.getId());
 					HabitacionesCkeckingService.getInstance().ingresar(h);
 					hc.setEstado("OCU");
-					HabitacionService.getInstance().actualizar(hc);
+					HabitacionService.getInstance().actualizar(hc,this.getHotelSession().getCodigo());
 				}
 
 				for (Servicio servicio : servicios) {
@@ -609,7 +610,7 @@ public class ReimprimirView extends GenericBB implements Serializable {
 			String[] datos = idHabitacion.split("-");
 
 			try {
-				habitacionSeleccionada.add((HabitacionService.getInstance().findXNombre(datos[0])).get(0));
+				habitacionSeleccionada.add((HabitacionService.getInstance().findXNombre(datos[0],this.getHotelSession().getCodigo())).get(0));
 
 			} catch (NumberFormatException e) {
 
@@ -729,7 +730,7 @@ public class ReimprimirView extends GenericBB implements Serializable {
 			
 	 
 			int nochesHotel=(int) ((fechaSalida.getTime()-fechaEntrada.getTime())/86400000);
-			parametros.put("noches", nochesHotel);
+			parametros.put("noches", (nochesHotel));
 			parametros.put("numeroPersonas", numeroPersonas);
 			parametros.put("habitacionCliente",habitacionCliente);
 			parametros.put("rutaImagen", realpathImagenes);
@@ -740,6 +741,19 @@ public class ReimprimirView extends GenericBB implements Serializable {
 			checkingDTO.setAcompanantes(acompanantes);
 
 			checkingDTO.setHabitaciones(getHabitacionSeleccionada());
+			
+             total =0;
+			
+			for(Habitacion hf : getHabitacionSeleccionada()) {
+				
+				total= total +hf.getPrecio();
+				
+			}
+			
+			int dias = (int) ((fechaSalida.getTime() - fechaEntrada.getTime()) / 86400000);
+            total = (total * (dias)) -descuento;
+			parametros.put("total", total);
+
 			checkingDTO.setServicios(servicios);
 			List<CheckingDTO> lista = new ArrayList<CheckingDTO>();
 			lista.add(checkingDTO);
@@ -823,7 +837,7 @@ public class ReimprimirView extends GenericBB implements Serializable {
 				parametros.put("fechaSalida", fechaSalida);
 				factura.setFechaSalida(fechaSalida);
 				int dias = (int) ((fechaSalida.getTime() - fechaEntrada.getTime()) / 86400000);
-				dias = dias + 1;
+			
 				parametros.put("dias", (dias));
 				Parametro parametroResolucion = ParametroService.getInstance().findXNombreXHotel("resolucion", this.getHotelSession().getCodigo());
 				Parametro parametroIVA = ParametroService.getInstance().findXNombreXHotel("iva", this.getHotelSession().getCodigo());
@@ -883,8 +897,7 @@ public class ReimprimirView extends GenericBB implements Serializable {
 				float ivaFactura = total-subtotal;
 				parametros.put("iva",ivaFactura);
 				parametros.put("descuento", descuento);
-			    total = total -descuento;
-                parametros.put("total", total);
+			     parametros.put("total", total);
 				
 				
 				factura.setTotal(subtotal);
@@ -892,6 +905,7 @@ public class ReimprimirView extends GenericBB implements Serializable {
 				factura.setFecha(fechaEntrada);
 				factura.setRazonSocial(this.getHotelSession().getNomgre());
 				factura.setHotel(this.getHotelSession().getCodigo());
+				factura.setDescuento(descuento);
 				parametroResolucion.setValor((consecutivo) + "");
 				parametroResolucion.setHotel(this.getHotelSession().getCodigo());
 				ParametroService.getInstance().actualizar(parametroResolucion);
@@ -904,7 +918,7 @@ public class ReimprimirView extends GenericBB implements Serializable {
 
 					habitacion.setEstado("FAC");
 				
-					HabitacionService.getInstance().actualizar(habitacion);
+					HabitacionService.getInstance().actualizar(habitacion,this.getHotelSession().getCodigo());
 
 				}
 

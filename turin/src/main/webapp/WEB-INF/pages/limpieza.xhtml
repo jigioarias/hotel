@@ -43,7 +43,7 @@
     
     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
      
-        <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" update=":forma:listaHabitaciones" ajax="false" icon="pi pi-check" />
+        <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" actionListener="#{limpiezaView.enviarHome}" update=":forma:listaHabitaciones" ajax="false" icon="pi pi-check" />
         <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
     </p:confirmDialog>  
     

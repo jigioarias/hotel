@@ -25,10 +25,7 @@
             <p:menuitem value="Imprimir" url="imprimirChecking.xhtml" />
         </p:submenu>
  
-        <p:submenu label="Facturar" icon="pi pi-pencil"  rendered="#{loginBean.usuarioSession.rol ne 'ASEO'}">
-            <p:menuitem value="Generar factura" url="facturar.xhtml" icon="pi pi-angle-double-left" />
-            
-        </p:submenu>
+      
         
            <p:submenu label="Limpieza" icon="pi pi-pencil">
             <p:menuitem value="Reportar" url="reportar.xhtml" icon="pi pi-angle-double-left" />
@@ -38,24 +35,23 @@
      
  
   <p:submenu label="Administracion" icon="pi pi-pencil">
-            <p:menuitem value="Habitaciones" url="habitacion.xhtml" icon="pi pi-angle-double-left" rendered="#{loginBean.usuarioSession.rol ne 'ASEO'}" />
-            <p:menuitem value="Insumos" url="insumos.xhtml" icon="pi pi-angle-double-left" rendered="#{loginBean.usuarioSession.rol ne 'ASEO'}" />
-            <p:menuitem value="Servicios" url="servicio.xhtml" icon="pi pi-angle-double-left" rendered="#{loginBean.usuarioSession.rol ne 'ASEO'}" />
-            <p:menuitem value="Clientes" url="clientes.xhtml" icon="pi pi-angle-double-left" rendered="#{loginBean.usuarioSession.rol ne 'ASEO'}" />
+            <p:menuitem value="Habitaciones" url="habitacion.xhtml" icon="pi pi-angle-double-left"  />
+            <p:menuitem value="Insumos" url="insumos.xhtml" icon="pi pi-angle-double-left" />
+            <p:menuitem value="Servicios" url="servicio.xhtml" icon="pi pi-angle-double-left"  />
+            <p:menuitem value="Clientes" url="clientes.xhtml" icon="pi pi-angle-double-left" />
 
-            <p:menuitem value="Roles" url="roles.xhtml" icon="pi pi-angle-double-left" rendered="#{loginBean.usuarioSession.rol eq 'ADMIN'}"  />
-            <p:menuitem value="Usuarios" url="usuario.xhtml" icon="pi pi-angle-double-left" rendered="#{loginBean.usuarioSession.rol eq 'ADMIN'}"  />
+            <p:menuitem value="Roles" url="roles.xhtml" icon="pi pi-angle-double-left" rendered="#{loginBean.usuarioSession.rol ne 'RECEPCIONISTA'}"  />
+            <p:menuitem value="Usuarios" url="usuario.xhtml" icon="pi pi-angle-double-left" rendered="#{loginBean.usuarioSession.rol ne 'RECEPCIONISTA'}"  />
             
             
        </p:submenu>
       <p:submenu label="Reportes" icon="pi pi-pencil">
-            <p:menuitem value="Extranjeros" url="reporteExtranjeros.xhtml" icon="pi pi-angle-double-left" rendered="#{loginBean.usuarioSession.rol ne 'ASEO'}" />
-            <p:menuitem value="Ventas" url="reporteVentas.xhtml" icon="pi pi-angle-double-left" rendered="#{loginBean.usuarioSession.rol eq 'ADMIN'}" />
+            <p:menuitem value="Extranjeros" url="reporteExtranjeros.xhtml" icon="pi pi-angle-double-left" rendered="#{loginBean.usuarioSession.rol ne 'RECEPCIONISTA'}" />
+            <p:menuitem value="Ventas" url="reporteVentas.xhtml" icon="pi pi-angle-double-left" rendered="#{loginBean.usuarioSession.rol ne 'RECEPCIONISTA'}" />
             
        </p:submenu>      
         
-        <p:menuitem value="Reservas (#{reservasView.numeroReservas})"  id="reservas" url="reservas.xhtml" icon="pi pi-user-plus"
-        rendered="#{loginBean.usuarioSession.rol ne 'ASEO'}" />
+        <p:menuitem value="Reservas (#{reservasView.numeroReservas})"  id="reservas" url="reservas.xhtml" icon="pi pi-user-plus" />
       
         <p:menuitem value="Home" url="index.xhtml"  />
             

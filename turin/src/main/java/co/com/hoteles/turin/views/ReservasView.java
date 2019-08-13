@@ -28,6 +28,8 @@ public class ReservasView extends GenericBB {
     private Date fechaSalida;
     private int numeroHabitaciones;
     private String habitaciones;
+    private String metodo;
+    private int abono;
     
     private String mensaje;
     private int numeroReservas;
@@ -132,6 +134,9 @@ public class ReservasView extends GenericBB {
 	        reserva.setNumeroHabitaciones(numeroHabitaciones);
 	        reserva.setNumeroNinos(numeroNinos);
 	        reserva.setHabitaciones(habitaciones);
+	        reserva.setAbono(abono);
+	        reserva.setMetodo(metodo);
+	        
 	        reserva.setHotel(this.getHotelSession().getCodigo());
 	        reserva.setActiva("S");
 	        ReservaService reservaService = ReservaService.getInstance();
@@ -152,7 +157,15 @@ public class ReservasView extends GenericBB {
 	 }     
     
 	 
-	    public String getMensaje() {
+	    public int getAbono() {
+		return abono;
+	}
+
+	public void setAbono(int abono) {
+		this.abono = abono;
+	}
+
+		public String getMensaje() {
 		return mensaje;
 	}
 	public void setMensaje(String mensaje) {
@@ -188,6 +201,14 @@ public class ReservasView extends GenericBB {
 
 	public void setHabitaciones(String habitaciones) {
 		this.habitaciones = habitaciones;
+	}
+
+	public String getMetodo() {
+		return metodo;
+	}
+
+	public void setMetodo(String metodo) {
+		this.metodo = metodo;
 	}    
 
 		 

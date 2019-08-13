@@ -149,7 +149,7 @@
 				</reportElement>
 			</line>
 			<staticText>
-				<reportElement x="210" y="122" width="120" height="15" uuid="1d3045ed-03d6-4253-a959-aeeb491b73ca"/>
+				<reportElement x="269" y="122" width="120" height="15" uuid="1d3045ed-03d6-4253-a959-aeeb491b73ca"/>
 				<text><![CDATA[Celular]]></text>
 			</staticText>
 			<staticText>
@@ -157,7 +157,7 @@
 				<text><![CDATA[Fecha Entrada:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="210" y="141" width="120" height="15" uuid="665f25c2-8663-4951-b699-1ab863bdeb76"/>
+				<reportElement x="268" y="141" width="120" height="15" uuid="665f25c2-8663-4951-b699-1ab863bdeb76"/>
 				<text><![CDATA[Fecha Salida:]]></text>
 			</staticText>
 			<staticText>
@@ -201,11 +201,11 @@
 				<textFieldExpression><![CDATA[$P{nombreCliente}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="89" y="122" width="100" height="15" uuid="fdbfbde6-3c04-4eb9-9eb4-7245ca508488"/>
+				<reportElement x="89" y="122" width="179" height="15" uuid="fdbfbde6-3c04-4eb9-9eb4-7245ca508488"/>
 				<textFieldExpression><![CDATA[$P{correo}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="247" y="122" width="100" height="15" uuid="42555568-d606-4cf2-be15-9cc1c1f011ff"/>
+				<reportElement x="306" y="122" width="100" height="15" uuid="42555568-d606-4cf2-be15-9cc1c1f011ff"/>
 				<textFieldExpression><![CDATA[$P{celular}]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -225,7 +225,7 @@
 				<textFieldExpression><![CDATA[$P{fechaEntrada}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd-MM-yyyy" isBlankWhenNull="true">
-				<reportElement x="283" y="141" width="100" height="15" uuid="60927068-633a-469d-a8ab-0595e14ef0e5"/>
+				<reportElement x="340" y="141" width="100" height="15" uuid="60927068-633a-469d-a8ab-0595e14ef0e5"/>
 				<textFieldExpression><![CDATA[$P{fechaSalida}]]></textFieldExpression>
 			</textField>
 			<line>
@@ -250,7 +250,7 @@
 			</staticText>
 			<staticText>
 				<reportElement x="1" y="158" width="120" height="15" uuid="c6adb4a0-7087-4829-abb8-e0dbfac9c985"/>
-				<text><![CDATA[Días en el hotel:]]></text>
+				<text><![CDATA[Noches en el hotel:]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="88" y="159" width="100" height="15" uuid="3248eabd-451a-4e9d-8614-c612fac64849"/>
@@ -264,7 +264,7 @@
 		</band>
 	</detail>
 	<summary>
-		<band height="270" splitType="Stretch">
+		<band height="273" splitType="Stretch">
 			<property name="local_mesure_unitheight" value="pixel"/>
 			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
 			<staticText>
@@ -430,11 +430,11 @@
 				<textFieldExpression><![CDATA[$P{total}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="350" y="164" width="89" height="20" uuid="7841cf93-e98e-4a93-9948-7642bacc38ee"/>
+				<reportElement x="351" y="163" width="89" height="20" uuid="7841cf93-e98e-4a93-9948-7642bacc38ee"/>
 				<text><![CDATA[Descuento :]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="440" y="164" width="100" height="20" uuid="4a2dd3e3-a6f2-45d8-9528-be29d076a2ad"/>
+				<reportElement x="441" y="163" width="100" height="20" uuid="4a2dd3e3-a6f2-45d8-9528-be29d076a2ad"/>
 				<textFieldExpression><![CDATA[$P{descuento}]]></textFieldExpression>
 			</textField>
 		</band>

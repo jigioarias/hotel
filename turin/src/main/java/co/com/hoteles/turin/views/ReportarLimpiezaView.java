@@ -262,7 +262,7 @@ public void confirmar() {
 	try {
 		h = HabitacionService.getInstance().find(Integer.parseInt(codigoHabitacion));
 		h.setEstado("RPF");
-		HabitacionService.getInstance().actualizar(h);
+		HabitacionService.getInstance().actualizar(h,this.getHotelSession().getCodigo());
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -273,6 +273,9 @@ public void confirmar() {
 
 
 
+public String enviarHome() {
+	 return "/index.xhtml?faces-redirect=true";	
+  }
 
 
 

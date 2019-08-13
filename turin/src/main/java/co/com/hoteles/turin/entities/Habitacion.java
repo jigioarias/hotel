@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @Entity
 @NamedQuery(name="Habitacion.findAll", query="SELECT h FROM Habitacion h where hotel=:hotel")
 @NamedQuery(name="Habitacion.findEstado", query="SELECT h FROM Habitacion h where estado=:estado and hotel=:hotel")
-@NamedQuery(name="Habitacion.findNombre", query="SELECT h FROM Habitacion h where nombre=:nombre")
+@NamedQuery(name="Habitacion.findNombre", query="SELECT h FROM Habitacion h where nombre=:nombre and hotel=:hotel")
 @Table(name="habitacion")
 public class Habitacion implements Serializable {
 	public Habitacion(int capacidad, String descripcion, String estado, String nombre, int precio) {

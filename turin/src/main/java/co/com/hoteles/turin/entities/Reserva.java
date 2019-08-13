@@ -31,6 +31,7 @@ public class Reserva implements Serializable {
 		this.numeroHabitaciones = numeroHabitaciones;
 		this.numeroNinos = numeroNinos;
 		this.hotel = hotel;
+		
 	}
 
 	
@@ -59,6 +60,10 @@ public class Reserva implements Serializable {
 	private int numeroNinos;
 	
 	private String activa;
+	
+	private String metodo;
+	
+	private int abono;
 	
 	private int hotel;
 
@@ -162,6 +167,22 @@ public class Reserva implements Serializable {
 
 	public void setHabitaciones(String habitaciones) {
 		this.habitaciones = habitaciones;
+	}
+
+	public String getMetodo() {
+		return metodo;
+	}
+
+	public void setMetodo(String metodo) {
+		this.metodo = metodo;
+	}
+
+	public int getAbono() {
+		return abono;
+	}
+
+	public void setAbono(int abono) {
+		this.abono = abono;
 	}
 
 }

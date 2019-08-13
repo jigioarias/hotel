@@ -125,8 +125,9 @@ width: 1500px
 					  <p:spinner id="basic" value="#{checkingView.numeroPersonas}" min="1" max="20" />
                   
 					 <h:outputLabel for="fechaEntrada" value="${msg['checking.fechaEntrada']}" />
-                  <p:calendar id="fechaEntrada" value="#{checkingView.fechaEntrada}" required="true" 
+                  <p:calendar id="fechaEntrada" value="#{checkingView.fechaEntrada}" required="true"  
                   pattern="dd-MM-yyyy"
+                  disabled="true"
                   requiredMessage="La fecha de entrada requerida" 
                   binding="#{dateIniComponent}"
                   mindate="#{checkingView.todayDate}"
@@ -530,11 +531,14 @@ width: 1500px
                    
                    <h:panelGrid columns="3" columnClasses="value, value">			
 					
-    				 		<h:outputText value="Total a pagar Check in:" />
-    				 		<h:outputText value="#{checkingView.total}" />	<br></br>	
+    				 		
     				 		<h:outputText value="Descuento:" />		
-    				    	<p:inputText value="#{checkingView.descuento}"  />		
-    			
+    				    	<h:inputText value="#{checkingView.descuento}" >
+    				    	
+    				    	</h:inputText>
+    				    	<br></br>	
+    			<h:outputText value="Valor Check in:" />
+    				 		<h:outputText value="#{checkingView.total}" id="total" />	
     				 
     				 </h:panelGrid>
 					

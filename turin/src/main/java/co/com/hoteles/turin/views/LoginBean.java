@@ -58,6 +58,8 @@ public class LoginBean extends GenericBB {
 		// colocar todos los valores de la clase cajero
 		Usuario usuarioC;
 		Hotel hotelC;
+		  FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+
 		
 		try {
 			usuarioC = usuarioService.findXClave(usuario);
@@ -78,13 +80,14 @@ public class LoginBean extends GenericBB {
 
 		}
 		  FacesContext.getCurrentInstance().addMessage("messages",
-					new FacesMessage(FacesMessage.SEVERITY_ERROR,  "Usuario y Clave Incorrectos", ""));
+					new FacesMessage(FacesMessage.SEVERITY_ERROR,  "Usuario y Clave Incorrectos o no tiene permisos para este hotel", ""));
 		  
-		  
+
 		  return "/login.xhtml?faces-redirect=true";	
 	} catch (Exception e) {
-		// TODO Auto-generated catch block
-	  e.printStackTrace();
+		FacesContext.getCurrentInstance().addMessage("messages",
+		new FacesMessage(FacesMessage.SEVERITY_ERROR,  "Usuario y Clave Incorrectos o no tiene permisos para este hotel", ""));
+	  
 	  return "/login.xhtml?faces-redirect=true";	
 	}
 	
