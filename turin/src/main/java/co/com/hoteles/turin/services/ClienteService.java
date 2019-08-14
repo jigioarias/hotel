@@ -125,16 +125,18 @@ public class ClienteService {
 
 
 	
-	public String findXHabitacion(int idHabitacion, int hotel) throws Exception{
+	public String findXHabitacion(int idHabitacion, int hotel, String estado) throws Exception{
 		try {
 			EntityManager em = JPAUtility.getEntityManager();
 			Query query = em.createNativeQuery("select upper(CONCAT(cl.tipoDocumento,' ',cl.documento, ' - ', cl.nombre))cliente from ckecking ch, clientes cl, habitaciones_checking hc " + 
 					" where hc.id_ckecking = ch.id " + 
 					"  and ch.id_cliente = cl.id " + 
 					"  and hc.id_habitacion = ? " +
-					 " and hc.hotel= ?");
+					 " and hc.hotel= ?"
+					 + " and  ch.estado=?");
 			query.setParameter(1, idHabitacion);
 			query.setParameter(2, hotel);
+			query.setParameter(3, estado);
 
 			List results = query.getResultList();
 			if (results.isEmpty()) {

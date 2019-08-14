@@ -47,7 +47,7 @@ public class IndexView  extends GenericBB {
            habitacionesOcupadas = new ArrayList<HabitacionOcupadaDTO>();
            for (Iterator iterator = habitaciones2.iterator(); iterator.hasNext();) {
 			Habitacion habitacion = (Habitacion) iterator.next();
-			nombreCliente =ClienteService.getInstance().findXHabitacion(habitacion.getId(),this.getHotelSession().getCodigo());
+			nombreCliente =ClienteService.getInstance().findXHabitacion(habitacion.getId(),this.getHotelSession().getCodigo(),"A");
 			habitacionesOcupadas.add(new HabitacionOcupadaDTO(habitacion, nombreCliente));
 			
 		}
