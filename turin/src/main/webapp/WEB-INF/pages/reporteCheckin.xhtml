@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+ <h:body>
+
+<ui:composition template="../template/hotelLayout.xhtml">
+         		<ui:define name="content">
+
+
+
+
+<h:form id="principal">
+
+ <div class="ui-fluid">
+        <p:panelGrid columns="2" id="pFiltros" columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4" layout="grid" styleClass="ui-fluid">
+    
+		 <h:outputLabel for="FechaInicio" value="${msg['reportes.fechaInicio']}" />
+                  <p:calendar id="fechaInicio" value="#{reporteCheckinView.fechaInicio}"
+                   required="false"  showOn="button"
+                   pattern="dd-MM-yyyy"
+                  maxdate="#{reporteCheckinView.todayDate}"
+                   />
+		
+			 <h:outputLabel for="FechaFin" value="${msg['reportes.fechaFinal']}" />
+                  <p:calendar id="fechaFin" value="#{reporteCheckinView.fechaFin}"
+                   required="false"  showOn="button"
+                   pattern="dd-MM-yyyy"
+                  maxdate="#{reporteCheckinView.todayDate}"
+                   />
+	
+		<p:commandButton action="#{reporteCheckinView.buscarVentas}" value="Buscar"
+			update="lista"></p:commandButton>
+	
+</p:panelGrid>
+	
+	
+		
+	<p:dataTable var="venta" value="#{reporteCheckinView.listaCheckin}" id="lista">
+	
+		
+		<p:column>
+		   <f:facet name="header">
+                <h:outputText value="# Check-in" />
+            </f:facet>
+			<h:outputText value="#{venta.checkin}" />
+		</p:column>
+		
+		<p:column>
+		   <f:facet name="header">
+                <h:outputText value="Fecha Check-in" />
+            </f:facet>
+			<h:outputText value="#{venta.fecha}" />
+		</p:column>
+
+		<p:column>
+		   <f:facet name="header">
+                <h:outputText value="Habitacion" />
+            </f:facet>
+			<h:outputText value="#{venta.habitacion}" />
+	</p:column>
+
+<p:column>
+		   <f:facet name="header">
+                <h:outputText value="Tipo Documento" />
+            </f:facet>
+			<h:outputText value="#{venta.tipoDocumento}" />
+	</p:column>
+	
+<p:column>
+		   <f:facet name="header">
+                <h:outputText value="Documento" />
+            </f:facet>
+			<h:outputText value="#{venta.documento}" />
+	</p:column>
+		
+<p:column>
+		   <f:facet name="header">
+                <h:outputText value="Nombre" />
+            </f:facet>
+			<h:outputText value="#{venta.nombre}" />
+	</p:column>	
+
+<p:column>
+		   <f:facet name="header">
+                <h:outputText value="Fecha Nacimiento" />
+            </f:facet>
+			<h:outputText value="#{venta.fechaNacimiento}" />
+	</p:column>		
+<p:column>
+		   <f:facet name="header">
+                <h:outputText value="Celular" />
+            </f:facet>
+			<h:outputText value="#{venta.celular}" />
+	</p:column>			
+
+<p:column>
+		   <f:facet name="header">
+                <h:outputText value="Num Acompanantes" />
+            </f:facet>
+			<h:outputText value="#{venta.acompanantes}" />
+	</p:column>		
+
+<p:column>
+		   <f:facet name="header">
+                <h:outputText value="Num Noches" />
+            </f:facet>
+			<h:outputText value="#{venta.noches}" />
+	</p:column>			
+	<p:column>
+		  <f:facet name="header">
+                <h:outputText value="Estado" />
+            </f:facet>
+		<h:outputText value="#{venta.estado}" />
+    
+		</p:column>
+	
+	
+	<p:column>
+		  <f:facet name="header">
+                <h:outputText value="Fecha Check-out" />
+            </f:facet>
+		<h:outputText value="#{venta.fechaFin}" />
+    
+		</p:column>
+		<p:column>
+		  <f:facet name="header">
+                <h:outputText value="Descuento" />
+            </f:facet>
+		<h:outputText value="#{venta.descuento}" />
+    
+		</p:column>
+	
+<p:column>
+		  <f:facet name="header">
+                <h:outputText value="Total" />
+            </f:facet>
+		<h:outputText value="#{venta.valor}" />
+    
+		</p:column>
+	</p:dataTable>
+	
+
+			  <div>
+              
+        <p:commandButton id="generar" value="${msg['reportes.generar']}"   icon="ui-icon-print" 
+    				 actionListener="#{reporteCheckinView.generarVentas()}" ajax="false" />
+    				 
+ 
+       </div>
+</div>	
+</h:form>
+
+	
+    	</ui:define>
+    		
+	
+    	</ui:composition>
+</h:body>
+</html>
+

@@ -14,6 +14,7 @@ public class CheckingDTO {
 	private List<Cliente> acompanantes;
 	private List<VentaDTO> ventas;
 	private List<InsumoDTO> insumos;
+	private List<CheckinDTO> chechins;
 
 	public List<Servicio> getServicios() {
 		return servicios;
@@ -44,6 +45,12 @@ public class CheckingDTO {
 	}
 	public void setVentas(List<VentaDTO> ventas) {
 		this.ventas = ventas;
+	}
+	public List<CheckinDTO> getChechins() {
+		return chechins;
+	}
+	public void setChechins(List<CheckinDTO> chechins) {
+		this.chechins = chechins;
 	}
 	
 		

@@ -44,7 +44,7 @@
 	<parameter name="rutaReportes" class="java.lang.String"/>
 	<parameter name="fechaInicio" class="java.util.Date"/>
 	<parameter name="fechaFin" class="java.util.Date"/>
-	<parameter name="total" class="java.lang.Integer"/>
+	<parameter name="total" class="java.lang.Float"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
