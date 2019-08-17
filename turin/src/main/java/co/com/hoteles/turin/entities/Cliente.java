@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 @Entity
@@ -127,7 +129,7 @@ public class Cliente implements Serializable {
 	public Date getFechaRegistro() {
 		return fechaRegistro;
 	}
-
+	@Temporal(TemporalType.TIMESTAMP)
 	public void setFechaRegistro(Date fechaRegistro) {
 		this.fechaRegistro = fechaRegistro;
 	}

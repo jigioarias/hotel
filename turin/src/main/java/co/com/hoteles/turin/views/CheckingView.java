@@ -307,7 +307,7 @@ public class CheckingView extends GenericBB implements Serializable {
 
 		try {
 			String usuarioIngreso = this.getUsuarioSession().getId();
-			cliente.setFechaRegistro(new Date());
+			cliente.setFechaRegistro(new java.sql.Date((new Date()).getTime()));
 			cliente.setUsuarioUIngreso(usuarioIngreso);
 			cliente.setHotel(this.getHotelSession().getCodigo());
 			ClienteService.getInstance().ingresar(cliente);
@@ -321,7 +321,7 @@ public class CheckingView extends GenericBB implements Serializable {
 			Ckecking ck = new Ckecking();
 			ck.setEstado("A");
 			ck.setFechaEntrada(fechaEntrada);
-			ck.setFechaRegistro(new Date());
+			ck.setFechaRegistro(new java.sql.Date((new Date()).getTime()));
 			ck.setFechaSalida(fechaSalida);
 			ck.setIdCliente(ClienteIngresado.getId());
 			ck.setNumeroPersonas(numeroPersonas);
@@ -430,7 +430,7 @@ public class CheckingView extends GenericBB implements Serializable {
 		acompanante.setExtranjero(extranjero);
 		acompanante.setNacionalidad(nacionalidad);
 
-		acompanante.setFechaRegistro(new Date());
+		acompanante.setFechaRegistro(new java.sql.Date((new Date()).getTime()));
 		acompanantes.add(acompanante);
 		RequestContext context = RequestContext.getCurrentInstance();
 		context.addCallbackParam("adicionado", true);

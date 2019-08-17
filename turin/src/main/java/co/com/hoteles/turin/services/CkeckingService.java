@@ -110,65 +110,34 @@ public class CkeckingService {
 		try {
 			List<CheckinDTO> lista = new ArrayList<CheckinDTO>();
 			EntityManager em = JPAUtility.getEntityManager();
-			Query query = em.createNativeQuery("SELECT    " + 
-					"	g.id checkin ,   " + 
-					"    g.fecha_registro fecha,   " + 
-					"    g.habitacion habitacion,   " + 
-					"    g.tipoDocumento tipoDocumento,   " + 
-					"    g.documento documento,   " + 
-					"    g.nombre nombre,   " + 
-					"    g.fechaNacimiento fechaNacimiento,   " + 
-					"    g.celular,   " + 
-					"    g.numero_personas acompanantes,   " + 
-					"    g.noches,   " + 
-					"    g.estado,   " + 
-					"    g.fecha_Salida fechaFin,   " + 
-					"    g.descuento descuento,   " + 
-					"    SUM(g.precio) valor   " + 
-					"   " + 
-					" FROM   " + 
-					"    (SELECT    " + 
-					"        d.*, h.nombre habit, h.precio   " + 
-					"    FROM   " + 
-					"        (SELECT    " + 
-					"        ck.id,   " + 
-					"        ck.fecha_registro,   " + 
-					"        ck.habitacion,   " + 
-					"        cl.tipodocumento,   " + 
-					"		cl.documento,   " + 
-					"        cl.nombre,   " + 
-					"        cl.fechaNacimiento,   " + 
-					"        cl.celular,   " + 
-					"		ck.numero_personas,   " + 
-					"        (ck.fecha_salida- ck.fecha_entrada) noches,   " + 
-					"		ck.estado,   " + 
-					"		ck.descuento,   " + 
-					"	    ck.fecha_salida   " + 
-					"              " + 
-					"             " + 
-					"               " + 
-					"               " + 
-					"               " + 
-					"    FROM   " + 
-					"        hturin.ckecking ck, hturin.clientes cl   " + 
-					"    WHERE   " + 
-					"        ck.fecha_entrada >= ?  " + 
-					"            AND ck.fecha_entrada <= ? " + 
-					"            AND ck.hotel = ?" + 
-					"            AND ck.id_cliente = cl.id) d, hturin.habitaciones_checking hc, hturin.habitacion h   " + 
-					"    WHERE   " + 
-					"        hc.id_ckecking = d.id   " + 
-					"            AND hc.id_habitacion = h.id) g   " + 
-					"GROUP BY    g.numero_personas,   " + 
-					"            g.estado,g.id ,   " + 
-					"            g.descuento ,    " + 
-					"            g.fecha_registro ,   " + 
-					"            g.fecha_salida ,    " + 
-					"            g.id ,    " + 
-					"            g.tipodocumento ,   " + 
-					"            g.documento ,    " + 
-					"            g.nombre , g.precio,g.fechaNacimiento,   " + 
-					"            g.celular, g.habitacion, g.noches");
+			Query query = em.createNativeQuery("select   "+
+					"ck.id,  "+
+					"ck.fecha_registro,  "+
+					"ck.habitacion,  "+
+					"(select tipoDocumento from clientes c where c.id=ck.id_cliente )tipo_documento,  "+
+					"(select documento from clientes c where c.id=ck.id_cliente )documento,  "+
+					"(select nombre from clientes c where c.id=ck.id_cliente )nombre,  "+
+					"(select fechaNacimiento from clientes c where c.id=ck.id_cliente )fechaNacimiento,  "+
+					"(select celular from clientes c where c.id=ck.id_cliente )celular,  "+
+					"ck.numero_personas acompanantes,  "+
+					"(ck.fecha_salida- ck.fecha_entrada) noches,  "+
+					"ck.estado,  "+
+					"(select fecha from facturas f where f.checking= ck.id)fecha_salida,  "+
+
+					"ck.descuento,  "+
+					"(select sum(h.precio)   "+
+					"from habitaciones_checking hc,   "+
+					"habitacion h, ckecking c  "+
+					"where  c.id = hc.id_ckecking and h.id = hc.id_habitacion  "+
+					"and hc.hotel = c.hotel  "+
+					"and c.hotel = h.hotel  "+
+					"and c.hotel = ck.hotel  "+
+					"and c.id =ck.id) total  "+
+					"from ckecking ck  "+
+					"where ck.fecha_entrada >= ?  "+
+					"and ck.fecha_entrada <= ?  "+
+					"and ck.hotel = ? "+
+					"order by ck.id ");
 			query.setParameter(1, fechaInicio);
 			query.setParameter(2, fechaFin);
 			query.setParameter(3, hotel);

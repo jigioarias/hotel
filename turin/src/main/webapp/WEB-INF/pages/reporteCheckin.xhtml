@@ -38,7 +38,12 @@
 	
 </p:panelGrid>
 	
-	
+	  
+    <h:commandLink   >
+    Exportar A Excel
+        <p:graphicImage name="/images/Logo.png" />
+        <p:dataExporter type="xls" target="lista" fileName="ckeck-in_hoy"   />
+    </h:commandLink>
 		
 	<p:dataTable var="venta" value="#{reporteCheckinView.listaCheckin}" id="lista">
 	
@@ -145,13 +150,7 @@
 	</p:dataTable>
 	
 
-			  <div>
-              
-        <p:commandButton id="generar" value="${msg['reportes.generar']}"   icon="ui-icon-print" 
-    				 actionListener="#{reporteCheckinView.generarVentas()}" ajax="false" />
-    				 
- 
-       </div>
+			
 </div>	
 </h:form>
 

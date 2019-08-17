@@ -34,7 +34,7 @@ public class Ckecking implements Serializable {
 	@Column(name="fecha_entrada")
 	private Date fechaEntrada;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="fecha_registro")
 	private Date fechaRegistro;
 

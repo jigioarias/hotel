@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
@@ -23,6 +24,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 @ManagedBean
+@ViewScoped
 public class ReporteCheckinView extends  GenericBB {
 
 	private Date fechaInicio;
@@ -145,7 +147,7 @@ public class ReporteCheckinView extends  GenericBB {
 			CheckingDTO checkingDTO = new CheckingDTO();
 			listaCheckin= CkeckingService.getInstance().listarVentas(fechaInicio, fechaFin,this.getHotelSession().getCodigo());
 					
-			checkingDTO.setChechins(listaCheckin);
+			checkingDTO.setCheckins(listaCheckin);
 			
 			float totalVenta = 0;
 			

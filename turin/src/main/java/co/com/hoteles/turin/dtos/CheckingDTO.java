@@ -13,8 +13,8 @@ public class CheckingDTO {
 	private List<Habitacion> habitaciones;
 	private List<Cliente> acompanantes;
 	private List<VentaDTO> ventas;
-	private List<InsumoDTO> insumos;
-	private List<CheckinDTO> chechins;
+	private List<InsumoDTO> insumos; 
+	private List<CheckinDTO> checkins;
 
 	public List<Servicio> getServicios() {
 		return servicios;
@@ -46,13 +46,12 @@ public class CheckingDTO {
 	public void setVentas(List<VentaDTO> ventas) {
 		this.ventas = ventas;
 	}
-	public List<CheckinDTO> getChechins() {
-		return chechins;
+	public List<CheckinDTO> getCheckins() {
+		return checkins;
 	}
-	public void setChechins(List<CheckinDTO> chechins) {
-		this.chechins = chechins;
+	public void setCheckins(List<CheckinDTO> checkins) {
+		this.checkins = checkins;
 	}
-	
 		
 	
 

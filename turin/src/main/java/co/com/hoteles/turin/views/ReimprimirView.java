@@ -278,7 +278,7 @@ public class ReimprimirView extends GenericBB implements Serializable {
 
 		try {
 			String usuarioIngreso = this.getUsuarioSession().getId();
-			cliente.setFechaRegistro(new Date());
+			cliente.setFechaRegistro(new java.sql.Date((new Date()).getTime()));
 			cliente.setUsuarioUIngreso(usuarioIngreso);
 			ClienteService.getInstance().ingresar(cliente);
 			Cliente ClienteIngresado = null;
@@ -381,7 +381,7 @@ public class ReimprimirView extends GenericBB implements Serializable {
 		acompanante.setCelular(celular);
 		acompanante.setFechaNacimiento(fechaNacimiento);
 		acompanante.setExtranjero(extranjero);
-		acompanante.setFechaRegistro(new Date());
+		acompanante.setFechaRegistro(new java.sql.Date((new Date()).getTime()));
 		acompanantes.add(acompanante);
 		RequestContext context = RequestContext.getCurrentInstance();
 		context.addCallbackParam("adicionado", true);

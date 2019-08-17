@@ -132,7 +132,7 @@ public class ClienteView extends GenericBB {
 	        Cliente cliente = new Cliente();
 	        cliente.setCelular(celular);
 	        cliente.setCorreo(correo);
-	        cliente.setFechaRegistro(new Date());
+	        cliente.setFechaRegistro(new java.sql.Date((new Date()).getTime()));
 	        cliente.setFechaNacimiento(fechaNacimiento);
 	        cliente.setDocumento(documento);
 	        cliente.setTipoDocumento(tipoDocumento);

@@ -37,7 +37,8 @@ public class Factura implements Serializable {
 	private String direccionCliente;
 
 	private String documentoCliente;
-
+	
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date fecha;
 
 	private int hotel;
