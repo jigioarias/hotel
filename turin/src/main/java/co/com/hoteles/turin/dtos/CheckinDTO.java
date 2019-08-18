@@ -19,6 +19,7 @@ public class CheckinDTO {
 	private String estado;
 	private String fechaFin;
 	private int descuento;
+	private String usuario;
 	
 
 	
@@ -108,5 +109,11 @@ public class CheckinDTO {
 	}
 	public void setDescuento(int descuento) {
 		this.descuento = descuento;
+	}
+	public String getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
 }

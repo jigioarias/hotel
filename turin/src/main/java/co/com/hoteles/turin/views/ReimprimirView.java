@@ -902,7 +902,9 @@ public class ReimprimirView extends GenericBB implements Serializable {
 				
 				factura.setTotal(subtotal);
 				factura.setHotel(this.getHotelSession().getCodigo());
-				factura.setFecha(fechaEntrada);
+				factura.setFechaSalida(fechaSalida);
+				factura.setFechaEntrada(fechaEntrada);
+				factura.setFecha(new java.sql.Date((new Date()).getTime()));
 				factura.setRazonSocial(this.getHotelSession().getNomgre());
 				factura.setHotel(this.getHotelSession().getCodigo());
 				factura.setDescuento(descuento);

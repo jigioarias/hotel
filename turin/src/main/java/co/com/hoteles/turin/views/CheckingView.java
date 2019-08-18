@@ -993,7 +993,10 @@ public class CheckingView extends GenericBB implements Serializable {
 				factura.setTotal(subtotal);
 				factura.setDescuento(descuento);
 				factura.setHotel(this.getHotelSession().getCodigo());
-				factura.setFecha(fechaEntrada);
+				factura.setFechaEntrada(fechaEntrada);
+				factura.setFechaSalida(fechaSalida);
+				
+				factura.setFecha(new java.sql.Date((new Date()).getTime()));
 				factura.setRazonSocial(this.getHotelSession().getNomgre());
 				factura.setDescuento(descuento);
 				parametroResolucion.setValor((consecutivo) + "");

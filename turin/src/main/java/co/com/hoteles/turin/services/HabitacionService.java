@@ -1,10 +1,13 @@
 package co.com.hoteles.turin.services;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import co.com.hoteles.turin.dtos.CheckinDTO;
 import co.com.hoteles.turin.entities.Cliente;
 import co.com.hoteles.turin.entities.Habitacion;
 import co.com.hoteles.turin.entities.Insumo;
@@ -173,6 +176,48 @@ public List<Habitacion> findXNombre(String nombre,int hotel) throws Exception{
 	List<Habitacion> results = query.getResultList();
     return results;
     
+}
+
+
+public String listarHabitacionesXCheckin(int checkin, int hotel) throws Exception{
+	try {
+	    String lista = "";
+		EntityManager em = JPAUtility.getEntityManager();
+		Query query = em.createNativeQuery("select h.nombre,precio from habitaciones_checking hc, habitacion h, ckecking  "+ 
+				"c where   "+ 
+				"c.id = hc.id_ckecking  "+ 
+				"and hc.id_habitacion = h.id  "+ 
+				"and c.id = ? " +
+				" and c.hotel = ?");
+		query.setParameter(1, checkin);
+		query.setParameter(2, hotel);
+
+		List<Object[]> habitaciones =  query.getResultList();
+		if (habitaciones==null || habitaciones.isEmpty()) {
+		    return ""; // handle no-results case
+		} else {
+				
+			for (Object[] r : habitaciones) {
+				
+				lista = lista+","+ r[0].toString();
+				
+		
+			}
+				
+				
+				
+		}
+		
+		return lista.substring(1);
+		 
+
+	} catch (Exception e) {
+
+		e.printStackTrace();
+		return "";
+	}
+
+
 }
 
 }

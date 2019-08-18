@@ -132,7 +132,7 @@ public class CkeckingService {
 					"and hc.hotel = c.hotel  "+
 					"and c.hotel = h.hotel  "+
 					"and c.hotel = ck.hotel  "+
-					"and c.id =ck.id) total  "+
+					"and c.id =ck.id) total, ck.usuario  "+
 					"from ckecking ck  "+
 					"where ck.fecha_entrada >= ?  "+
 					"and ck.fecha_entrada <= ?  "+
@@ -146,12 +146,13 @@ public class CkeckingService {
 			if (ventas==null || ventas.isEmpty()) {
 			    return null; // handle no-results case
 			} else {
-					
+					String habitaciones="";
 				for (Object[] r : ventas) {
 					CheckinDTO d = new CheckinDTO();
 					d.setCheckin(Integer.parseInt(r[0]+""));
+					habitaciones = HabitacionService.getInstance().listarHabitacionesXCheckin(Integer.parseInt(r[0]+""), hotel);
 					d.setFecha(r[1].toString());
-					d.setHabitacion(r[2].toString());
+					d.setHabitacion(habitaciones);
 					d.setTipoDocumento(r[3].toString());
 					d.setDocumento(r[4].toString());
 					d.setNombre(r[5].toString());
@@ -164,6 +165,7 @@ public class CkeckingService {
 
                     d.setDescuento(Integer.parseInt(r[12].toString()));
 					d.setValor(Integer.parseInt(r[13].toString()));
+					d.setUsuario(r[14].toString());
 					
 					lista.add(d);
 
