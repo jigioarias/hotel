@@ -1,8 +1,8 @@
 package co.com.hoteles.turin.views;
 
-import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.model.menu.DefaultMenuItem;
