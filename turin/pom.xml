@@ -129,7 +129,9 @@
                     <configuration>
                         <url>http://ec2-18-216-25-220.us-east-2.compute.amazonaws.com:8080/manager/text</url>
                         <server>TomcatServer</server>
-                        <path>/yourappcontextpath</path>
+                        <path>/turin</path>
+                         <username>tadmin</username>
+        				<password>jariasr2</password>  
                     </configuration>
            </plugin>
       
