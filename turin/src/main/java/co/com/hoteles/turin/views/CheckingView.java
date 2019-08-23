@@ -823,6 +823,11 @@ public class CheckingView extends GenericBB implements Serializable {
 			parametros.put("numeroPersonas", numeroPersonas);
 			parametros.put("habitacionCliente",habitacionCliente);
 			parametros.put("rutaImagen", realpathImagenes);
+			parametros.put("redes",this.getHotelSession().getRedessociales());
+			parametros.put("telefono",this.getHotelSession().getTelefono());
+			parametros.put("direccion",this.getHotelSession().getDireccion());
+			parametros.put("nit",this.getHotelSession().getNit());
+
 			parametros.put("rutaReportes",
 					FacesContext.getCurrentInstance().getExternalContext().getInitParameter("ruta_reportes"));
 
@@ -924,8 +929,12 @@ public class CheckingView extends GenericBB implements Serializable {
 				factura.setFechaEntrada(fechaEntrada);
 				parametros.put("fechaSalida", fechaSalida);
 				factura.setFechaSalida(fechaSalida);
-				int dias = (int) ((fechaSalida.getTime() - fechaEntrada.getTime()) / 86400000);
-				
+				int dias = 0;
+				if(fechaSalida.equals(fechaEntrada)) {
+					 dias = 1;
+				}else {
+				     dias = (int) ((fechaSalida.getTime() - fechaEntrada.getTime()) / 86400000);
+				}
 				parametros.put("dias", (dias));
 				Parametro parametroResolucion = ParametroService.getInstance().findXNombreXHotel("resolucion", this.getHotelSession().getCodigo());
 				Parametro parametroIVA = ParametroService.getInstance().findXNombre("iva");
@@ -947,6 +956,13 @@ public class CheckingView extends GenericBB implements Serializable {
 
 				parametros.put("numeroPersonas", numeroPersonas);
 				parametros.put("rutaImagen", realpathImagenes);
+				parametros.put("redes",this.getHotelSession().getRedessociales());
+				parametros.put("telefono",this.getHotelSession().getTelefono());
+				parametros.put("direccion",this.getHotelSession().getDireccion());
+				parametros.put("nit",this.getHotelSession().getNit());
+
+
+
 				parametros.put("rutaReportes",
 						FacesContext.getCurrentInstance().getExternalContext().getInitParameter("ruta_reportes"));
 

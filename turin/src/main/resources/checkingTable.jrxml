@@ -97,6 +97,7 @@
 	<parameter name="noches" class="java.lang.Integer"/>
 	<parameter name="descuento" class="java.lang.Integer"/>
 	<parameter name="total" class="java.lang.Integer"/>
+	<parameter name="telefono" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -170,8 +171,8 @@
 				<text><![CDATA[Check-in]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="95" y="31" width="205" height="15" uuid="b96f7183-44f8-43ad-ba60-43d8fbf50b6e"/>
-				<text><![CDATA[Telefono: +57 (4) 5683199 ]]></text>
+				<reportElement x="95" y="32" width="106" height="15" uuid="b96f7183-44f8-43ad-ba60-43d8fbf50b6e"/>
+				<text><![CDATA[Telefono:]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="346" y="88" width="209" height="14" uuid="952e4648-2454-4e53-baea-53a1ea2f1680"/>
@@ -256,6 +257,10 @@
 			<textField>
 				<reportElement x="435" y="158" width="109" height="22" uuid="2befc229-1b57-40e6-b3ad-0f41995acf12"/>
 				<textFieldExpression><![CDATA[$P{total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="144" y="32" width="161" height="15" uuid="09f9ca8e-3a24-402a-accf-807dc2461e92"/>
+				<textFieldExpression><![CDATA[$P{telefono}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>

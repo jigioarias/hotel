@@ -111,6 +111,10 @@
 	<parameter name="iva" class="java.lang.Float"/>
 	<parameter name="total" class="java.lang.Float"/>
 	<parameter name="descuento" class="java.lang.Integer"/>
+	<parameter name="redes" class="java.lang.String"/>
+	<parameter name="telefono" class="java.lang.String"/>
+	<parameter name="direccion" class="java.lang.String"/>
+	<parameter name="nit" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -185,16 +189,8 @@
 				<text><![CDATA[Recibo de Caja]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="417" y="48" width="160" height="15" uuid="b8cc42fd-b569-497d-834d-7e854040ad18"/>
-				<text><![CDATA[www.hotelturinlaceja.com]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="95" y="37" width="288" height="15" uuid="c226e44d-3bb5-4145-b0b3-903bf1d79fde"/>
-				<text><![CDATA[La Ceja,  Calle 19 # 21- 55]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="95" y="53" width="205" height="15" uuid="b96f7183-44f8-43ad-ba60-43d8fbf50b6e"/>
-				<text><![CDATA[Telefono: +57 (4) 5683199 ]]></text>
+				<reportElement x="95" y="53" width="98" height="15" uuid="b96f7183-44f8-43ad-ba60-43d8fbf50b6e"/>
+				<text><![CDATA[Telefono: ]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="88" y="86" width="209" height="14" uuid="952e4648-2454-4e53-baea-53a1ea2f1680"/>
@@ -235,7 +231,7 @@
 				</reportElement>
 			</line>
 			<staticText>
-				<reportElement x="411" y="28" width="80" height="15" uuid="708a7606-6501-411e-a86c-e6637986a95e"/>
+				<reportElement x="410" y="28" width="80" height="15" uuid="708a7606-6501-411e-a86c-e6637986a95e"/>
 				<box rightPadding="4"/>
 				<textElement textAlignment="Right"/>
 				<text><![CDATA[Recibo de Caja #:]]></text>
@@ -245,16 +241,31 @@
 				<textFieldExpression><![CDATA[$P{consecutivo}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="95" y="23" width="288" height="15" uuid="b1cf3561-850e-4b0a-a4a8-97847ea9fae4"/>
-				<text><![CDATA[Nit: 80034300]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="1" y="158" width="120" height="15" uuid="c6adb4a0-7087-4829-abb8-e0dbfac9c985"/>
 				<text><![CDATA[Noches en el hotel:]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="88" y="159" width="100" height="15" uuid="3248eabd-451a-4e9d-8614-c612fac64849"/>
 				<textFieldExpression><![CDATA[$P{dias}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="410" y="44" width="138" height="18" uuid="f03e932a-e94e-4b87-a9bf-d3c565a6ed17"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{redes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="144" y="53" width="153" height="15" uuid="76685ce2-5bd8-4547-854c-9c807a366888"/>
+				<textFieldExpression><![CDATA[$P{telefono}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="95" y="38" width="241" height="15" uuid="4929db6e-035e-4134-88b5-2aa482200002"/>
+				<textFieldExpression><![CDATA[$P{direccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="95" y="23" width="305" height="15" uuid="f3c04871-e135-4ef9-ac83-6317b82a6bfe"/>
+				<textFieldExpression><![CDATA[$P{nit}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>

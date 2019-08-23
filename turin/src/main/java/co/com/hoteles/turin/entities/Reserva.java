@@ -11,7 +11,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name="reservas")
-@NamedQuery(name="Reserva.findAll", query="SELECT r FROM Reserva r where hotel=:hotel")
+@NamedQuery(name="Reserva.findAll", query="SELECT r FROM Reserva r where r.hotel=:hotels")
 @NamedQuery(name="Reserva.findEstado", query="SELECT r FROM Reserva r where activa=:activo and hotel=:hotel")
 
 public class Reserva implements Serializable {
