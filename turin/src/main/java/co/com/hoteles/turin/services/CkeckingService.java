@@ -110,34 +110,34 @@ public class CkeckingService {
 		try {
 			List<CheckinDTO> lista = new ArrayList<CheckinDTO>();
 			EntityManager em = JPAUtility.getEntityManager();
-			Query query = em.createNativeQuery("select   "+
-					"ck.id,  "+
-					"ck.fecha_registro,  "+
-					"ck.habitacion,  "+
-					"(select tipoDocumento from clientes c where c.id=ck.id_cliente )tipo_documento,  "+
-					"(select documento from clientes c where c.id=ck.id_cliente )documento,  "+
-					"(select nombre from clientes c where c.id=ck.id_cliente )nombre,  "+
-					"(select fechaNacimiento from clientes c where c.id=ck.id_cliente )fechaNacimiento,  "+
-					"(select celular from clientes c where c.id=ck.id_cliente )celular,  "+
-					"ck.numero_personas acompanantes,  "+
-					"(ck.fecha_salida- ck.fecha_entrada) noches,  "+
-					"ck.estado,  "+
-					"(select fecha from facturas f where f.checking= ck.id)fecha_salida,  "+
-
-					"ck.descuento,  "+
-					"(select sum(h.precio)   "+
-					"from habitaciones_checking hc,   "+
-					"habitacion h, ckecking c  "+
-					"where  c.id = hc.id_ckecking and h.id = hc.id_habitacion  "+
-					"and hc.hotel = c.hotel  "+
-					"and c.hotel = h.hotel  "+
-					"and c.hotel = ck.hotel  "+
-					"and c.id =ck.id) total, ck.usuario  "+
-					"from ckecking ck  "+
-					"where ck.fecha_entrada >= ?  "+
-					"and ck.fecha_entrada <= ?  "+
-					"and ck.hotel = ? "+
-					"order by ck.id ");
+				Query query = em.createNativeQuery("select   "+
+						"ck.id,  "+
+						"ck.fecha_registro,  "+
+						"ck.habitacion,  "+
+						"(select tipoDocumento from clientes c where c.id=ck.id_cliente )tipo_documento,  "+
+						"(select documento from clientes c where c.id=ck.id_cliente )documento,  "+
+						"(select nombre from clientes c where c.id=ck.id_cliente )nombre,  "+
+						"(select fechaNacimiento from clientes c where c.id=ck.id_cliente )fechaNacimiento,  "+
+						"(select celular from clientes c where c.id=ck.id_cliente )celular,  "+
+						"ck.numero_personas acompanantes,  "+
+						"(ck.fecha_salida- ck.fecha_entrada) noches,  "+
+						"ck.estado,  "+
+						"(select fecha from facturas f where f.checking= ck.id)fecha_salida,  "+
+	
+						"ck.descuento,  "+
+						"(select sum(h.precio)   "+
+						"from habitaciones_checking hc,   "+
+						"habitacion h, ckecking c  "+
+						"where  c.id = hc.id_ckecking and h.id = hc.id_habitacion  "+
+						"and hc.hotel = c.hotel  "+
+						"and c.hotel = h.hotel  "+
+						"and c.hotel = ck.hotel  "+
+						"and c.id =ck.id) total, ck.usuario  "+
+						"from ckecking ck  "+
+						"where ck.fecha_entrada >= ?  "+
+						"and ck.fecha_entrada <= ?  "+
+						"and ck.hotel = ? "+
+						"order by ck.id ");
 			query.setParameter(1, fechaInicio);
 			query.setParameter(2, fechaFin);
 			query.setParameter(3, hotel);
@@ -158,13 +158,13 @@ public class CkeckingService {
 					d.setNombre(r[5].toString());
 					d.setFechaNacimiento((r[6]==null)?"": r[6].toString());
                     d.setCelular(r[7].toString());
-					d.setAcompanantes(Integer.parseInt(r[8].toString()));
-					d.setNoches(Integer.parseInt(r[9].toString()));
+					d.setAcompanantes(Integer.parseInt((r[8]==null)?"0":r[8].toString()));
+					d.setNoches(Integer.parseInt((r[9]==null)?"0":r[9].toString()));
                     d.setEstado(r[10].toString());
 					d.setFechaFin(((r[11]==null)?"": r[11].toString()));
 
-                    d.setDescuento(Integer.parseInt(r[12].toString()));
-					d.setValor(Integer.parseInt(r[13].toString()));
+                    d.setDescuento(Integer.parseInt((r[12]==null)?"0":r[12].toString()));
+					d.setValor(Integer.parseInt((r[13]==null)?"0":r[13].toString()));
 					d.setUsuario(r[14].toString());
 					
 					lista.add(d);
