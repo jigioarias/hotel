@@ -153,6 +153,40 @@ public class ClienteService {
 			return null;
 		}
 
+		
+
+	}
+	
+	public Cliente findXHabitacion(String idHabitacion,String estado,int hotel) throws Exception{
+		
+		 int clienteId = 0;
+		try {
+			EntityManager em = JPAUtility.getEntityManager();
+			Query query = em.createNativeQuery("select ch.idCliente from ckecking ch " + 
+					" where  ch.habitacion = ? " +
+					 " and ch.hotel= ?"
+					 + " and  ch.estado=?");
+			query.setParameter(1, idHabitacion);
+			query.setParameter(2, hotel);
+			query.setParameter(3, estado);
+
+			List results = query.getResultList();
+			if (results.isEmpty()) {
+			    return null; // handle no-results case
+			} else {
+			     clienteId = (Integer)results.get(0);
+			}
+			Cliente clienteConsulta = new Cliente();
+			clienteConsulta.setId(clienteId);
+			Cliente clienteC =find(clienteConsulta);
+			return clienteC;
+	
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			return null;
+		}
+
 
 	}
 

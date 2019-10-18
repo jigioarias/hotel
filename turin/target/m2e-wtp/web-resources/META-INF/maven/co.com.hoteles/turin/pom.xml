@@ -14,10 +14,6 @@
 		<url>http://repository.primefaces.org</url>
 	</repository>
 </repositories>
-<properties>
- <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-</properties>
-
   <dependencies>
   
 			<dependency>
@@ -73,13 +69,7 @@
     <artifactId>poi-ooxml</artifactId>
     <version>4.0.0</version>
 </dependency>
-  
-  <dependency>
-    <groupId>javax.servlet</groupId>
-    <artifactId>servlet-api</artifactId>
-    <version>2.3</version>
-    <scope>provided</scope>
-</dependency>      
+        
         
   <dependency>
         <groupId>mysql</groupId>
@@ -110,31 +100,5 @@
   </dependencies>
   <build>
     <finalName>turin</finalName>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.1</version>
-        <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
-           <encoding>Cp1252</encoding>
-          
-        </configuration>
-      </plugin>
-         <plugin>
-                    <groupId>org.apache.tomcat.maven</groupId>
-                    <artifactId>tomcat7-maven-plugin</artifactId>
-                    <version>2.2</version>
-                    <configuration>
-                        <url>http://ec2-18-216-25-220.us-east-2.compute.amazonaws.com:8080/manager/text</url>
-                        <server>TomcatServer</server>
-                        <path>/turin</path>
-                         <username>tadmin</username>
-        				<password>jariasr2</password>  
-                    </configuration>
-           </plugin>
-      
-    </plugins>
   </build>
 </project>

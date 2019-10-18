@@ -70,6 +70,7 @@ public class CheckingView extends GenericBB implements Serializable {
 	private String formatFechaSalida;
 	private String formatFechaEntrada;
 	private List<String> codigosHabitacion;
+	private boolean mostrarBoton;
 	private int total = 0;
 	public Map<String, String> getPaises() {
 		return paises;
@@ -395,10 +396,12 @@ public class CheckingView extends GenericBB implements Serializable {
 				String mensaje = "";
 				if (hayExtrajeros) {
 					mensaje = "EL cheking se guardo con exito,Recuerde que debe reportar al final los extranjeros";
+					this.mostrarBoton = true;
 
 				} else {
 
 					mensaje = "EL cheking se guardo con exito";
+					this.mostrarBoton = true;
 				}
 				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Grabacion de Checking", mensaje);
 				PrimeFaces.current().dialog().showMessageDynamic(message);
@@ -406,6 +409,7 @@ public class CheckingView extends GenericBB implements Serializable {
 			} else {
 				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Grabacion de Checking",
 						"error al grabar el checking. valide con el administrador");
+				this.mostrarBoton = false;
 				PrimeFaces.current().dialog().showMessageDynamic(message);
 
 			}
@@ -1178,5 +1182,13 @@ public class CheckingView extends GenericBB implements Serializable {
 	} 
 	public void cambiarTotal( ) {
 	   total = total - descuento;
+	}
+
+	public boolean isMostrarBoton() {
+		return mostrarBoton;
+	}
+
+	public void setMostrarBoton(boolean mostrarBoton) {
+		this.mostrarBoton = mostrarBoton;
 	}
 }

@@ -13,6 +13,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
+import javax.faces.model.SelectItemGroup;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -56,7 +58,11 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 @ManagedBean(name="reimprimirView")
 @ViewScoped
 public class ReimprimirView extends GenericBB implements Serializable {
+	
+	private String codigoHabitacion;
+	private List<SelectItem> habitacionesOcupadas;
 
+	
 	private Cliente cliente;
 	private List<Cliente> acompanantes;
 	private List<Servicio> servicios;
@@ -96,6 +102,28 @@ public class ReimprimirView extends GenericBB implements Serializable {
 
 	public ReimprimirView() {
 
+		
+		SelectItemGroup g1 = new SelectItemGroup("Habitaciones Turin");
+		SelectItem[] habitacionesOcu= null;
+
+		try {
+			List<Habitacion> habitaciones= HabitacionService.getInstance().listar("OCU",this.getHotelSession().getCodigo());
+			habitacionesOcu= new SelectItem[habitaciones.size()];
+			int contador =0;
+			for (Habitacion habitacion : habitaciones) {
+				habitacionesOcu[contador] =new SelectItem(habitacion.getId(), habitacion.getNombre());
+				contador++;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		g1.setSelectItems(habitacionesOcu);
+
+
+		habitacionesOcupadas = new ArrayList<SelectItem>();
+		habitacionesOcupadas.add(g1);
+		
+		
 		List<String> habitacionesDisponibles = new ArrayList<String>();
 		try {
 			for (Habitacion i : HabitacionService.getInstance().listarDisponibles(this.getHotelSession().getCodigo())) {
@@ -506,6 +534,18 @@ public class ReimprimirView extends GenericBB implements Serializable {
 		return filteredServicio;
 	}
 
+	public void buscarHabitacion() {
+	   
+		try {
+			clienteBusqueda =ClienteService.getInstance().findXHabitacion(codigoHabitacion, "A", this.getHotelSession().getCodigo());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		buscarReserva();
+	}
+	
 	public void buscarReserva() {
 
 		cliente = clienteBusqueda;
@@ -1015,5 +1055,21 @@ public class ReimprimirView extends GenericBB implements Serializable {
 
 	public void setHabitacionCliente(String habitacionCliente) {
 		this.habitacionCliente = habitacionCliente;
+	}
+
+	public String getCodigoHabitacion() {
+		return codigoHabitacion;
+	}
+
+	public void setCodigoHabitacion(String codigoHabitacion) {
+		this.codigoHabitacion = codigoHabitacion;
+	}
+
+	public List<SelectItem> getHabitacionesOcupadas() {
+		return habitacionesOcupadas;
+	}
+
+	public void setHabitacionesOcupadas(List<SelectItem> habitacionesOcupadas) {
+		this.habitacionesOcupadas = habitacionesOcupadas;
 	} 
 }

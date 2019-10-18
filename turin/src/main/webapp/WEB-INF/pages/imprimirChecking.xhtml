@@ -26,6 +26,23 @@ width: 1500px
 
 		<p:growl id="messages" showDetail="true" sticky="true" />
 
+       <p:panel header="${msg['limpieza.habitacion']}" id="listaHabitaciones3">
+					
+				 <h:panelGrid columns="1" style="margin-bottom:10px" cellpadding="5"  columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-4,ui-g-12 ui-md-2,ui-g-12 ui-md-4" layout="grid">
+	       					 <p:selectOneMenu id="habitacion" value="#{reimprimirView.codigoHabitacion}" >
+	            				<f:selectItem itemLabel="Seleccione la habitacion" itemValue="" />
+	            				<f:selectItems value="#{reimprimirView.habitacionesOcupadas}" />
+	            				 
+	            			
+	        				</p:selectOneMenu>	  
+					        
+				   </h:panelGrid>
+				  <p:commandButton id="buscarCliente" value="Buscar Cliente" action="#{reimprimirView.habitacionBusqueda}" update="pResumen"  ></p:commandButton>
+				
+				    
+				
+    </p:panel>
+
 	
 					<p:panel header="${msg['checking.buscarCliente']}" toggleable="true" toggleOrientation="horizontal" collapsed="true">
 					
@@ -142,8 +159,7 @@ width: 1500px
 					<h:panelGrid columns="2" columnClasses="value, value">			
 					
     				 				
-    				<p:commandButton id="Imprimir" value="${msg['checking.imprimir']}"  icon="ui-icon-print" 
-    				 actionListener="#{reimprimirView.imprimirChecking()}" ajax="false" />
+    				
     			    <p:commandButton id="Facturar" value="${msg['checking.facturar']}"  icon="ui-icon-print" 
     				 actionListener="#{reimprimirView.generarFactura()}" ajax="false" />
     				 
